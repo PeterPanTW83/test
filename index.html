@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>台灣活動整合平台</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/all.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header clearfix">
+            <div class="logo">
+                LOGO
+            </div>
+            <ul class="menu">
+                <a href="map-list.html">
+                    <li>
+                        <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+                        &nbsp;地圖+列表
+                    </li>
+                </a>
+                <a href="map.html">
+                    <li>
+                        <i class="fa fa-map fa-lg" aria-hidden="true"></i>
+                        &nbsp;地圖
+                    </li>
+                </a>
+                <a href="list.html">
+                    <li>
+                        <i class="fa fa-list fa-lg" aria-hidden="true"></i>
+                        &nbsp;列表
+                    </li>
+                </a>
+                <a href="#" class="btn-filter">
+                    <li>
+                        <i class="fa fa-filter fa-lg" aria-hidden="true"></i>
+                        &nbsp;篩選器
+                    </li>
+                </a>
+            </ul>
+            <div class="filter">
+                <span class="filter-arrow"></span>
+                <form accept-charset="UTF-8" method="post">
+                    <ul>
+                        <li>
+                            <label for="type">活動種類</label>
+                            <select id="type">
+                                <option value="whole" selected>不限</option>
+                                <option value="concert">演唱會</option>
+                                <option value="music">音樂</option>
+                                <option value="art">展覽</option>
+                                <option value="mic">講座</option>
+                                <option value="movie">電影</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="name">活動名稱</label>
+                            <input type="text" name="name" id="name" placeholder="例：音樂會">
+                        </li>
+                        <li>
+                            <label for="location">活動地點</label>
+                            <input type="text" name="location" id="location" placeholder="例：文化中心">
+                        </li>
+                        <li class="city">
+                            <label for="city">縣市</label>
+                            <select id="city">
+                                <option value="whole" selected>不限</option>
+                                <option value="concert">高雄市</option>
+                                <option value="music">台北市</option>
+                                <option value="art">台南市</option>
+                                <option value="mic">新北市</option>
+                                <option value="movie">桃園市</option>
+                            </select>
+                        </li>
+                        <li class="district">
+                            <label for="district">鄉鎮市區</label>
+                            <select id="district">
+                                <option value="whole" selected>不限</option>
+                                <option value="concert">楠梓區</option>
+                                <option value="music">三民區</option>
+                                <option value="art">左營區</option>
+                                <option value="mic">鳥松區</option>
+                                <option value="movie">橋頭區</option>
+                            </select>
+                        </li>
+                        <li class="starttime">
+                            <label for="starttime">活動開始時間</label>
+                            <input type="date" name="starttime" id="starttime">
+                        </li>
+                        <li class="endtime">
+                            <label for="endtime">活動結束時間</label>
+                            <input type="date" name="endtime" id="endtime">
+                        </li>
+                    </ul>
+                    <input type="submit" name="submit" value="&#xf002;&nbsp;&nbsp;Search" class="search">
+                </form>
+            </div>
+        </div>
+        <div class="content">
+            <ul class="list">
+                <a href="#">
+                    <li class="clearfix">
+                        <img src="img/music.png" width="64px" height="64px" class="photo">
+                        <div class="info">
+                            <div class="title"> 新北市藝文中心演藝廳「樂齡音樂會」</div>
+                            <div class="intro">
+                                時間：2016/04/26 14:00-2016/11/29 15:00<br>
+                                地點：新北市藝文中心演藝廳<br>
+                                地址：新北市板橋區莊敬路62號<br>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+                <a href="#">
+                    <li class="clearfix">
+                        <img src="img/concert.png" class="photo">
+                        <div class="info">
+                            <div class="title">50年不朽傳奇_謝雷演唱會</div>
+                            <div class="intro">
+                                時間：2016/08/14 19:00<br>
+                                地點：高雄市文化中心至德堂<br>
+                                地址：高雄市苓雅區五福一路67號<br>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+                <a href="#">
+                    <li class="clearfix">
+                        <img src="img/movie.png" class="photo">
+                        <div class="info">
+                            <div class="title">諸神的慾望</div>
+                            <div class="intro">
+                                時間：2016/06/11 19:00<br>
+                                地點：高雄市電影館<br>
+                                地址：高雄市鹽埕區004鄰河西路10號<br>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+                <a href="#">
+                    <li class="clearfix">
+                        <img src="img/art.png" class="photo">
+                        <div class="info">
+                            <div class="title">永不放棄-伊甸萬芳身障畫家美藝展</div>
+                            <div class="intro">
+                                時間：2016/08/24 09:00<br>
+                                地點：新北市藝文中心藝廊<br>
+                                地址：新北市板橋區莊敬路62號<br>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+                <a href="#">
+                    <li class="clearfix">
+                        <img src="img/mic.png" class="photo">
+                        <div class="info">
+                            <div class="title">彩妝達人班</div>
+                            <div class="intro">
+                                時間：2016/01/07 13:30<br>
+                                地點：高雄市立圖書館寶珠分館 藝文研習室<br>
+                                地址：高雄市三民區大順二路468號<br>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+            <div class="map">
+                <img src="http://www.freelargeimages.com/wp-content/uploads/2014/11/Google_map-6.png">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
