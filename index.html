@@ -19,7 +19,16 @@
             });
             var marker = new google.maps.Marker({
                 position: {lat: 22.732811, lng: 120.287898},
-                title:"Hello World!"
+                title:"管院在這邊"
+            });
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: '這邊是管院'
+            });
+
+            // Opens the InfoWindow when marker is clicked.
+            marker.addListener('click', function() {
+                infoWindow.open(map, marker);
             });
             // To add the marker to the map, call setMap();
             marker.setMap(map);
