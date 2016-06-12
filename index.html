@@ -67,15 +67,15 @@
             });
 
             marker.setMap(map);
-            marker.addListener('click', function() {
+            marker.addListener('click', function(){
                 infoWindow.open(map, marker);
             });
         }
 
-    function codeAddress(address, dataTitle) {
+    function codeAddress(address, dataTitle){
         var geocoder = new google.maps.Geocoder();
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
+        geocoder.geocode({'address': address}, function(results, status){
+            if (status == google.maps.GeocoderStatus.OK){
                 createMaker(results[0].geometry.location, dataTitle, address);
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
@@ -92,7 +92,6 @@
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" async defer></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&libraries=places"></script>
 </head>
 <body>
     <div class="wrapper">
