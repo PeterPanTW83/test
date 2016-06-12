@@ -50,6 +50,7 @@
         
             for (var i = 0; i < 5; i++) {
                 codeAddress(jsonData[i].showInfo[0].location);
+                $('list').append('<a href="#"><li class="clearfix"><img src="img/music.png" width="64px" height="64px" class="photo"><div class="info"><div class="title">'+json[i]['title']+'</div><div class="intro">時間：'+json[i].showInfo[0].time+'~'+json[i].showInfo[0].endTime+'<br>地點：'+json[i].showInfo[0].locationName+'<br>地址：'+address+'<br></div></div></li></a>');
             }
         }
 
@@ -181,72 +182,7 @@
             </div>
         </div>
         <div class="content">
-            <ul class="list">
-                <a href="#">
-                    <li class="clearfix">
-                        <img src="img/music.png" width="64px" height="64px" class="photo">
-                        <div class="info">
-                            <div class="title"> 新北市藝文中心演藝廳「樂齡音樂會」</div>
-                            <div class="intro">
-                                時間：2016/04/26 14:00-2016/11/29 15:00<br>
-                                地點：新北市藝文中心演藝廳<br>
-                                地址：新北市板橋區莊敬路62號<br>
-                            </div>
-                        </div>
-                    </li>
-                </a>
-                <a href="#">
-                    <li class="clearfix">
-                        <img src="img/concert.png" class="photo">
-                        <div class="info">
-                            <div class="title">50年不朽傳奇_謝雷演唱會</div>
-                            <div class="intro">
-                                時間：2016/08/14 19:00<br>
-                                地點：高雄市文化中心至德堂<br>
-                                地址：高雄市苓雅區五福一路67號<br>
-                            </div>
-                        </div>
-                    </li>
-                </a>
-                <a href="#">
-                    <li class="clearfix">
-                        <img src="img/movie.png" class="photo">
-                        <div class="info">
-                            <div class="title">諸神的慾望</div>
-                            <div class="intro">
-                                時間：2016/06/11 19:00<br>
-                                地點：高雄市電影館<br>
-                                地址：高雄市鹽埕區004鄰河西路10號<br>
-                            </div>
-                        </div>
-                    </li>
-                </a>
-                <a href="#">
-                    <li class="clearfix">
-                        <img src="img/art.png" class="photo">
-                        <div class="info">
-                            <div class="title">永不放棄-伊甸萬芳身障畫家美藝展</div>
-                            <div class="intro">
-                                時間：2016/08/24 09:00<br>
-                                地點：新北市藝文中心藝廊<br>
-                                地址：新北市板橋區莊敬路62號<br>
-                            </div>
-                        </div>
-                    </li>
-                </a>
-                <a href="#">
-                    <li class="clearfix">
-                        <img src="img/mic.png" class="photo">
-                        <div class="info">
-                            <div class="title">彩妝達人班</div>
-                            <div class="intro">
-                                時間：2016/01/07 13:30<br>
-                                地點：高雄市立圖書館寶珠分館 藝文研習室<br>
-                                地址：高雄市三民區大順二路468號<br>
-                            </div>
-                        </div>
-                    </li>
-                </a>
+            <ul id="list">
             </ul>
             <div id="map">
                 <!--<img src="img/Google_map-6.png">-->

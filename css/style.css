@@ -193,25 +193,25 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 /* List */
 
-.list {
+#list {
     height: 100%;
     width: 35%;
     float: left;
     overflow-y: scroll;
 }
 
-.list li {
+#list li {
     border-bottom: 1px solid #d2d2d2;
     padding: 20px 10px;
 }
 
-.list a {
+#list a {
     display: block;
     text-decoration: none;
     color: #292929;
 }
 
-.list a:hover {
+#list a:hover {
     background-color: rgba(210, 210, 210, 0.2);
 }
 
