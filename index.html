@@ -50,18 +50,20 @@
         
             for (var i = 0; i < 5; i++) {
                 var dataTitle=jsonData[i].title;
-                codeAddress(jsonData[i].showInfo[0].location, dataTitle);
+                var dataLocation=jsonData[i].showInfo[0].location;
+                codeAddress(dataLocation, dataTitle);
             }
         }
 
-        function createMaker(pos, dataTitle){
+        function createMaker(pos, dataTitle, address){
             var marker = new google.maps.Marker({
                 position: pos,
                 title:dataTitle
             });
 
             var infoWindow = new google.maps.InfoWindow({
-                content: dataTitle
+                content: '活動名稱:'+dataTitle+'<br>'+
+                         '地址:'+address
             });
 
             marker.setMap(map);
@@ -74,7 +76,7 @@
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                createMaker(results[0].geometry.location, dataTitle);
+                createMaker(results[0].geometry.location, dataTitle, address);
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
             }
