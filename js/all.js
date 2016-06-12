@@ -16,6 +16,7 @@ jQuery(document).ready(function($) {
             content: '這邊是管院'
         });
 
+        marker.setMap(map);
         marker.addListener('click', function() {
             infoWindow.open(map, marker);
         });
