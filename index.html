@@ -56,10 +56,14 @@
         
             for (var i = 0; i < 5; i++) {
                 var dataTitle=jsonData[i].title;
-                var dataLocation=jsonData[i].showInfo[0].location;
-                codeAddress(dataLocation, dataTitle);
-                $('list').append('<a href="#"><li class="clearfix"><img src="img/music.png" width="64px" height="64px" class="photo"><div class="info"><div class="title">'+dataTitle+'</div><div class="intro">時間：'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'<br>地點：'+jsonData[i].showInfo[0].locationName+'<br>地址：'+dataLocation+'<br></div></div></li></a>');
+                var dataLocation="{lat:"+jsonData[i].showInfo[0].latitude+", lng:"+jsonData[i].showInfo[0].longitude+"}";
+                //codeAddress(dataLocation, dataTitle);
+                createMaker(dataLocation, dataTitle, jsonData[i].showInfo[0].location);
+                $('list').append('<a href="javascript: return false;" onclick="focusLocation('+dataLocation+')"><li class="clearfix"><img src="img/music.png" width="64px" height="64px" class="photo"><div class="info"><div class="title">'+dataTitle+'</div><div class="intro">時間：'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'<br>地點：'+jsonData[i].showInfo[0].locationName+'<br>地址：'+jsonData[i].showInfo[0].location+'<br></div></div></li></a>');
             }
+        }
+        function focusLocation(dataLocation){
+            map.setCenter(dataLocation);
         }
         function callback(results, status) {
               if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -114,8 +118,7 @@
     }
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" async defer></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&libraries=places&callback=initMap" async defer></script>
 </head>
 <body>
     <div class="wrapper">
