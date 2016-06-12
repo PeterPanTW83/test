@@ -119,6 +119,14 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     float: left;
 }
 
+.logo a {
+    display: block;
+    /*background: url(../img/logo.png) no-repeat;
+    height: 81px;
+    width: 171px;*/
+    text-indent: -9999px;
+}
+
 .menu {
     float: right;
 }
@@ -225,15 +233,12 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     width: calc(100% - 94px);
 }
 
-.title {
+.info h2 {
     font-weight: bold;
     font-size: 16px;
     border-bottom: 1px solid #d2d2d2;
     padding-bottom: 8px;
     margin-bottom: 10px;
-}
-
-.intro {
 }
 
 /* Map */
