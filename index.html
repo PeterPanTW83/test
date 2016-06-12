@@ -55,13 +55,13 @@
                 //codeAddress(dataLocation, dataTitle);
                 createMaker(dataLocation, dataTitle, jsonData[i].showInfo[0].location);
 
-                $('#list').append('<a href="javascript:focusLocation(\''+locationLati+','+locationLng+'\')"><li class="clearfix"><img src="img/music.png" width="64px" height="64px" class="photo"><div class="info"><div class="title">'+dataTitle+'</div><div class="intro">時間：'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'<br>地點：'+jsonData[i].showInfo[0].locationName+'<br>地址：'+jsonData[i].showInfo[0].location+'<br></div></div></li></a>');
+                $('#list').append('<a href="javascript:focusLocation(\''+locationLati+'\',\''+locationLng+'\')"><li class="clearfix"><img src="img/music.png" width="64px" height="64px" class="photo"><div class="info"><div class="title">'+dataTitle+'</div><div class="intro">時間：'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'<br>地點：'+jsonData[i].showInfo[0].locationName+'<br>地址：'+jsonData[i].showInfo[0].location+'<br></div></div></li></a>');
             }
         }
 
         function focusLocation(locationLati, locationLng){
-            var dataLocation={lat:Number(locationLati), lng:Number(locationLng)};
-            map.setCenter(dataLocation);
+            var pos={lat:Number(locationLati), lng:Number(locationLng)};
+            map.setCenter(pos);
         }
 
         function createMaker(pos, dataTitle, address){
