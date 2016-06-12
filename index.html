@@ -38,6 +38,12 @@
                  handleLocationError(false, infoWindow, map.getCenter());
             }
             **/
+            var service = new google.maps.places.PlacesService(map);
+                  service.nearbySearch({
+                    location: {lat: 22.73281, lng: 120.287898},
+                    radius: 500,
+                    types: ['store']
+                  }, callback);
 
             showData();
             //directionsDisplay.setMap(map);
@@ -55,6 +61,13 @@
                 $('list').append('<a href="#"><li class="clearfix"><img src="img/music.png" width="64px" height="64px" class="photo"><div class="info"><div class="title">'+dataTitle+'</div><div class="intro">時間：'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'<br>地點：'+jsonData[i].showInfo[0].locationName+'<br>地址：'+dataLocation+'<br></div></div></li></a>');
             }
         }
+        function callback(results, status) {
+              if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                  createMarker(results[i]);
+                }
+              }
+            }
 
         function createMaker(pos, dataTitle, address){
             var marker = new google.maps.Marker({
@@ -66,6 +79,15 @@
                 content: '活動名稱:'+dataTitle+'<br>'+
                          '地址:'+address
             });
+             var placeLoc = place.geometry.location;
+            var marker1 = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location
+                  });
+
+                  google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(place.name);
+                    infowindow.open(map, this);
 
             marker.setMap(map);
             marker.addListener('click', function() {
@@ -93,6 +115,7 @@
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" async defer></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&libraries=places"></script>
 </head>
 <body>
     <div class="wrapper">
