@@ -42,7 +42,7 @@
 
         function loadCalendarApi() {
             gapi.client.load('calendar', 'v3', listUpcomingEvents);
-            
+
             var event = {
             'summary': 'Google I/O 2015',
             'location': '800 Howard St., San Francisco, CA 94103',
@@ -79,6 +79,12 @@
         request.execute(function(event) {
             appendPre('Event created: ' + event.htmlLink);
         });
+        }
+
+        function appendPre(message) {
+        var pre = document.getElementById('output');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
         }
 
         checkAuth();
@@ -178,9 +184,19 @@
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" async defer></script>
+    <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
 
 </head>
 <body>
+    <div id="authorize-div" style="display: none">
+      <span>Authorize access to Google Calendar API</span>
+      <!--Button for the user to click to initiate auth sequence -->
+      <button id="authorize-button" onclick="handleAuthClick(event)">
+        Authorize
+      </button>
+    </div>
+    <pre id="output"></pre>
+
     <div class="wrapper">
         <div class="header clearfix">
             <h1 class="logo">
