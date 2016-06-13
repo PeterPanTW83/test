@@ -58,6 +58,23 @@
                 $('#list').append('<a href="javascript:focusLocation(\''+locationLati+'\',\''+locationLng+'\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>'+dataTitle+'</h2><p>時間：'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'<br>地點：'+jsonData[i].showInfo[0].locationName+'<br>地址：'+jsonData[i].showInfo[0].location+'<br></p></div></li></a>');
             }
         }
+        function search(){
+            var location=getElementById("location").value;
+                for (var i = 0; i < 60; i++) {
+                var dataTitle=jsonData[i].title;
+                var dataposition=jsonData[i].showInfo[0].location;
+                var locationLati=jsonData[i].showInfo[0].latitude;
+                var locationLng=jsonData[i].showInfo[0].longitude;
+                var dataLocation={lat:Number(locationLati), lng:Number(locationLng)};
+                if(dataposition.match(location)!=null){
+                    createMaker(dataLocation, dataTitle, jsonData[i].showInfo[0].location);
+
+                $('#list').append('<a href="javascript:focusLocation(\''+locationLati+'\',\''+locationLng+'\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>'+dataTitle+'</h2><p>時間：'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'<br>地點：'+jsonData[i].showInfo[0].locationName+'<br>地址：'+jsonData[i].showInfo[0].location+'<br></p></div></li></a>');
+                }
+                //codeAddress(dataLocation, dataTitle);
+                
+            }
+        }
 
         function focusLocation(locationLati, locationLng){
             var pos={lat:Number(locationLati), lng:Number(locationLng)};
@@ -141,7 +158,7 @@
             </ul>
             <div class="filter">
                 <span class="filter-arrow"></span>
-                <form accept-charset="UTF-8" method="post">
+                <form accept-charset="UTF-8" method="post" onsubmit="search()">
                     <ul>
                         <li>
                             <label for="type">活動種類</label>
