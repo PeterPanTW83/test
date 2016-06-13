@@ -59,7 +59,7 @@
             }
         }
         function search(){
-            var location=getElementById("location").value;
+            var location=document.forms.["test"]["location"].value;
                 for (var i = 0; i < 60; i++) {
                 var dataTitle=jsonData[i].title;
                 var dataposition=jsonData[i].showInfo[0].location;
@@ -158,7 +158,7 @@
             </ul>
             <div class="filter">
                 <span class="filter-arrow"></span>
-                <form accept-charset="UTF-8" method="post" onsubmit=" return search()">
+                <form name="test" accept-charset="UTF-8" method="post" onsubmit=" return search()">
                     <ul>
                         <li>
                             <label for="type">活動種類</label>
