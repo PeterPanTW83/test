@@ -117,13 +117,14 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 .logo {
     float: left;
+    margin: 10px auto;
 }
 
 .logo a {
     display: block;
-    /*background: url(../img/logo.png) no-repeat;
-    height: 81px;
-    width: 171px;*/
+    background: url(../img/logo.png) no-repeat;
+    height: 50px;
+    width: 174px;
     text-indent: -9999px;
 }
 
@@ -136,7 +137,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     text-decoration: none;
     color: white;
     float: left;
-    padding: 17px 20px;
+    padding: 22.5px 20px;
 }
 
 .menu a:hover {
