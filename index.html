@@ -8,9 +8,78 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/all.js"></script>
     <script type="text/javascript">
-        
+
+        var CLIENT_ID = '998871371950-c95ffdeu6pee5bal5l4pmio9911gjdva.apps.googleusercontent.com';
+        var SCOPES = ["https://www.googleapis.com/auth/calendar"];
         var directionsDisplay;
         var map;
+
+        function checkAuth() {
+            gapi.auth.authorize(
+            {
+                'client_id': CLIENT_ID,
+                'scope': SCOPES.join(' '),
+                'immediate': true
+            }, handleAuthResult);
+        }
+
+        function handleAuthResult(authResult) {
+            var authorizeDiv = document.getElementById('authorize-div');
+            if (authResult && !authResult.error) {
+                authorizeDiv.style.display = 'none';
+                loadCalendarApi();
+            } else {
+                authorizeDiv.style.display = 'inline';
+            }
+        }
+
+        function handleAuthClick(event) {
+            gapi.auth.authorize(
+            {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+            handleAuthResult);
+            return false;
+        }
+
+        function loadCalendarApi() {
+            gapi.client.load('calendar', 'v3', listUpcomingEvents);
+        }
+
+        var event = {
+            'summary': 'Google I/O 2015',
+            'location': '800 Howard St., San Francisco, CA 94103',
+            'description': 'A chance to hear more about Google\'s developer products.',
+            'start': {
+                'dateTime': '2015-05-28T09:00:00-07:00',
+                'timeZone': 'America/Los_Angeles'
+            },
+            'end': {
+                'dateTime': '2015-05-28T17:00:00-07:00',
+                'timeZone': 'America/Los_Angeles'
+            },
+            'recurrence': [
+                'RRULE:FREQ=DAILY;COUNT=2'
+            ],
+            'attendees': [
+                {'email': 'lpage@example.com'},
+                {'email': 'sbrin@example.com'}
+            ],
+            'reminders': {
+                'useDefault': false,
+                'overrides': [
+                    {'method': 'email', 'minutes': 24 * 60},
+                    {'method': 'popup', 'minutes': 10}
+                ]
+            }
+        };
+
+        var request = gapi.client.calendar.events.insert({
+            'calendarId': 'primary',
+            'resource': event
+        });
+
+        request.execute(function(event) {
+            appendPre('Event created: ' + event.htmlLink);
+        });
 
         function initMap() {
             //directionsDisplay = new google.maps.DirectionsRenderer();
