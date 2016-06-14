@@ -105,7 +105,7 @@
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
                 markers[i].addListener('click', function(){
-                    console.log(infoWindow[i].content);
+                    console.log(infoWindows[i].content);
                     infoWindows[i].open(map, markers[i]);
                 });
             }
