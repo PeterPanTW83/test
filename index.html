@@ -104,9 +104,8 @@
             console.log(infoWindows.length);
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
-                var infoWindow = infoWindows[i];
                 markers[i].addListener('click', function(){
-                    infoWindow.open(map, markers[i]);
+                    infoWindows[i].open(map, markers[i]);
                 });
             }
         }
@@ -139,7 +138,6 @@
     }
 
     </script>
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" async defer></script>
 
 </head>
