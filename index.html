@@ -79,7 +79,7 @@
 
         function focusLocation(locationLati, locationLng, markerCount){
             var pos={lat:Number(locationLati), lng:Number(locationLng)};
-            markers[markerCount].click();
+            markers[markerCount].trigger('click');
             map.setCenter(pos);
             map.setZoom(15);
             $('.filter').hide();
