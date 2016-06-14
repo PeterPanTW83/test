@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/dk-tw-citySelector.min.js"></script>
     <script type="text/javascript" src="js/all.js"></script>
     <script type="text/javascript">
 
@@ -136,6 +137,9 @@
             'Error: The Geolocation service failed.' :
             'Error: Your browser doesn\'t support geolocation.');
     }
+        $(function() {
+          $('#form').dk_tw_citySelector('#city', '#district', '#zipcode')
+    })
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" async defer></script>
@@ -169,7 +173,7 @@
             </ul>
             <div class="filter">
                 <span class="filter-arrow"></span>
-                <form accept-charset="UTF-8" method="post">
+                <form accept-charset="UTF-8" method="post" id="form">
                     <ul>
                         <li>
                             <label for="type">活動種類</label>
@@ -193,23 +197,11 @@
                         <li class="city">
                             <label for="city">縣市</label>
                             <select id="city">
-                                <option value="whole" selected>不限</option>
-                                <option value="concert">高雄市</option>
-                                <option value="music">台北市</option>
-                                <option value="art">台南市</option>
-                                <option value="mic">新北市</option>
-                                <option value="movie">桃園市</option>
                             </select>
                         </li>
                         <li class="district">
                             <label for="district">鄉鎮市區</label>
                             <select id="district">
-                                <option value="whole" selected>不限</option>
-                                <option value="concert">楠梓區</option>
-                                <option value="music">三民區</option>
-                                <option value="art">左營區</option>
-                                <option value="mic">鳥松區</option>
-                                <option value="movie">橋頭區</option>
                             </select>
                         </li>
                         <li class="starttime">
