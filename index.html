@@ -76,6 +76,7 @@
                 } 
             }
             showMarkers();
+            $('.filter').hide();
         }
 
         function focusLocation(locationLati, locationLng){
@@ -100,6 +101,7 @@
         }
 
         function showMarkers(){
+            console.log(infoWindows.length);
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
                 var infoWindow = infoWindows[i];
