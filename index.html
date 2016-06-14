@@ -102,9 +102,10 @@
         function showMarkers(){
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
+                var infoWindow = infoWindows[i];
                 markers[i].addListener('click', function(){
                     console.log(infoWindow[i]);
-                    infoWindows[i].open(map, markers[i]);
+                    infoWindow.open(map, markers[i]);
                 });
             }
         }
