@@ -110,7 +110,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 }
 
 .content {
-    height: calc(100% - 70px);
+    height: calc(100% - 60px);
 }
 
 /* Header */
@@ -123,8 +123,8 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 .logo a {
     display: block;
     background: url(../img/logo.png) no-repeat;
-    height: 50px;
-    width: 174px;
+    height: 40px;
+    width: 150px;
     text-indent: -9999px;
 }
 
@@ -137,7 +137,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     text-decoration: none;
     color: white;
     float: left;
-    padding: 22.5px 20px;
+    padding: 17.5px 20px;
 }
 
 .menu a:hover {
