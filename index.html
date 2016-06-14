@@ -71,14 +71,15 @@
                 if(dataLocationName.match(location)!=null){
                     createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location);
 
-                    $('#list').append('<a href="javascript:focusLocation(\''+locationLati+'\',\''+locationLng+'\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>'+dataTitle+'</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>'+jsonData[i].showInfo[0].locationName+'</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>'+jsonData[i].showInfo[0].location+'</p></div></li></a>');
+                    $('#list').append('<a href="javascript:focusLocation(\''+locationLati+'\',\''+locationLng+'\',\''+i+'\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>'+dataTitle+'</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>'+jsonData[i].showInfo[0].time+'~'+jsonData[i].showInfo[0].endTime+'</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>'+jsonData[i].showInfo[0].locationName+'</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>'+jsonData[i].showInfo[0].location+'</p></div></li></a>');
                 } 
             }
             $('.filter').hide();
         }
 
-        function focusLocation(locationLati, locationLng){
+        function focusLocation(locationLati, locationLng, markerCount){
             var pos={lat:Number(locationLati), lng:Number(locationLng)};
+            markers[markerCount].click();
             map.setCenter(pos);
             map.setZoom(15);
             $('.filter').hide();
