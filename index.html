@@ -104,7 +104,6 @@
                 markers[i].setMap(map);
                 var infoWindow = infoWindows[i];
                 markers[i].addListener('click', function(){
-                    console.log(infoWindow[i]);
                     infoWindow.open(map, markers[i]);
                 });
             }
@@ -113,10 +112,10 @@
         function deleteMarkers() {
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(null);
-                infoWindow[i].close();
+                infoWindows[i].close();
             }
             markers = [];
-            infoWindow = [];
+            infoWindows = [];
         }
 
     function codeAddress(address, dataTitle){
