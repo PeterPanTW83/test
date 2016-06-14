@@ -94,6 +94,7 @@
                 var dataLocationName=newSelectData[i].showInfo[0].locationName;
                 var locationLati=newSelectData[i].showInfo[0].latitude;
                 var locationLng=newSelectData[i].showInfo[0].longitude;
+                var dataCoordinates={lat:Number(locationLati), lng:Number(locationLng)};
 
                 createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location);
 
