@@ -110,7 +110,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 }
 
 .content {
-    height: calc(100% - 59px);
+    height: calc(100% - 70px);
 }
 
 /* Header */
@@ -204,7 +204,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 #list {
     height: 100%;
-    width: 35%;
+    width: 500px;
     float: left;
     overflow-y: scroll;
 }
@@ -246,8 +246,13 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 #map {
     height: 100%;
-    width: 65%;
+    width: calc(100% - 500px);
     float: left;
+}
+
+#map-list {
+    height: 100%;
+    width: 100%;
 }
 
 
