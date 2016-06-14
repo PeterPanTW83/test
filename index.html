@@ -105,6 +105,7 @@
             console.log(infoWindows.length);
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
+                markers[i].setAnimation(google.maps.Animation.BOUNCE);
                 markers[i].addListener('click', function(){
                     infoWindows[i].open(map, markers[i]);
                 });
