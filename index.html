@@ -98,7 +98,7 @@
 
             marker.setMap(map);
             marker.addListener('click', function(){
-                    infoWindow.open(map, markers[i]);
+                    infoWindow.open(map, marker);
              });
 
             markers.push(marker);
@@ -128,7 +128,7 @@
             'Error: The Geolocation service failed.' :
             'Error: Your browser doesn\'t support geolocation.');
     }
-        $(function() {
+    $(function() {
           $('#form').dk_tw_citySelector('#city', '#district', '#zipcode')
     })
 
