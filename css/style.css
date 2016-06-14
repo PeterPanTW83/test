@@ -244,13 +244,13 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 /* Map */
 
-#map {
+#map-list {
     height: 100%;
     width: calc(100% - 500px);
     float: left;
 }
 
-#map-list {
+#map {
     height: 100%;
     width: 100%;
 }
