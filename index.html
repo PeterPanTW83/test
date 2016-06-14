@@ -79,6 +79,7 @@
 
         function focusLocation(markerCount){
             var focusMarker = markers[markerCount];
+            focusMarker.click();
             map.panTo(focusMarker.getPosition());
             map.setZoom(15);
             $('.filter').hide();
