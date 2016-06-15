@@ -145,8 +145,6 @@ function search() {
         tempData1 = tempData;
     }
 
-
-
     for (var i = 0; i < tempData1.length; i++) {
         var dataTitle = tempData1[i].title;
         var dataLocationName = tempData1[i].showInfo[0].locationName;
@@ -254,7 +252,8 @@ function createEvent() {
             title: "完成",
             text: "活動已經新增至您的日曆中<br><a href='"+event.htmlLink+"'>查看日曆</a>",
             type: "success",
-            closeOnConfirm: true
+            closeOnConfirm: true,
+            html: true;
         });
     });
 }
