@@ -4,9 +4,9 @@
     var markers = [];
     var image = 'img/marker-movie.png';
 
-    function initMap() {
+    function initMap(latitude, longitude) {
         map = new google.maps.Map(document.getElementById('map-list'), {
-            center: {lat: 22.73281, lng: 120.287898},
+            center: {lat: latitude, lng: longitude},
             zoom: 9
         });
         includeData();
@@ -114,6 +114,25 @@
         map.panTo(focusMarker.getPosition());
         map.setZoom(15);
         $('.filter').hide();
+    }
+
+    function geoFindMe() {
+
+        if (!navigator.geolocation){
+            alert("很抱歉，您的瀏覽器不支援定位服務");
+            return;
+        }
+
+        function success(position) {
+            var latitude  = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            initMap(latitude, longitude);
+        };
+
+        function error() {
+            alert("定位時發生錯誤，請稍後再試");
+        };
+        navigator.geolocation.getCurrentPosition(success, error);
     }
 
     jQuery(document).ready(function($) {
