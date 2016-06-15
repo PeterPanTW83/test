@@ -52,8 +52,7 @@
         var activityEndTime= Number(document.getElementById("endtime").value.replace(/-/g,""));
         var activityCity= document.getElementById("city").value;
         var activityDistrict= document.getElementById("district").value;
-        console.log(activityCity+activityDistrict);
-        console.log(activityCity);
+       
         var tempData = [];
         var tempData1 = [];
 
