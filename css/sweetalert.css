@@ -20,10 +20,10 @@ body.stop-scrolling {
 
 .sweet-alert {
     background-color: white;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    width: 478px;
+    font-family: '微軟正黑體';
+    width: 400px;
     padding: 17px;
-    border-radius: 5px;
+    border-radius: 10px;
     text-align: center;
     position: fixed;
     left: 50%;
