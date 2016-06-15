@@ -210,6 +210,10 @@
         	location.href = "https://www.google.com";
     		event.stopPropagation();
   	});
+  	
+  	$("li").click(function(){
+        	location.href = "https://www.facebook.com";
+  	});
 
         $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
 
