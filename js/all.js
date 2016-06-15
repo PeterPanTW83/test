@@ -115,14 +115,14 @@
         map.setZoom(15);
         $('.filter').hide();
     }
-	
-    function setHtml(){
+
+    jQuery(document).ready(function($) {
+
         $('.btn-filter').on('click', function(){
             $('.filter').toggle();
         });
 
-        $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
-    }
+        $('#form').dk_tw_citySelector('#city', '#district', '#zipcode')
 
-    setHtml();
+    });
     
