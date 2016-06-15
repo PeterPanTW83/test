@@ -4,9 +4,9 @@
     var markers = [];
     var image = 'img/marker-movie.png';
 
-    function initMap(latitude, longitude) {
+    function initMap() {
         map = new google.maps.Map(document.getElementById('map-list'), {
-            center: {lat: latitude, lng: longitude},
+            center: {lat: 22.73281, lng: 120.287898},
             zoom: 9
         });
         includeData();
