@@ -207,7 +207,7 @@
             showCancelButton: true,
             confirmButtonColor: "#12BDBC",
             confirmButtonText: "確定",
-            cancleButtonText: "取消",
+            cancelButtonText: "取消",
             closeOnConfirm: false,
             imageUrl: "img/calendar.png"
         } , function() {
