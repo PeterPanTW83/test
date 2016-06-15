@@ -273,9 +273,9 @@ function sweetAlert() {
     swal({
         title: "新增日曆活動",
         text: "請問您是否要新增此活動至Google日曆？",
-        type: "warning",
         imageUrl: "img/calendar.png",
         showCancelButton: true,
+        cancelButtonText: "取消",
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "同意",
         closeOnConfirm: false
