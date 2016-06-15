@@ -116,9 +116,13 @@
         $('.filter').hide();
     }
 	
+    function setHtml(){
+        $('.btn-filter').on('click', function(){
+            $('.filter').toggle();
+        });
 
-    $('.btn-filter').on('click', function(){
-        $('.filter').toggle();
-    });
+        $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
+    }
 
-    $('#form').dk_tw_citySelector('#city', '#district', '#zipcode')
+    setHtml();
+    
