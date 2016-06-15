@@ -202,6 +202,10 @@
             $('.filter').toggle();
         });
         
+        $('.add-calendar').on('click', function(){
+            swal("Here's a message!")
+        });
+        
         $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
 
     });
