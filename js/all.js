@@ -203,7 +203,7 @@
         });
         
         $('.add-calendar').on('click', function(){
-            swal("Here's a message!")
+            swal({   title: "Sweet!",   text: "請問您是否同意新增此活動至Google日曆？",   imageUrl: "img/calendar.png" });
         });
         
         $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
