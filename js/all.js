@@ -206,6 +206,11 @@
             swal({   title: "Sweet!",   text: "請問您是否同意新增此活動至Google日曆？",   imageUrl: "img/calendar.png" });
         });
         
+        $("add-calendar").click(function(event){
+        	location.href = "https://www.google.com";
+    		event.stopPropagation();
+  	});
+
         $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
 
     });
