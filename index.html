@@ -13,6 +13,7 @@
         var map;
         var jsonData;
         var markers = [];
+        var image = 'img/marker-movie.png';
 
         function initMap() {
             
@@ -21,12 +22,7 @@
                 zoom: 9
             });
             
-            var image = 'img/marker-movie.png';
-            var beachMarker = new google.maps.Marker({
-                position: {lat: -33.890, lng: 151.274},
-                map: map,
-                icon: image
-                });
+         
             /** 定位使用者
             var infoWindow = new google.maps.InfoWindow({map: map});
             if (navigator.geolocation) {
@@ -120,9 +116,9 @@
         function createMarkers(dataCoordinates, dataTitle, address){
             var marker = new google.maps.Marker({
                 position: dataCoordinates,
-                title:dataTitle
+                title:dataTitle,
+                icon: image
             });
-
             var infoWindow = new google.maps.InfoWindow({
                 content: '活動名稱:'+dataTitle+'<br>'+
                          '地址:'+address
