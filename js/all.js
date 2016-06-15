@@ -258,7 +258,7 @@ function createEvent() {
     });
 }
 
-function sweetAlert() {
+function Dialog() {
     swal({
         title: "新增日曆活動",
         text: "請問您是否要新增此活動至Google日曆？",
