@@ -203,18 +203,6 @@
         });
         
         $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
-        
-        $('.add-calendar').click(function(){
-            text: "您要將此活動加至您的Google日曆嗎？",
-            showCancelButton: true,
-            confirmButtonColor: "#12BDBC",
-            confirmButtonText: "確定",
-            cancelButtonText: "取消",
-            closeOnConfirm: false,
-            imageUrl: "img/calendar.png"
-        } , function() {
-	    swal("新增成功", "該活動已被加至您的Google日曆中", "success");
-        });
 
     });
     
