@@ -48,10 +48,14 @@
     function search(){
         var activityTitle = document.getElementById("name").value;
         var activityLocation = document.getElementById("location").value;
-        var activityStartTime = document.getElementById("starttime").value;
+        var activityStartTime= Number(document.getElementById("starttime").value.replace(/-/g,""));
+        var activityEndTime= Number(document.getElementById("endtime").value.replace(/-/g,""));
+        var activityCity= document.getElementById("city").value;
+        var activityDistrict= document.getElementById("district").value;
+        console.log(activityCity+activityDistrict);
+        console.log(activityCity);
         var tempData = [];
         var tempData1 = [];
-        var tempData2 = [];
 
         $('#list').html("");
         deleteMarkers();
@@ -72,32 +76,90 @@
                 var dataLocation=tempData[i].showInfo[0].locationName;
                 if(dataLocation.match(activityLocation)!=null){
                     tempData1.push(tempData[i]);
+                    console.log(tempData[i].showInfo[0].locationName);
                 }
             }
         }else{
-            tempData1=jsonData;
+            tempData1=tempData;
         }
-        if(activityStartTime!=null){
-            for(var i = 0;i <tempData1.length; i++){
-                var dataStartTime=tempData1[i].showInfo[0].time;
-                if(dataStartTime.match(activityStartTime)!=null){
-                    tempData2.push(tempData1[i]);
-                }
-            }
+        tempData=[];
+        if(activityCity!=""&&activityDistrict!=""){
+        	 for(var i = 0;i <tempData1.length; i++){
+        	 	var dataaddress=tempData1[i].showInfo[0].location;
+        	 	if(dataaddress.match(activityCity+activityDistrict)){
+        	 		tempData.push(tempData1[i]);
+        	 		
+        	 	}
+        	 }
+        }else if(activityCity!=""&&activityDistrict==""){
+        	for(var i = 0;i <tempData1.length; i++){
+        	 	var dataaddress=tempData1[i].showInfo[0].location;
+        	 	if(dataaddress.match(activityCity)){
+        	 		tempData.push(tempData1[i]);
+        	 	}
+        	 }
+
+        }else if(activityCity==""&&activityDistrict!=""){
+        	for(var i = 0;i <tempData1.length; i++){
+        	 	var dataaddress=tempData1[i].showInfo[0].location;
+        	 	if(dataaddress.match(activityDistrict)){
+        	 		tempData.push(tempData1[i]);
+        	 	}
+        	 }
         }else{
-            tempData2=jsonData;
+        	tempData=tempData1;
+        	
+        }
+        tempData1=[];
+        if(activityStartTime!=0&&activityEndTime!=0){
+            for(var i = 0;i <tempData.length; i++){
+                var dataStartTime=Number(tempData[i].showInfo[0].time.substr(0,10).replace(/\//g,""));
+                var dataEndTime=Number(tempData[i].showInfo[0].endTime.substr(0,10).replace(/\//g,""));
+                if(dataStartTime<activityStartTime){
+					  if(dataEndTime>=activityStartTime){
+					  	tempData1.push(tempData[i]);
+					  }
+				}else if(dataStartTime>activityStartTime){
+					  if(dataStartTime<=activityEndTime){
+					   	tempData1.push(tempData[i]);
+					  }
+				}else{
+					tempData1.push(tempData[i]);
+				}
+			}    
+        }else if(activityStartTime!=0&&activityEndTime==0){
+        	for(var i = 0;i <tempData.length; i++){
+             	var dataStartTime=Number(tempData[i].showInfo[0].time.substr(0,10).replace(/\//g,""));
+                var dataEndTime=Number(tempData[i].showInfo[0].endTime.substr(0,10).replace(/\//g,""));
+                if(activityStartTime<=dataEndTime){
+        			tempData1.push(tempData[i]);
+        		}
+			}    
+        }else if(activityStartTime==0&&activityEndTime!=0){
+        	for(var i = 0;i <tempData.length; i++){
+             	var dataStartTime=Number(tempData[i].showInfo[0].time.substr(0,10).replace(/\//g,""));
+                var dataEndTime=Number(tempData[i].showInfo[0].endTime.substr(0,10).replace(/\//g,""));
+              	if(activityEndTime>=dataStartTime){
+        			tempData1.push(tempData[i]);
+        		}
+			}    
+        }
+        else{
+            tempData1=tempData;
         }
 
-        for(var i = 0; i < tempData2.length; i++){
-            var dataTitle=tempData2[i].title;
-            var dataLocationName=tempData2[i].showInfo[0].locationName;
-            var locationLati=tempData2[i].showInfo[0].latitude;
-            var locationLng=tempData2[i].showInfo[0].longitude;
+
+
+        for(var i = 0; i < tempData1.length; i++){
+            var dataTitle=tempData1[i].title;
+            var dataLocationName=tempData1[i].showInfo[0].locationName;
+            var locationLati=tempData1[i].showInfo[0].latitude;
+            var locationLng=tempData1[i].showInfo[0].longitude;
             var dataCoordinates={lat:Number(locationLati), lng:Number(locationLng)};
 
-            createMarkers(dataCoordinates, dataTitle, tempData2[i].showInfo[0].location);
+            createMarkers(dataCoordinates, dataTitle, tempData1[i].showInfo[0].location);
 
-            $('#list').append('<a href="javascript:focusLocation(\''+i+'\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>'+dataTitle+'</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>'+tempData2[i].showInfo[0].time+'~'+tempData2[i].showInfo[0].endTime+'</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>'+tempData2[i].showInfo[0].locationName+'</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>'+tempData2[i].showInfo[0].location+'</p></div></li></a>');
+            $('#list').append('<a href="javascript:focusLocation(\''+i+'\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>'+dataTitle+'</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>'+tempData1[i].showInfo[0].time+'~'+tempData1[i].showInfo[0].endTime+'</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>'+tempData1[i].showInfo[0].locationName+'</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>'+tempData1[i].showInfo[0].location+'</p></div></li></a>');
         } 
         $('.filter').hide();
     }
