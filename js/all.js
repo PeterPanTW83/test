@@ -156,7 +156,7 @@ function search() {
 
         createMarkers(dataCoordinates, dataTitle, tempData1[i].showInfo[0].location);
 
-        $('#list').append('<a href="javascript:focusLocation(\'' + i + '\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].time + '~' + tempData1[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].location + '</p><a href="#" class="add-calendar">日曆</a></div></li></a>');
+        $('#list').append('<a href="javascript:focusLocation(\'' + i + '\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].time + '~' + tempData1[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].location + '</p><a href="javascript:sweetAlert()" class="add-calendar">日曆</a></div></li></a>');
     }
     $('.filter').hide();
 }
@@ -206,12 +206,8 @@ function checkAuth() {
 }
 
 function handleAuthResult(authResult) {
-    var authorizeDiv = document.getElementById('authorize-div');
     if (authResult && !authResult.error) {
-        authorizeDiv.style.display = 'none';
         loadCalendarApi();
-    } else {
-        authorizeDiv.style.display = 'inline';
     }
 }
 
@@ -271,6 +267,20 @@ function createEvent() {
     request.execute(function(event) {
         appendPre('Event created: ' + event.htmlLink);
     });
+}
+
+function sweetAlert(){
+    swal({   
+        title: "新增日曆活動",   
+        text: "請問您是否要新增此活動至Google日曆？",   
+        type: "warning",
+        imageUrl: "img/calendar.png",  
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "同意",   
+        closeOnConfirm: false 
+    }, function(){   
+        swal("確認", "已經新增至您的日曆中", "success"); });
 }
 
 $(document).ready(function() {
