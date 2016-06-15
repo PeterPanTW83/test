@@ -13,7 +13,7 @@
     }
 
 	function includeData(){
-		$.getJSON('movie.json', function(Data) {
+		$.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/movie.json', function(Data) {
 			jsonData=Data;
    			for(var i = 0; i < jsonData.length; i++) {
                 var dataTitle=jsonData[i].title;
