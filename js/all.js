@@ -253,7 +253,7 @@ function createEvent() {
             text: "活動已經新增至您的日曆中<br><a href='"+event.htmlLink+"'>查看日曆</a>",
             type: "success",
             closeOnConfirm: true,
-            html: true;
+            html: true
         });
     });
 }
