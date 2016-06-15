@@ -208,6 +208,8 @@ function checkAuth() {
 function handleAuthResult(authResult) {
     if (authResult && !authResult.error) {
         loadCalendarApi();
+    }else{
+        handleAuthClick(event);
     }
 }
 
@@ -268,7 +270,7 @@ function sweetAlert() {
         confirmButtonText: "同意",
         closeOnConfirm: true
     }, function() {
-        handleAuthClick(event);
+        checkAuth();
     });
 }
 
