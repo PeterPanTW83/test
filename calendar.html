@@ -1,5 +1,8 @@
 <html>
 	<head>
+	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/sweetalert.min.js"></script> 
 	<script type="text/javascript">
 
     var CLIENT_ID = '998871371950-c95ffdeu6pee5bal5l4pmio9911gjdva.apps.googleusercontent.com';
@@ -78,6 +81,18 @@
             appendPre('Event created: ' + event.htmlLink);
           });
    	}
+   	
+   	$('.add-calendar').click(function(){
+            text: "您要將此活動加至您的Google日曆嗎？",
+            showCancelButton: true,
+            confirmButtonColor: "#12BDBC",
+            confirmButtonText: "確定",
+            cancelButtonText: "取消",
+            closeOnConfirm: false,
+            imageUrl: "img/calendar.png"
+        } , function() {
+	    swal("新增成功", "該活動已被加至您的Google日曆中", "success");
+        });
 
 	</script>
     <script src="https://apis.google.com/js/client.js?onload=checkAuth" async defer></script>
@@ -87,6 +102,7 @@
       		<span>是否同意新增活動至Google日曆?</span>
       		<!--Button for the user to click to initiate auth sequence -->
       		<button id="authorize-button" onclick="handleAuthClick(event)">確認</button>
+      		<button class="add-calendar">test</button>
     	</div>
     	<pre id="output"></pre>
   </body>
