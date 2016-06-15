@@ -224,38 +224,21 @@ function loadCalendarApi() {
     gapi.client.load('calendar', 'v3', createEvent);
 }
 
-function appendPre(message) {
-    var pre = document.getElementById('output');
-    var textContent = document.createTextNode(message + '\n');
-    pre.appendChild(textContent);
-}
-
 function createEvent() {
     var event = {
         'summary': 'Google I/O 2015',
         'location': '800 Howard St., San Francisco, CA 94103',
         'description': 'A chance to hear more about Google\'s developer products.',
         'start': {
-            'dateTime': '2015-05-28T09:00:00-07:00',
+            'dateTime': '2016-06-28T09:00:00-07:00',
             'timeZone': 'America/Los_Angeles'
         },
         'end': {
-            'dateTime': '2015-05-28T17:00:00-07:00',
+            'dateTime': '2016-06-28T17:00:00-07:00',
             'timeZone': 'America/Los_Angeles'
         },
-        'recurrence': [
-            'RRULE:FREQ=DAILY;COUNT=2'
-        ],
-        'attendees': [
-            { 'email': 'lpage@example.com' },
-            { 'email': 'sbrin@example.com' }
-        ],
         'reminders': {
-            'useDefault': false,
-            'overrides': [
-                { 'method': 'email', 'minutes': 24 * 60 },
-                { 'method': 'popup', 'minutes': 10 }
-            ]
+            'useDefault': true,
         }
     };
 
@@ -265,7 +248,7 @@ function createEvent() {
     });
 
     request.execute(function(event) {
-        appendPre('Event created: ' + event.htmlLink);
+        swal("確認", "已經新增至您的日曆中<br>"+event.htmlLink, "success");
     });
 }
 
@@ -280,7 +263,7 @@ function sweetAlert() {
         confirmButtonText: "同意",
         closeOnConfirm: false
     }, function() {
-        swal("確認", "已經新增至您的日曆中", "success");
+        handleAuthClick(event);
     });
 }
 
