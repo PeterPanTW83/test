@@ -248,7 +248,12 @@ function createEvent() {
     });
 
     request.execute(function(event) {
-        swal("確認", "已經新增至您的日曆中<br>"+event.htmlLink, "success");
+        swal({
+            title: "完成",
+            text: "活動已經新增至您的日曆中<br><a href='"+event.htmlLink+"'>查看日曆</a>",
+            type: "success"
+            closeOnConfirm: true
+        });
     });
 }
 
@@ -261,7 +266,7 @@ function sweetAlert() {
         cancelButtonText: "取消",
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "同意",
-        closeOnConfirm: false
+        closeOnConfirm: true
     }, function() {
         handleAuthClick(event);
     });
