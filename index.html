@@ -63,9 +63,10 @@
         function search(){
             var activityTitle = document.getElementById("name").value;
             var activityLocation = document.getElementById("location").value;
-            console.log(activityLocation);
-            var selectedData = [];
-            var newSelectData = [];
+            var activityStartTime = document.getElementById("starttime").value;
+            var tempData = [];
+            var tempData1 = [];
+            var tempData2 = [];
 
             $('#list').html("");
             deleteMarkers();
@@ -74,22 +75,32 @@
                 for(var i = 0;i < jsonData.length; i++){
                     var dataTitle=jsonData[i].title;
                     if(dataTitle.match(activityTitle)!=null){
-                        selectedData.push(jsonData[i]);
+                        tempData.push(jsonData[i]);
                     }
                 }
             }else{
-                selectedData=jsonData;
+                tempData=jsonData;
             }
 
             if(activityLocation!=null){
-                for(var i = 0;i < selectedData.length; i++){
-                    var dataLocation=selectedData[i].showInfo[0].locationName;
+                for(var i = 0;i < tempData.length; i++){
+                    var dataLocation=tempData[i].showInfo[0].locationName;
                     if(dataLocation.match(activityLocation)!=null){
-                        newSelectData.push(selectedData[i]);
+                        tempData1.push(tempData[i]);
                     }
                 }
             }else{
-                newSelectData=jsonData;
+                tempData1=jsonData;
+            }
+            if(activityStartTime!=null){
+                for(var i = 0;i <tempData1.length; i++){
+                    var dataStartTime=tempData1[i].showInfo[0].time;
+                    if(dataStartTime.match(activityStartTime)!=null){
+                        tempData2.push(tempData1[i]);
+                    }
+                }
+            }else{
+                tempData2=jsonData;
             }
 
             for(var i = 0; i < newSelectData.length; i++){
