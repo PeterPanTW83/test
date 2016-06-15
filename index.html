@@ -20,7 +20,12 @@
                 center: {lat: 22.73281, lng: 120.287898},
                 zoom: 9
             });
-
+            
+            var image = 'img/marker-movie.png';
+            var beachMarker = new google.maps.Marker({
+                map: map,
+                icon: image
+                });
             /** 定位使用者
             var infoWindow = new google.maps.InfoWindow({map: map});
             if (navigator.geolocation) {
