@@ -312,9 +312,8 @@ function Dialog(dataCount) {
 }
 
 function addFavorite(i) {
-    $('img').html('<img src="img/heart.png">');
-    $('span').html('已收藏');
-        
+    $('button').html("<img src='img/heart.png'>已收藏");
+
     var favoriteData = JSON.parse(localStorage.getItem("favorite"));
     if (favoriteData == null) {
         favoriteData = [];
