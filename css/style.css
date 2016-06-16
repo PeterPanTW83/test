@@ -295,6 +295,12 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     color: #292929;
     font-size: 14px;
     padding: 5px 10px;
+    cursor: pointer;
+}
+
+.submenu button img {
+    margin-right: 5px;
+    vertical-align: middle;
 }
 
 .add-calendar {
