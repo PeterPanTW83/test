@@ -349,6 +349,10 @@ jQuery(document).ready(function($) {
     $('.btn-filter').on('click', function() {
         $('.filter').toggle();
     });
+    
+    $("#list").find('li').mouseover(function() {
+        $(button).css("background-color","rgba(210, 210, 210, 0.2)");
+    }
 
     $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
 
