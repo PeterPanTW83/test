@@ -151,12 +151,15 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     float: right;
 }
 
-.menu a {
-    display: block;
-    text-decoration: none;
+.menu li {
     color: white;
     float: left;
     padding: 17.5px 20px;
+}
+
+.menu a {
+    display: block;
+    text-decoration: none;
 }
 
 .menu a:hover {
