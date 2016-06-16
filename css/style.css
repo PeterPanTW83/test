@@ -287,6 +287,18 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     margin-top: 15px;
 }
 
+.add-calendar {
+    float: right;
+}
+
+.favorite {
+    
+}
+
+.route {
+    float: right;
+}
+
 /* Map */
 
 #map-list {
