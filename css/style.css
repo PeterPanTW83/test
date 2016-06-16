@@ -287,16 +287,35 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     margin-top: 15px;
 }
 
-.add-calendar {
-    float: right;
+.submenu button {
+    font-family: "微軟正黑體";
+    font-weight: bold;
+    border: 0px;
+    background-color: #fff;
+    color: #292929;
+    font-size: 14px;
+    padding: 5px 10px;
 }
 
-.favorite {
-    
+.add-calendar {
+    float: right;
+    margin-right: 10px;
+}
+
+.add-calendar:hover{
+    color: #e74c3c;
+}
+
+.favorite:hover {
+    color: #c0392b;
 }
 
 .route {
     float: right;
+}
+
+.route:hover {
+    color: #38447e;
 }
 
 /* Map */
