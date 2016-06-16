@@ -71,6 +71,16 @@ body.stop-scrolling {
     line-height: normal;
 }
 
+.sweet-alert a {
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.sweet-alert a img {
+    vertical-align: text-bottom;
+    margin-right: 5px;
+}
+
 .sweet-alert fieldset {
     border: none;
     position: relative;
