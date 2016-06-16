@@ -134,6 +134,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     float: left;
     margin-top: 25px;
     margin-left: 20px;
+    font-size: 13px;
 }
 
 .source a {
