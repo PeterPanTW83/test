@@ -264,9 +264,9 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     margin-bottom: 10px;
 }
 
-.info ul li {
+.info li {
     margin-bottom: 3px;
-    border-bottom: 0px;
+    border-bottom: 0px !important;
 }
 
 .info li:nth-child(3) {
@@ -278,7 +278,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     color: #656565;
 }
 
-.info li:nth-child(4) i {
+.info li:nth-child(3) i {
     margin-left: 4px;
     margin-right: 18px;
 }
