@@ -230,6 +230,8 @@ function loadCalendarApi() {
 
 function createEvent() {
 
+    console.log(event);
+
     var request = gapi.client.calendar.events.insert({
         'calendarId': 'primary',
         'resource': event
