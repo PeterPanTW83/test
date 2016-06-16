@@ -291,7 +291,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     font-family: "微軟正黑體";
     font-weight: bold;
     border: 0px;
-    background-color: #fff;
+    background-color: transparent;
     color: #292929;
     font-size: 14px;
     padding: 0px;
@@ -310,6 +310,10 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 .add-calendar:hover{
     color: #e74c3c;
+}
+
+.favorite {
+    vertical-align: top;
 }
 
 .favorite:hover {
