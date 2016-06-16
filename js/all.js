@@ -165,6 +165,10 @@ function search() {
     }
     tempData1.sort(SortByDate);
 
+    if(tempData1.length==0){
+         $('#list').append('<div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
+    }
+
     for (var i = 0; i < tempData1.length; i++) {
         var dataTitle = tempData1[i].title;
         var dataLocationName = tempData1[i].showInfo[0].locationName;
