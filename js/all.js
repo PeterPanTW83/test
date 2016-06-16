@@ -315,6 +315,25 @@ function addFavorite(data) {
     localStorage.setItem("favorite", JSON.stringify(data));
 }
 
+function showFavorite() {
+    $('#list').html("");
+    deleteMarkers();
+    var favoriteData = JSON.parse(localStorage.getItem("favorite"));
+    favoriteData.sort(SortByDate);
+    for (var i = 0; i < favoriteData.length; i++) {
+        var dataTitle = favoriteData[i].title;
+        var locationLati = favoriteData[i].showInfo[0].latitude;
+        var locationLng = favoriteData[i].showInfo[0].longitude;
+        var dataCoordinates = { lat: Number(locationLati), lng: Number(locationLng) };
+        createMarkers(dataCoordinates, dataTitle, favoriteData[i].showInfo[0].location, favoriteData[i].category);
+        if (favoriteData[i].category == 8) {
+            $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + favoriteData[i].showInfo[0].time + '~' + favoriteData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + favoriteData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + favoriteData[i].showInfo[0].location + '</li></ul><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button><button onclick="addFavorite(\'' + favoriteData[i] + '\')" class="favorite">已收藏</button><button onclick="" class="route">路線規劃</button></div></a></li>');
+        } else {
+            $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/exhibition.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + favoriteData[i].showInfo[0].time + '~' + favoriteData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + favoriteData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + favoriteData[i].showInfo[0].location + '</li></ul><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button><button onclick="addFavorite(\'' + favoriteData[i] + '\')" class="favorite">已收藏</button><button onclick="" class="route">路線規劃</button></div></a></li>');
+        }
+    }
+}
+
 jQuery(document).ready(function($) {
 
     $('.btn-filter').on('click', function() {
