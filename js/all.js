@@ -313,7 +313,7 @@ function Dialog(dataCount) {
 
 function addFavorite(data) {
     var favoriteData = JSON.parse(localStorage.getItem("favorite"));
-    console.log(favoriteData[0].showInfo[0].location);
+    console.log(favoriteData[0]);
     favoriteData.append(data);
     localStorage.setItem("favorite", JSON.stringify(favoriteData));
 }
