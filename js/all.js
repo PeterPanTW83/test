@@ -22,11 +22,12 @@ function includeData() {
             var locationLati = jsonData[i].showInfo[0].latitude;
             var locationLng = jsonData[i].showInfo[0].longitude;
             var dataCoordinates = { lat: Number(locationLati), lng: Number(locationLng) };
+            var favoriteActivity = JSON.stringify(jsonData[i]);
             createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location, jsonData[i].category);
             if (jsonData[i].category == 8) {
-                $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</li></ul><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button><button onclick="addFavorite(\'' + jsonData[i] + '\')" class="favorite">收藏</button><button onclick="" class="route">路線規劃</button></div></a></li>');
+                $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</li></ul><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button><button onclick="addFavorite(\'' + favoriteActivity + '\')" class="favorite">收藏</button><button onclick="" class="route">路線規劃</button></div></a></li>');
             } else {
-                $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/exhibition.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</li></ul><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button><button onclick="addFavorite(\'' + jsonData[i] + '\')" class="favorite">收藏</button><button onclick="" class="route">路線規劃</button></div></a></li>');
+                $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/exhibition.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</li></ul><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button><button onclick="addFavorite(\'' + favoriteActivity + '\')" class="favorite">收藏</button><button onclick="" class="route">路線規劃</button></div></a></li>');
             }
         }
     });
@@ -311,9 +312,10 @@ function Dialog(dataCount) {
     });
 }
 
-function addFavorite(data) {
-    console.log(data[0]);
-    localStorage.setItem("favorite", JSON.stringify(favoriteData));
+function addFavorite(favoriteActivity) {
+
+    console.log(favoriteActivity);
+    //localStorage.setItem("favorite", JSON.stringify(favoriteData));
 }
 
 function showFavorite() {
