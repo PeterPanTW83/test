@@ -195,6 +195,7 @@ function focusLocation(markerCount) {
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
     $('.filter').hide();
+    $('#list').find('li').css('box-shadow','0px 0px 5px 2px #0f9c9b inset');
 }
 
 function geoFindMe() {
