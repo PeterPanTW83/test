@@ -312,6 +312,7 @@ function Dialog(dataCount) {
 }
 
 function addFavorite(data) {
+    console.log(data[0].showInfo[0].version);
     localStorage.setItem("favorite", JSON.stringify(data));
 }
 
