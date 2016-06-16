@@ -302,7 +302,7 @@ function Dialog(dataCount) {
         imageUrl: "img/calendar.png",
         showCancelButton: true,
         cancelButtonText: "取消",
-        confirmButtonColor: "#DD6B55",
+        confirmButtonColor: "#12BDBC",
         confirmButtonText: "同意",
         closeOnConfirm: true
     }, function() {
