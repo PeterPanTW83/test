@@ -341,6 +341,17 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     width: 100%;
 }
 
+/* No Result */
+
+.nosult {
+    background-color: #D2D2D2;
+}
+
+.noresult img {
+    width: 130px;
+    margin: 120px 183px 30px 183px;
+}
+
 
 /* Clear Float */
 
