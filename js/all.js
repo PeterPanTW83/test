@@ -23,7 +23,7 @@ function includeData() {
             var locationLng = jsonData[i].showInfo[0].longitude;
             var dataCoordinates = { lat: Number(locationLati), lng: Number(locationLng) };
             createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location);
-            $('#list').append('<li class="clearfix"><a href="javascript:focusLocation(\'' + i + '\')"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><a href="javascript:Dialog(\'' + i + '\')" class="add-calendar">日曆</a></div></a></li>');
+            $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><button onclick=Dialog(\'' + i + '\')" class="add-calendar">日曆</button></div></a></li>');
         }
     });
 }
