@@ -24,7 +24,7 @@ function includeData() {
             var dataCoordinates = { lat: Number(locationLati), lng: Number(locationLng) };
             createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location, jsonData[i].category);
             if (jsonData[i].category == 8) {
-                $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</li></ul><div class="submenu"><button onclick="addFavorite(\'' + i + '\')" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
+                $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</li></ul><div class="submenu"><button onclick="addFavorite(\'' + i + '\'); $(this).children("img").attr("src", "img/heart.png");" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
             } else {
                 $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/exhibition.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</li></ul><div class="submenu"><button onclick="addFavorite(\'' + i + '\')" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
             }
@@ -165,8 +165,8 @@ function search() {
     }
     tempData1.sort(SortByDate);
 
-    if(tempData1.length==0){
-         $('#list').append('<div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
+    if (tempData1.length == 0) {
+        $('#list').append('<div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     }
 
     for (var i = 0; i < tempData1.length; i++) {
@@ -316,7 +316,6 @@ function Dialog(dataCount) {
 }
 
 function addFavorite(i) {
-    $('.favorite').html("<img src='img/heart.png'>已收藏");
 
     var favoriteData = JSON.parse(localStorage.getItem("favorite"));
     if (favoriteData == null) {
