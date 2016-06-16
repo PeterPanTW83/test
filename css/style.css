@@ -119,7 +119,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     float: left;
     margin: 10px auto;
     padding-right: 20px;
-    border: 2px solid #fff;
+    border-right: 2px solid #fff;
 }
 
 .logo a {
@@ -128,6 +128,10 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     height: 40px;
     width: 150px;
     text-indent: -9999px;
+}
+
+.source {
+    
 }
 
 .menu {
