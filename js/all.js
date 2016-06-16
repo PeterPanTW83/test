@@ -2,6 +2,7 @@ var map;
 var jsonData;
 var markers = [];
 var image = 'img/marker-movie.png';
+var event;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
@@ -20,7 +21,7 @@ function includeData() {
             var locationLng = jsonData[i].showInfo[0].longitude;
             var dataCoordinates = { lat: Number(locationLati), lng: Number(locationLng) };
             createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location);
-            $('#list').append('<a href="javascript:focusLocation(\'' + i + '\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><a href="javascript:Dialog()" class="add-calendar">日曆</a></div></li></a>');
+            $('#list').append('<a href="javascript:focusLocation(\'' + i + '\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><a href="javascript:Dialog(\'' + i + '\')" class="add-calendar">日曆</a></div></li></a>');
         }
     });
 }
@@ -154,7 +155,7 @@ function search() {
 
         createMarkers(dataCoordinates, dataTitle, tempData1[i].showInfo[0].location);
 
-        $('#list').append('<a href="javascript:focusLocation(\'' + i + '\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].time + '~' + tempData1[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].location + '</p><a href="javascript:Dialog()" class="add-calendar">日曆</a></div></li></a>');
+        $('#list').append('<a href="javascript:focusLocation(\'' + i + '\')"><li class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].time + '~' + tempData1[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + tempData1[i].showInfo[0].location + '</p><a href="javascript:Dialog(\'' + i + '\')" class="add-calendar">日曆</a></div></li></a>');
     }
     $('.filter').hide();
 }
@@ -206,7 +207,7 @@ function checkAuth() {
 function handleAuthResult(authResult) {
     if (authResult && !authResult.error) {
         loadCalendarApi();
-    }else{
+    } else {
         handleAuthClick(event);
     }
 }
@@ -225,22 +226,6 @@ function loadCalendarApi() {
 }
 
 function createEvent() {
-    var event = {
-        'summary': 'Google I/O 2015',
-        'location': '800 Howard St., San Francisco, CA 94103',
-        'description': 'A chance to hear more about Google\'s developer products.',
-        'start': {
-            'dateTime': '2016-06-28T09:00:00-07:00',
-            'timeZone': 'America/Los_Angeles'
-        },
-        'end': {
-            'dateTime': '2016-06-28T17:00:00-07:00',
-            'timeZone': 'America/Los_Angeles'
-        },
-        'reminders': {
-            'useDefault': true,
-        }
-    };
 
     var request = gapi.client.calendar.events.insert({
         'calendarId': 'primary',
@@ -250,7 +235,7 @@ function createEvent() {
     request.execute(function(event) {
         swal({
             title: "完成",
-            text: "活動已經新增至您的日曆中<br><a href='"+event.htmlLink+"'>查看日曆</a>",
+            text: "活動已經新增至您的日曆中<br><a href='" + event.htmlLink + "'>查看日曆</a>",
             type: "success",
             closeOnConfirm: true,
             html: true
@@ -258,7 +243,35 @@ function createEvent() {
     });
 }
 
-function Dialog() {
+function Dialog(dataCount) {
+
+    var selectData;
+    if (tempData1[dataCount] != null) {
+        selectData = tempData1;
+    } else {
+        selectData = jsonData;
+    }
+
+    var startDateTime = selectData[dataCount].showInfo[0].time.replace(" ", "T");
+    var endDateTime = selectData[dataCount].showInfo[0].endTime.replace(" ", "T");
+
+    event = {
+        'summary': selectData[dataCount].title,
+        'location': selectData[dataCount].showInfo[0].location,
+        'description': selectData[dataCount].descriptionFilterHtml,
+        'start': {
+            'dateTime': startDateTime,
+            'timeZone': 'Taiwan/Taipei'
+        },
+        'end': {
+            'dateTime': endDateTime,
+            'timeZone': 'Taiwan/Taipei'
+        },
+        'reminders': {
+            'useDefault': true,
+        }
+    };
+
     swal({
         title: "新增日曆活動",
         text: "請問您是否要新增此活動至Google日曆？",
