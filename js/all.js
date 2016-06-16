@@ -266,11 +266,11 @@ function Dialog(dataCount) {
         'description': selectData[dataCount].descriptionFilterHtml,
         'end': {
             'dateTime': '2016-06-28T09:00:00+08:00',
-            'timeZone': 'Taiwan/Taipei'
+            'timeZone': 'Asia/Taipei'
         },
         'start': {
             'dateTime': '2016-06-28T17:00:00+08:00',
-            'timeZone': 'Taiwan/Taipei'
+            'timeZone': 'Asia/Taipei'
         },
         'reminders': {
             'useDefault': true
