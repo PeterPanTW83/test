@@ -264,12 +264,12 @@ function Dialog(dataCount) {
         'summary': selectData[dataCount].title,
         'location': selectData[dataCount].showInfo[0].location,
         'description': selectData[dataCount].descriptionFilterHtml,
-        'end': {
-            'dateTime': endDateTime,
-            'timeZone': 'Taiwan/Taipei'
-        },
         'start': {
             'dateTime': startDateTime,
+            'timeZone': 'Taiwan/Taipei'
+        },
+        'end': {
+            'dateTime': endDateTime,
             'timeZone': 'Taiwan/Taipei'
         },
         'reminders': {
