@@ -22,19 +22,23 @@ function includeData() {
             var locationLng = jsonData[i].showInfo[0].longitude;
             var dataCoordinates = { lat: Number(locationLati), lng: Number(locationLng) };
             createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location, jsonData[i].category);
-            $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button></div></a></li>');
+            if (jsonData[i].category == 8) {
+                $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button></div></a></li>');
+            } else {
+                $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/exhibition.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button></div></a></li>');
+            }
         }
     });
 }
 
 function createMarkers(dataCoordinates, dataTitle, address, category) {
     var image;
-    if(category==8){
+    if (category == 8) {
         image = 'img/marker-movie.png';
-    }else{
+    } else {
         image = 'img/marker-exhibition.png';
     }
-     
+
     var marker = new google.maps.Marker({
         position: dataCoordinates,
         title: dataTitle,
@@ -164,7 +168,11 @@ function search() {
 
         createMarkers(dataCoordinates, dataTitle, tempData1[i].showInfo[0].location);
 
-        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button></div></a></li>');
+        if (jsonData[i].category == 8) {
+            $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button></div></a></li>');
+        } else {
+            $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/exhibition.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button></div></a></li>');
+        }
     }
     $('.filter').hide();
 }
@@ -271,11 +279,11 @@ function Dialog(dataCount) {
         'location': selectData[dataCount].showInfo[0].location,
         'description': selectData[dataCount].descriptionFilterHtml,
         'end': {
-            'dateTime': endDateTime+'+08:00',
+            'dateTime': endDateTime + '+08:00',
             'timeZone': 'Asia/Taipei'
         },
         'start': {
-            'dateTime': startDateTime+'+08:00',
+            'dateTime': startDateTime + '+08:00',
             'timeZone': 'Asia/Taipei'
         },
         'reminders': {
