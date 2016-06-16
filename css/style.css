@@ -283,6 +283,10 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     margin-right: 18px;
 }
 
+.submenu {
+    margin-top: 15px;
+}
+
 /* Map */
 
 #map-list {
