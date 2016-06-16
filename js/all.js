@@ -16,6 +16,7 @@ function initMap() {
 function includeData() {
     $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(Data) {
         jsonData = Data;
+        jsonData.sort(SortByDate);
         for (var i = 0; i < jsonData.length; i++) {
             var dataTitle = jsonData[i].title;
             var locationLati = jsonData[i].showInfo[0].latitude;
@@ -29,6 +30,9 @@ function includeData() {
             }
         }
     });
+}
+function SortByDate(x,y){
+    return Number(x.showInfo[0].time.substr(0, 10).replace(/\//g, ""))-Number(y.showInfo[0].time.substr(0, 10).replace(/\//g, ""));
 }
 
 function createMarkers(dataCoordinates, dataTitle, address, category) {
@@ -158,6 +162,7 @@ function search() {
     } else {
         tempData1 = tempData;
     }
+        tempData1.sort(SortByDate);
 
     for (var i = 0; i < tempData1.length; i++) {
         var dataTitle = tempData1[i].title;
