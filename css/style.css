@@ -264,20 +264,20 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     margin-bottom: 10px;
 }
 
-.info p {
+.info li {
     margin-bottom: 3px;
 }
 
-.info p:nth-child(4) {
+.info li:nth-child(4) {
     margin-bottom: 0px;
 }
 
-.info p i {
+.info li i {
     margin-right: 15px;
     color: #656565;
 }
 
-.info p:nth-child(4) i{
+.info li:nth-child(4) i {
     margin-left: 4px;
     margin-right: 18px;
 }
