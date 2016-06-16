@@ -271,7 +271,7 @@ function Dialog(dataCount) {
             'timeZone': 'Taiwan/Taipei'
         },
         'reminders': {
-            'useDefault': true,
+            'useDefault': true
         }
     };
 
