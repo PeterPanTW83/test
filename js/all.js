@@ -351,11 +351,6 @@ jQuery(document).ready(function($) {
     $('.btn-filter').on('click', function() {
         $('.filter').toggle();
     });
-    
-   /* $('.favorite').on('click', function() {
-        $('img').html('<img src="img/heart.png">');
-        $('span').html('已收藏');
-    });*/
 
     $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
 
