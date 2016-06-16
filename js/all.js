@@ -261,15 +261,15 @@ function Dialog(dataCount) {
     endDateTime = endDateTime.replace(/\//g, "-");
 
     event = {
-        'summary': selectData[dataCount].title,
-        'location': selectData[dataCount].showInfo[0].location,
-        'description': selectData[dataCount].descriptionFilterHtml,
+        'summary': '\"'+selectData[dataCount].title+'\"',
+        'location': '\"'+selectData[dataCount].showInfo[0].location+'\"',
+        'description': '\"'+selectData[dataCount].descriptionFilterHtml+'\"',
         'end': {
-            'dateTime': '2016-06-28T09:00:00+08:00',
+            'dateTime': '2016-06-28T17:00:00+08:00',
             'timeZone': 'Asia/Taipei'
         },
         'start': {
-            'dateTime': '2016-06-28T17:00:00+08:00',
+            'dateTime': '2016-06-28T09:00:00+08:00',
             'timeZone': 'Asia/Taipei'
         },
         'reminders': {
