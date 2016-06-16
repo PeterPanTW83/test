@@ -2,7 +2,7 @@ var map;
 var jsonData;
 var markers = [];
 var image = 'img/marker-movie.png';
-var event;
+var activity;
 var isSearch = false;
 var tempData1;
 
@@ -230,11 +230,9 @@ function loadCalendarApi() {
 
 function createEvent() {
 
-    console.log(event);
-
     var request = gapi.client.calendar.events.insert({
         'calendarId': 'primary',
-        'resource': event
+        'resource': activity
     });
 
     request.execute(function(event) {
@@ -262,7 +260,7 @@ function Dialog(dataCount) {
     startDateTime = startDateTime.replace(/\//g, "-");
     endDateTime = endDateTime.replace(/\//g, "-");
 
-    event = {
+    activity = {
         //'summary': '\"'+selectData[dataCount].title+'\"',
         //'location': '\"'+selectData[dataCount].showInfo[0].location+'\"',
         //'description': '\"'+selectData[dataCount].descriptionFilterHtml+'\"',
