@@ -312,7 +312,7 @@ function Dialog(dataCount) {
 }
 
 function addFavorite(i) {
-    $('.add-calendar').html("<img src='img/heart.png'>已收藏");
+    $('.favorite').html("<img src='img/heart.png'>已收藏");
 
     var favoriteData = JSON.parse(localStorage.getItem("favorite"));
     if (favoriteData == null) {
