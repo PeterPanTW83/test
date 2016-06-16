@@ -3,6 +3,8 @@ var jsonData;
 var markers = [];
 var image = 'img/marker-movie.png';
 var event;
+var isSearch = false;
+var tempData1;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
@@ -46,6 +48,7 @@ function createMarkers(dataCoordinates, dataTitle, address) {
 }
 
 function search() {
+    isSearch = true;
     var activityTitle = document.getElementById("name").value;
     var activityLocation = document.getElementById("location").value;
     var activityStartTime = Number(document.getElementById("starttime").value.replace(/-/g, ""));
@@ -54,7 +57,7 @@ function search() {
     var activityDistrict = document.getElementById("district").value;
 
     var tempData = [];
-    var tempData1 = [];
+    tempData1 = [];
 
     $('#list').html("");
     deleteMarkers();
@@ -246,7 +249,7 @@ function createEvent() {
 function Dialog(dataCount) {
 
     var selectData;
-    if (tempData1[dataCount] != null) {
+    if (isSearch) {
         selectData = tempData1;
     } else {
         selectData = jsonData;
