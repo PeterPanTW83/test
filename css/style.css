@@ -118,6 +118,8 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 .logo {
     float: left;
     margin: 10px auto;
+    padding-right: 20px;
+    border: 2px solid #fff;
 }
 
 .logo a {
