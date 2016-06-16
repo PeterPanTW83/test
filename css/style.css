@@ -345,6 +345,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 .noresult {
     background-color: #D2D2D2;
+    height: 100%;
 }
 
 .noresult img {
@@ -353,7 +354,9 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 }
 
 .noresult h2 {
-    
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 
