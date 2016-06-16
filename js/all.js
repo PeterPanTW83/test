@@ -257,6 +257,8 @@ function Dialog(dataCount) {
 
     var startDateTime = selectData[dataCount].showInfo[0].time.replace(" ", "T");
     var endDateTime = selectData[dataCount].showInfo[0].endTime.replace(" ", "T");
+    startDateTime = startDateTime.replace(/\//g, "-");
+    endDateTime = endDateTime.replace(/\//g, "-");
     console.log(startDateTime);
     console.log(endDateTime);
 
