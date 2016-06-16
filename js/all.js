@@ -265,11 +265,11 @@ function Dialog(dataCount) {
         'location': selectData[dataCount].showInfo[0].location,
         'description': selectData[dataCount].descriptionFilterHtml,
         'end': {
-            'dateTime': endDateTime + ".000+08:00",
+            'dateTime': '2016-06-28T09:00:00+08:00',
             'timeZone': 'Taiwan/Taipei'
         },
         'start': {
-            'dateTime': startDateTime + ".000+08:00",
+            'dateTime': '2016-06-28T17:00:00+08:00',
             'timeZone': 'Taiwan/Taipei'
         },
         'reminders': {
