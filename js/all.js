@@ -312,6 +312,9 @@ function Dialog(dataCount) {
 }
 
 function addFavorite(i) {
+    $('img').html('<img src="img/heart.png">');
+    $('span').html('已收藏');
+        
     var favoriteData = JSON.parse(localStorage.getItem("favorite"));
     if (favoriteData == null) {
         favoriteData = [];
@@ -350,12 +353,10 @@ jQuery(document).ready(function($) {
         $('.filter').toggle();
     });
     
-    $('.favorite').on('click', function() {
+   /* $('.favorite').on('click', function() {
         $('img').html('<img src="img/heart.png">');
         $('span').html('已收藏');
-    });
-    
-    
+    });*/
 
     $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
 
