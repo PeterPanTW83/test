@@ -32,10 +32,10 @@ function includeData() {
             var dataImageUrl;
             switch (dataCategory) {
                 case 8:
-                    dataImageUrl = "img/movie.png"
+                    dataImageUrl = "img/movie.png";
                     break;
                 case 6:
-                    dataImageUrl = "img/exhibition.png"
+                    dataImageUrl = "img/exhibition.png";
                     break;
             }
             $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
@@ -52,10 +52,10 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
 
     switch (dataCategory) {
         case 8:
-            dataImageUrl = "img/marker-movie.png"
+            dataImageUrl = "img/marker-movie.png";
             break;
         case 6:
-            dataImageUrl = "img/marker-exhibition.png"
+            dataImageUrl = "img/marker-exhibition.png";
             break;
     }
 
@@ -230,10 +230,10 @@ function search() {
         var dataImageUrl;
         switch (dataCategory) {
             case 8:
-                dataImageUrl = "img/movie.png"
+                dataImageUrl = "img/movie.png";
                 break;
             case 6:
-                dataImageUrl = "img/exhibition.png"
+                dataImageUrl = "img/exhibition.png";
                 break;
         }
         $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
@@ -380,10 +380,10 @@ function showFavorite() {
         var dataImageUrl;
         switch (dataCategory) {
             case 8:
-                dataImageUrl = "img/movie.png"
+                dataImageUrl = "img/movie.png";
                 break;
             case 6:
-                dataImageUrl = "img/exhibition.png"
+                dataImageUrl = "img/exhibition.png";
                 break;
         }
         $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
