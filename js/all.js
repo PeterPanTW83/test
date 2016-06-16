@@ -86,7 +86,7 @@ function focusLocation(markerCount) {
 
 function changeFavorite(dataCount, dataElemet) {
     if (dataElemet.text() == "未收藏") {
-        dataElemet.children('img').attr('src', 'img/heart.png');
+        dataElemet.children("img").attr("src", "img/heart.png");
         dataElemet.text('已收藏');
 
         var favoriteData = JSON.parse(localStorage.getItem("favorite"));
@@ -99,11 +99,11 @@ function changeFavorite(dataCount, dataElemet) {
         } else {
             selectData = jsonData;
         }
-        favoriteData.push(selectData[i]);
+        favoriteData.push(selectData[dataCount]);
         localStorage.setItem("favorite", JSON.stringify(favoriteData));
 
     } else {
-        dataElemet.children('img').attr('src', 'img/empty-heart.png');
+        dataElemet.children("img").attr("src", "img/heart.png");
         dataElemet.text('未收藏');
     }
 }
