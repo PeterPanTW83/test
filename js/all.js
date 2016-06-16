@@ -351,8 +351,8 @@ jQuery(document).ready(function($) {
     });
     
     $("#list").find('li').mouseover(function() {
-        $(button).css("background-color","rgba(210, 210, 210, 0.2)");
-    }
+        $('.info').find('button').css("background-color","rgba(210, 210, 210, 0.2)");
+    });
 
     $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
 
