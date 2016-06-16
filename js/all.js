@@ -258,7 +258,7 @@ function createEvent() {
     request.execute(function(event) {
         swal({
             title: "完成",
-            text: "活動已經新增至您的日曆中<br><a href='" + event.htmlLink + "' target='_new'><img src='img/calendar.png' width='21px' height='21px'><span>查看日曆</span></a>",
+            text: "活動已經新增至您的日曆中<br><a href='" + event.htmlLink + "' target='_new'><img src='img/calendar.png' width='23px' height='23px'>查看日曆</a>",
             type: "success",
             closeOnConfirm: true,
             html: true
@@ -312,8 +312,6 @@ function Dialog(dataCount) {
 }
 
 function addFavorite(data) {
-    var favoriteData = JSON.parse(localStorage.getItem("favorite"));
-    console.log(favoriteData[0]);
     console.log(data[0]);
     localStorage.setItem("favorite", JSON.stringify(favoriteData));
 }
