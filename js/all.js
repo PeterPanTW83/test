@@ -1,7 +1,6 @@
 var map;
 var jsonData;
 var markers = [];
-var image = 'img/marker-movie.png';
 var activity;
 var isSearch = false;
 var tempData1;
@@ -15,20 +14,27 @@ function initMap() {
 }
 
 function includeData() {
-    $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/movie.json', function(Data) {
+    $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(Data) {
         jsonData = Data;
         for (var i = 0; i < jsonData.length; i++) {
             var dataTitle = jsonData[i].title;
             var locationLati = jsonData[i].showInfo[0].latitude;
             var locationLng = jsonData[i].showInfo[0].longitude;
             var dataCoordinates = { lat: Number(locationLati), lng: Number(locationLng) };
-            createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location);
+            createMarkers(dataCoordinates, dataTitle, jsonData[i].showInfo[0].location, jsonData[i].category);
             $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="img/movie.png" class="photo"><div class="info"><h2>' + dataTitle + '</h2><p><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].time + '~' + jsonData[i].showInfo[0].endTime + '</p><p><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].locationName + '</p><p><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + jsonData[i].showInfo[0].location + '</p><button onclick="Dialog(\'' + i + '\')" class="add-calendar">日曆</button></div></a></li>');
         }
     });
 }
 
-function createMarkers(dataCoordinates, dataTitle, address) {
+function createMarkers(dataCoordinates, dataTitle, address, category) {
+    var image;
+    if(category==8){
+        image = 'img/marker-movie.png';
+    }else{
+        image = 'img/marker-exhibition.png';
+    }
+     
     var marker = new google.maps.Marker({
         position: dataCoordinates,
         title: dataTitle,
