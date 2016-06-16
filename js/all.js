@@ -230,8 +230,6 @@ function loadCalendarApi() {
 
 function createEvent() {
 
-    console.log(event.end);
-
     var request = gapi.client.calendar.events.insert({
         'calendarId': 'primary',
         'resource': event
@@ -267,11 +265,11 @@ function Dialog(dataCount) {
         'location': selectData[dataCount].showInfo[0].location,
         'description': selectData[dataCount].descriptionFilterHtml,
         'end': {
-            'dateTime': endDateTime + "+08:00",
+            'dateTime': endDateTime + ".000+08:00",
             'timeZone': 'Taiwan/Taipei'
         },
         'start': {
-            'dateTime': startDateTime + "+08:00",
+            'dateTime': startDateTime + ".000+08:00",
             'timeZone': 'Taiwan/Taipei'
         },
         'reminders': {
