@@ -350,9 +350,12 @@ jQuery(document).ready(function($) {
         $('.filter').toggle();
     });
     
-    $("#list").find('li').mouseover(function() {
-        $('.info').find('button').css("background-color","rgba(210, 210, 210, 0.2)");
+    $('.favorite').on('click', function() {
+        $('img').html('<img src="img/heart.png">');
+        $('span').html('已收藏');
     });
+    
+    
 
     $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
 
