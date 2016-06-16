@@ -277,7 +277,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     color: #656565;
 }
 
-.info p:last-child i{
+.info p:nth-child(3) i{
     margin-left: 4px;
     margin-right: 18px;
 }
