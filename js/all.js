@@ -319,7 +319,6 @@ function showFavorite() {
     $('#list').html("");
     deleteMarkers();
     var favoriteData = JSON.parse(localStorage.getItem("favorite"));
-    favoriteData.sort(SortByDate);
     for (var i = 0; i < favoriteData.length; i++) {
         var dataTitle = favoriteData[i].title;
         var locationLati = favoriteData[i].showInfo[0].latitude;
