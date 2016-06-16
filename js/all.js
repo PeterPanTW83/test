@@ -312,8 +312,10 @@ function Dialog(dataCount) {
 }
 
 function addFavorite(data) {
-    console.log(data[0].showInfo[0].version);
-    localStorage.setItem("favorite", JSON.stringify(data));
+    var favoriteData = JSON.parse(localStorage.getItem("favorite"));
+    console.log(favoriteData[0].showInfo[0].location);
+    favoriteData.append(data);
+    localStorage.setItem("favorite", JSON.stringify(favoriteData));
 }
 
 function showFavorite() {
