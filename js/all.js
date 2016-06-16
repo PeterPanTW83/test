@@ -257,7 +257,7 @@ function createEvent() {
     request.execute(function(event) {
         swal({
             title: "完成",
-            text: "活動已經新增至您的日曆中<br><a href='" + event.htmlLink + "'>查看日曆</a>",
+            text: "活動已經新增至您的日曆中<br><a href='" + event.htmlLink + "' target="_new">查看日曆</a>",
             type: "success",
             closeOnConfirm: true,
             html: true
