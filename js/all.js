@@ -31,10 +31,10 @@ function includeData() {
             createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
             var dataImageUrl;
             switch (dataCategory) {
-                case 8:
+                case "8":
                     dataImageUrl = "img/movie.png";
                     break;
-                case 6:
+                case "6":
                     dataImageUrl = "img/exhibition.png";
                     break;
             }
@@ -51,10 +51,10 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var dataImageUrl;
 
     switch (dataCategory) {
-        case 8:
+        case "8":
             dataImageUrl = "img/marker-movie.png";
             break;
-        case 6:
+        case "6":
             dataImageUrl = "img/marker-exhibition.png";
             break;
     }
@@ -229,10 +229,10 @@ function search() {
         createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
         var dataImageUrl;
         switch (dataCategory) {
-            case 8:
+            case "8":
                 dataImageUrl = "img/movie.png";
                 break;
-            case 6:
+            case "6":
                 dataImageUrl = "img/exhibition.png";
                 break;
         }
@@ -379,10 +379,10 @@ function showFavorite() {
         createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
         var dataImageUrl;
         switch (dataCategory) {
-            case 8:
+            case "8":
                 dataImageUrl = "img/movie.png";
                 break;
-            case 6:
+            case "6":
                 dataImageUrl = "img/exhibition.png";
                 break;
         }
