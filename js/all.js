@@ -141,115 +141,156 @@ function search() {
     var activityEndTime = Number(document.getElementById("endtime").value.replace(/-/g, ""));
     var activityCity = document.getElementById("city").value;
     var activityDistrict = document.getElementById("district").value;
+    var activityType = document.getElementById("type").value;
 
     var tempData = [];
     tempData1 = [];
 
     $('#list').html("");
     deleteMarkers();
-
-    if (activityTitle != null) {
+    if(activityType=="演唱會"){
         for (var i = 0; i < jsonData.length; i++) {
-            var dataTitle = jsonData[i].title;
-            if (dataTitle.match(activityTitle) != null) {
+            var dataType = jsonData[i].category;
+            if (dataType!="17") {
                 tempData.push(jsonData[i]);
             }
         }
-    } else {
-        tempData = jsonData;
+    }else if(activityType=="音樂"){
+         for (var i = 0; i < jsonData.length; i++) {
+            var dataType = jsonData[i].category;
+            if (dataType!="5") {
+                tempData.push(jsonData[i]);
+            }
+    }else if(activityType=="戲劇"){
+        for (var i = 0; i < jsonData.length; i++) {
+            var dataType = jsonData[i].category;
+            if (dataType!="2") {
+                tempData.push(jsonData[i]);
+            }
+    }else if(activityType=="舞蹈"){
+        for (var i = 0; i < jsonData.length; i++) {
+            var dataType = jsonData[i].category;
+            if (dataType!="3") {
+                tempData.push(jsonData[i]);
+            }
+    }else if(activityType=="電影"){
+        for (var i = 0; i < jsonData.length; i++) {
+            var dataType = jsonData[i].category;
+            if (dataType!="8") {
+                tempData.push(jsonData[i]);
+            }
+    }else if(activityType=="親子"){
+        for (var i = 0; i < jsonData.length; i++) {
+            var dataType = jsonData[i].category;
+            if (dataType!="4") {
+                tempData.push(jsonData[i]);
+            }
+    }else{
+        tempData=jsonData;
     }
 
-    if (activityLocation != null) {
+
+    if (activityTitle != null) {
         for (var i = 0; i < tempData.length; i++) {
-            var dataLocation = tempData[i].showInfo[0].locationName;
-            if (dataLocation.match(activityLocation) != null) {
+            var dataTitle = tempData[i].title;
+            if (dataTitle.match(activityTitle) != null) {
                 tempData1.push(tempData[i]);
-                console.log(tempData[i].showInfo[0].locationName);
             }
         }
     } else {
         tempData1 = tempData;
     }
-    tempData = [];
-    if (activityCity != "" && activityDistrict != "") {
+     tempData = [];
+    if (activityLocation != null) {
         for (var i = 0; i < tempData1.length; i++) {
-            var dataaddress = tempData1[i].showInfo[0].location;
-            if (dataaddress.match(activityCity + activityDistrict)) {
-                tempData.push(tempData1[i]);
-
-            }
-        }
-    } else if (activityCity != "" && activityDistrict == "") {
-        for (var i = 0; i < tempData1.length; i++) {
-            var dataaddress = tempData1[i].showInfo[0].location;
-            if (dataaddress.match(activityCity)) {
-                tempData.push(tempData1[i]);
-            }
-        }
-
-    } else if (activityCity == "" && activityDistrict != "") {
-        for (var i = 0; i < tempData1.length; i++) {
-            var dataaddress = tempData1[i].showInfo[0].location;
-            if (dataaddress.match(activityDistrict)) {
+            var dataLocation = tempData1[i].showInfo[0].locationName;
+            if (dataLocation.match(activityLocation) != null) {
                 tempData.push(tempData1[i]);
             }
         }
     } else {
         tempData = tempData1;
-
     }
     tempData1 = [];
-    if (activityStartTime != 0 && activityEndTime != 0) {
+    if (activityCity != "" && activityDistrict != "") {
         for (var i = 0; i < tempData.length; i++) {
-            var dataStartTime = Number(tempData[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
-            var dataEndTime = Number(tempData[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
-            if (dataStartTime < activityStartTime) {
-                if (dataEndTime >= activityStartTime) {
-                    tempData1.push(tempData[i]);
-                }
-            } else if (dataStartTime > activityStartTime) {
-                if (dataStartTime <= activityEndTime) {
-                    tempData1.push(tempData[i]);
-                }
-            } else {
+            var dataaddress = tempData[i].showInfo[0].location;
+            if (dataaddress.match(activityCity + activityDistrict)) {
+                tempData1.push(tempData[i]);
+
+            }
+        }
+    } else if (activityCity != "" && activityDistrict == "") {
+        for (var i = 0; i < tempData.length; i++) {
+            var dataaddress = tempData[i].showInfo[0].location;
+            if (dataaddress.match(activityCity)) {
                 tempData1.push(tempData[i]);
             }
         }
-    } else if (activityStartTime != 0 && activityEndTime == 0) {
+
+    } else if (activityCity == "" && activityDistrict != "") {
         for (var i = 0; i < tempData.length; i++) {
-            var dataStartTime = Number(tempData[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
-            var dataEndTime = Number(tempData[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
-            if (activityStartTime <= dataEndTime) {
-                tempData1.push(tempData[i]);
-            }
-        }
-    } else if (activityStartTime == 0 && activityEndTime != 0) {
-        for (var i = 0; i < tempData.length; i++) {
-            var dataStartTime = Number(tempData[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
-            var dataEndTime = Number(tempData[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
-            if (activityEndTime >= dataStartTime) {
+            var dataaddress = tempData[i].showInfo[0].location;
+            if (dataaddress.match(activityDistrict)) {
                 tempData1.push(tempData[i]);
             }
         }
     } else {
         tempData1 = tempData;
-    }
-    tempData1.sort(SortByDate);
 
-    if (tempData1.length == 0) {
+    }
+    tempData = [];
+    if (activityStartTime != 0 && activityEndTime != 0) {
+        for (var i = 0; i < tempData1.length; i++) {
+            var dataStartTime = Number(tempData1[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
+            var dataEndTime = Number(tempData1[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
+            if (dataStartTime < activityStartTime) {
+                if (dataEndTime >= activityStartTime) {
+                    tempData.push(tempData1[i]);
+                }
+            } else if (dataStartTime > activityStartTime) {
+                if (dataStartTime <= activityEndTime) {
+                    tempData.push(tempData1[i]);
+                }
+            } else {
+                tempData.push(tempData1[i]);
+            }
+        }
+    } else if (activityStartTime != 0 && activityEndTime == 0) {
+        for (var i = 0; i < tempData1.length; i++) {
+            var dataStartTime = Number(tempData1[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
+            var dataEndTime = Number(tempData1[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
+            if (activityStartTime <= dataEndTime) {
+                tempData.push(tempData1[i]);
+            }
+        }
+    } else if (activityStartTime == 0 && activityEndTime != 0) {
+        for (var i = 0; i < tempData1.length; i++) {
+            var dataStartTime = Number(tempData1[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
+            var dataEndTime = Number(tempData1[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
+            if (activityEndTime >= dataStartTime) {
+                tempData.push(tempData1[i]);
+            }
+        }
+    } else {
+        tempData = tempData1;
+    }
+    tempData.sort(SortByDate);
+
+    if (tempData.length == 0) {
         $('#list').append('<div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     }
 
-    for (var i = 0; i < tempData1.length; i++) {
-        var dataTitle = tempData1[i].title;
-        var dataStartTime = tempData1[i].showInfo[0].time;
-        var dataEndTime = tempData1[i].showInfo[0].endTime;
-        var dataLati = tempData1[i].showInfo[0].latitude;
-        var dataLng = tempData1[i].showInfo[0].longitude;
+    for (var i = 0; i < tempData.length; i++) {
+        var dataTitle = tempData[i].title;
+        var dataStartTime = tempData[i].showInfo[0].time;
+        var dataEndTime = tempData[i].showInfo[0].endTime;
+        var dataLati = tempData[i].showInfo[0].latitude;
+        var dataLng = tempData[i].showInfo[0].longitude;
         var dataCoordinates = { lat: Number(dataLati), lng: Number(dataLng) };
-        var dataLocation = tempData1[i].showInfo[0].location;
-        var dataLocationName = tempData1[i].showInfo[0].locationName;
-        var dataCategory = tempData1[i].category;
+        var dataLocation = tempData[i].showInfo[0].location;
+        var dataLocationName = tempData[i].showInfo[0].locationName;
+        var dataCategory = tempData[i].category;
         createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
         var dataImageUrl;
         switch (dataCategory) {
