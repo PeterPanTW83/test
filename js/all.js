@@ -30,6 +30,7 @@ function includeData() {
             console.log(data.length);
 
             for (var i = 0; i < data.length; i++) {
+                console.log(data[i].showInfo[0].time);
                 if(data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == ""){
                     continue;
                 }
