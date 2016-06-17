@@ -130,15 +130,14 @@ function changeFavorite(dataCount, dataElemet) {
         var selectDataUID = selectData[dataCount].UID;
         console.log(selectDataUID);
         var favoriteData = JSON.parse(localStorage.getItem("favorite"));
-        var i;
-        for (i = 0; i < favoriteData.length; i++) {
+        for (var i = 0; i < favoriteData.length; i++) {
             console.log(favoriteData[i].UID);
             if (favoriteData[i].UID == selectDataUID) {
+                favoriteData.splice(i, 1);
+                localStorage.setItem("favorite", JSON.stringify(favoriteData));
                 return;
             }
         }
-        favoriteData.splice(i, 1);
-        localStorage.setItem("favorite", JSON.stringify(favoriteData));
     }
 }
 
