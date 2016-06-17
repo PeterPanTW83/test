@@ -1,6 +1,7 @@
 var map;
 var markers = [];
 var infoWindows = [];
+var openInfoWindow;
 var activity;
 var isSearch = false;
 var jsonData;
@@ -18,34 +19,34 @@ function includeData() {
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     if (jsonData == null) {
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
-            
-            var date=new Date();
-            var TodayY=date.getFullYear();
-            var TodayM=date.getMonth()+1;
-            var TodayD=date.getDate();
+
+            var date = new Date();
+            var TodayY = date.getFullYear();
+            var TodayM = date.getMonth() + 1;
+            var TodayD = date.getDate();
             jsonData = [];
 
             for (var i = 0; i < data.length; i++) {
                 console.log(data[i].showInfo[0].time);
-                if(data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == ""){
+                if (data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == "") {
                     continue;
                 }
-                
-                var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
-                var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(5, 2));
-                var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(8, 2));
-                var rawDataLat=data[i].showInfo[0].latitude;
 
-                if(rawDataEndTimeY>TodayY){
+                var rawDataEndTimeY = Number(data[i].showInfo[0].endTime.substr(0, 4));
+                var rawDataEndTimeM = Number(data[i].showInfo[0].endTime.substr(5, 2));
+                var rawDataEndTimeD = Number(data[i].showInfo[0].endTime.substr(8, 2));
+                var rawDataLat = data[i].showInfo[0].latitude;
+
+                if (rawDataEndTimeY > TodayY) {
                     jsonData.push(data[i]);
-                    jsonData[jsonData.length-1].favorite = false;
-                }else if(rawDataEndTimeY==TodayY){
-                    if(rawDataEndTimeM>TodayM){
+                    jsonData[jsonData.length - 1].favorite = false;
+                } else if (rawDataEndTimeY == TodayY) {
+                    if (rawDataEndTimeM > TodayM) {
                         jsonData.push(data[i]);
-                        jsonData[jsonData.length-1].favorite = false;
-                    }else if(rawDataEndTimeD>=TodayD){
+                        jsonData[jsonData.length - 1].favorite = false;
+                    } else if (rawDataEndTimeD >= TodayD) {
                         jsonData.push(data[i]);
-                        jsonData[jsonData.length-1].favorite = false;
+                        jsonData[jsonData.length - 1].favorite = false;
                     }
                 }
             }
@@ -145,9 +146,13 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
 }
 
 function focusLocation(markerCount) {
+    if (openInfoWindow != null) {
+        openInfoWindow.close();
+    }
     var focusMarker = markers[markerCount];
     var focusInfoWindow = infoWindows[markerCount];
     focusInfoWindow.open(map, focusMarker);
+    openInfoWindow = focusInfoWindow;
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
     $('.filter').hide();
