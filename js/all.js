@@ -38,14 +38,14 @@ function includeData() {
 
                 if(rawDataEndTimeY>TodayY){
                     jsonData.push(data[i]);
-                    jsonData[i].favorite = false;
+                    jsonData[jsonData.length-1].favorite = false;
                 }else if(rawDataEndTimeY==TodayY){
                     if(rawDataEndTimeM>TodayM){
                         jsonData.push(data[i]);
-                        jsonData[i].favorite = false;
+                        jsonData[jsonData.length-1].favorite = false;
                     }else if(rawDataEndTimeD>=TodayD){
                         jsonData.push(data[i]);
-                        jsonData[i].favorite = false;
+                        jsonData[jsonData.length-1].favorite = false;
                     }
                 }
             }
