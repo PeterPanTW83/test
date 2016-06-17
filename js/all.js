@@ -3,8 +3,11 @@ var markers = [];
 var activity;
 var isSearch = false;
 var jsonData;
-var searchResult;
-
+var searchResult
+var date=new Date();
+var TodayY=date.getFullYear();
+var TodayM=date.getMonth()+1;
+var TodayD=date.getDate();
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
         center: { lat: 23.973875, lng: 120.982024 },
@@ -17,11 +20,26 @@ function includeData() {
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     if (jsonData == null) {
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
-            jsonData = data;
-            jsonData.sort(SortByDate);
             for (var i = 0; i < data.length; i++) {
-                jsonData[i].favorite = false;
+                var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
+                var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(6, 2));
+                var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
+                var rawDataLat=data[i].showInfo[0].latitude;
+                console.log(rawDataEndTimeM);
+                if(rawDateEndTimeY>TodayY&&rawDataLat!=""){
+                    jsonData.push(data[i]);
+                    jsonData[i].favorite = false;
+                }else if(rawDateEndTimeY==TodayY){
+                    if(rawDataEndTimeM>TodayM&&rawDataLat!=""){
+                        jsonData.push(data[i]);
+                        jsonData[i].favorite = false;
+                    }else if(rawDataEndTimeD>TodayD&&rawDataLat!=""){
+                         jsonData.push(data[i]);
+                        jsonData[i].favorite = false;
+                    }
+                }
             }
+            jsonData.sort(SortByDate);
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
             showData(jsonData);
         });
