@@ -343,23 +343,22 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 /* No Result */
 
-.noresult {
+#noresult {
     background-color: #D2D2D2;
     height: 100%;
     overflow-x: hidden;
 }
 
-.noresult img {
+#noresult img {
     width: 130px;
     margin: 120px 183px 30px 183px;
 }
 
-.noresult h2 {
+#noresult h2 {
     text-align: center;
     font-size: x-large;
     font-weight: bold;
 }
-
 
 /* Clear Float */
 
