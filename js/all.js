@@ -148,42 +148,42 @@ function search() {
 
     $('#list').html("");
     deleteMarkers();
-    if(activityType=="演唱會"){
+    if(activityType=="concert"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="17") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="音樂"){
+    }else if(activityType=="music"){
          for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="5") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="戲劇"){
+    }else if(activityType=="drama"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="2") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="舞蹈"){
+    }else if(activityType=="dance"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="3") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="電影"){
+    }else if(activityType=="movie"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="8") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="親子"){
+    }else if(activityType=="children"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="4") {
