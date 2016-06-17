@@ -20,20 +20,16 @@ function includeData() {
             
             var date=new Date();
             var TodayY=date.getFullYear();
-            console.log(TodayY);
             var TodayM=date.getMonth()+1;
-            console.log(TodayM);
             var TodayD=date.getDate();
-            console.log(TodayD);
             jsonData = [];
-
-            console.log(data.length);
 
             for (var i = 0; i < data.length; i++) {
                 console.log(data[i].showInfo[0].time);
                 if(data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == ""){
                     continue;
                 }
+                
                 var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
                 var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(5, 2));
                 var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(8, 2));
