@@ -146,8 +146,8 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
 
 function focusLocation(markerCount) {
     var focusMarker = markers[markerCount];
-    var focusInfoWindows = infoWindows[markerCount];
-    focusInfoWindows.open();
+    var focusInfoWindow = infoWindows[markerCount];
+    focusInfoWindow.open(map, marker);
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
     $('.filter').hide();
