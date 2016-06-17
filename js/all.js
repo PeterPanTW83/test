@@ -148,6 +148,7 @@ function search() {
 
     $('#list').html("");
     deleteMarkers();
+    console.log(activityType);
     if(activityType=="concert"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
