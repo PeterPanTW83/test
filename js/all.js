@@ -129,8 +129,7 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var marker = new google.maps.Marker({
         position: dataCoordinates,
         title: dataTitle,
-        icon: dataImageUrl,
-        animation: google.maps.Animation.DROP
+        icon: dataImageUrl
     });
 
     var infoWindow = new google.maps.InfoWindow({
@@ -160,7 +159,10 @@ function focusLocation(markerCount) {
     openInfoWindow = focusInfoWindow;
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
-    focusMarker.setAnimation(BOUNCE);
+    focusMarker.setAnimation(google.maps.Animation.BOUNCE);
+    window.setTimeout(function() {
+        focusMarker.setAnimation(null);
+    }, 2000);
     $('.filter').hide();
 }
 
