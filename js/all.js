@@ -12,7 +12,14 @@ function initMap() {
     });
     includeData();
 }
-
+var oms = new OverlappingMarkerSpiderfier(map);
+    oms.addListener('click', function(marker, event) {
+      iw.setContent(marker.desc);
+      iw.open(map, marker);
+    });
+    oms.addListener('spiderfy', function(markers) {
+      iw.close();
+    });
 function includeData() {
     $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(Data) {
         jsonData = Data;
@@ -80,7 +87,8 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
         infoWindow.open(map, marker);
     });
 
-    markers.push(marker);
+    //markers.push(marker);
+    oms.addMarker(marker); 
 }
 
 function focusLocation(markerCount) {
