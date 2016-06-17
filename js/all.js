@@ -25,7 +25,7 @@ function includeData() {
                 var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(6, 2));
                 var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
                 var rawDataLat=data[i].showInfo[0].latitude;
-                console.log(rawDataEndTimeM);
+                console.log(rawDataEndTimeY);
                 if(rawDateEndTimeY>TodayY&&rawDataLat!=""){
                     jsonData.push(data[i]);
                     jsonData[i].favorite = false;
