@@ -32,13 +32,10 @@ function includeData() {
                     continue;
                 }
                 var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
-                console.log(rawDataEndTimeY);
-                var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(7, 1));
-                console.log(rawDataEndTimeM);
-                var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
-                console.log(rawDataEndTimeD);
+                var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(5, 2));
+                var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(8, 2));
                 var rawDataLat=data[i].showInfo[0].latitude;
-                console.log(rawDataLat);
+
                 if(rawDataEndTimeY>TodayY){
                     jsonData.push(data[i]);
                     jsonData[i].favorite = false;
