@@ -25,13 +25,13 @@ function includeData() {
                 var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(6, 2));
                 var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
                 var rawDataLat=data[i].showInfo[0].latitude;
-                console.log(rawDataEndTimeY);
                 if(rawDataEndTimeY!=0){
                     if(rawDataEndTimeY>TodayY&&rawDataLat!=""){
                         jsonData.push(data[i]);
                         jsonData[i].favorite = false;
                     }else if(rawDataEndTimeY==TodayY){
                         if(rawDataEndTimeM>TodayM&&rawDataLat!=""){
+                            console.log(rawDataEndTimeM);
                             jsonData.push(data[i]);
                             jsonData[i].favorite = false;
                         }else if(rawDataEndTimeD>TodayD&&rawDataLat!=""){
