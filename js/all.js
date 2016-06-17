@@ -402,7 +402,7 @@ function Dialog(dataCount) {
 
     var selectData;
     if (isSearch) {
-        selectData = tempData1;
+        selectData = searchResult;
     } else {
         selectData = jsonData;
     }
