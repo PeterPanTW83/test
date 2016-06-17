@@ -110,7 +110,7 @@ function focusLocation(markerCount) {
 
 function changeFavorite(dataCount, dataElemet) {
     if (dataElemet.text() == "未收藏") {
-        dataElemet.children("img").attr("src", "img/heart.png");
+        dataElemet.find("img").attr("src", "img/heart.png");
         dataElemet.text('已收藏');
 
         var favoriteData = JSON.parse(localStorage.getItem("favorite"));
@@ -127,7 +127,7 @@ function changeFavorite(dataCount, dataElemet) {
         localStorage.setItem("favorite", JSON.stringify(favoriteData));
 
     } else {
-        dataElemet.children("img").attr("src", "img/heart.png");
+        dataElemet.find("img").attr("src", "img/heart.png");
         dataElemet.text('未收藏');
     }
 }
