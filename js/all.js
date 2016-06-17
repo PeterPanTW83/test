@@ -282,6 +282,7 @@ function search() {
     tempData.sort(SortByDate);
 
     if (tempData.length == 0) {
+        $('#list').css('overflow','hidden');
         $('#list').append('<div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     }
 
