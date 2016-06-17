@@ -31,7 +31,7 @@ function includeData() {
                     if(rawDataEndTimeY>TodayY&&rawDataLat!=""){
                         jsonData.push(data[i]);
                         jsonData[i].favorite = false;
-                    }else if(rawDateEndTimeY==TodayY){
+                    }else if(rawDataEndTimeY==TodayY){
                         if(rawDataEndTimeM>TodayM&&rawDataLat!=""){
                             jsonData.push(data[i]);
                             jsonData[i].favorite = false;
