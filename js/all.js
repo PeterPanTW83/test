@@ -27,18 +27,21 @@ function includeData() {
                 var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
                 var rawDataLat=data[i].showInfo[0].latitude;
                 console.log(rawDataEndTimeY);
-                if(rawDateEndTimeY>TodayY&&rawDataLat!=""){
-                    jsonData.push(data[i]);
-                    jsonData[i].favorite = false;
-                }else if(rawDateEndTimeY==TodayY){
-                    if(rawDataEndTimeM>TodayM&&rawDataLat!=""){
+                if(rawDataEndTimeY!=""){
+                    if(rawDateEndTimeY>TodayY&&rawDataLat!=""){
                         jsonData.push(data[i]);
                         jsonData[i].favorite = false;
-                    }else if(rawDataEndTimeD>TodayD&&rawDataLat!=""){
-                         jsonData.push(data[i]);
-                        jsonData[i].favorite = false;
+                    }else if(rawDateEndTimeY==TodayY){
+                        if(rawDataEndTimeM>TodayM&&rawDataLat!=""){
+                            jsonData.push(data[i]);
+                            jsonData[i].favorite = false;
+                        }else if(rawDataEndTimeD>TodayD&&rawDataLat!=""){
+                            jsonData.push(data[i]);
+                            jsonData[i].favorite = false;
+                        }
                     }
                 }
+
             }
             jsonData.sort(SortByDate);
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
