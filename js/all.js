@@ -19,9 +19,9 @@ function initMap() {
 function includeData() {
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     if (jsonData == null) {
+        jsonData = [];
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i]);
                 var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
                 var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(6, 2));
                 var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
@@ -43,6 +43,7 @@ function includeData() {
                 }
 
             }
+             console.log(jsonData);
             jsonData.sort(SortByDate);
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
             showData(jsonData);
