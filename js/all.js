@@ -23,9 +23,12 @@ function includeData() {
                 jsonData[i].favorite = false;
             }
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
+            showData(jsonData);
         });
+    }else{
+        showData(jsonData);
     }
-    showData(jsonData);
+    
 }
 
 function showData(data) {
