@@ -16,7 +16,7 @@ function initMap() {
 function includeData() {
     $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(Data) {
         jsonData = Data;
-        jsonData.sort(SortByDate);
+        //jsonData.sort(SortByDate);
 
         for (var i = 0; i < jsonData.length; i++) {
             var dataTitle = jsonData[i].title;
