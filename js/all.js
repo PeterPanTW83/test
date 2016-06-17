@@ -21,7 +21,7 @@ function includeData() {
     if (jsonData == null) {
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i].showInfo[0].endTime.substr(0, 4));
+                console.log(data[i].showInfo[0].endTime);
                 var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
                 var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(6, 2));
                 var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
