@@ -9306,8 +9306,8 @@
         "locationName": "",
         "onSales": "UNKNOWN",
         "price": "",
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": "",
+        "longitude": "",
         "endTime": "2016/07/09 16:00:00"
       }
     ],
@@ -10848,8 +10848,8 @@
         "locationName": "",
         "onSales": "UNKNOWN",
         "price": "",
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": "",
+        "longitude": "",
         "endTime": "2016/08/06 16:00:00"
       }
     ],
@@ -17756,8 +17756,8 @@
         "locationName": "",
         "onSales": "UNKNOWN",
         "price": "",
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": "",
+        "longitude": "",
         "endTime": "2016/08/20 16:00:00"
       }
     ],
