@@ -129,7 +129,8 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var marker = new google.maps.Marker({
         position: dataCoordinates,
         title: dataTitle,
-        icon: dataImageUrl
+        icon: dataImageUrl,
+        animation: google.maps.Animation.DROP
     });
 
     var infoWindow = new google.maps.InfoWindow({
