@@ -159,6 +159,7 @@ function focusLocation(markerCount) {
     openInfoWindow = focusInfoWindow;
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
+    focusMarker.setAnimation(DROP);
     $('.filter').hide();
 }
 
