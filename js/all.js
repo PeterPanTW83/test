@@ -128,9 +128,11 @@ function changeFavorite(dataCount, dataElemet) {
     } else {
         dataElemet.html('<img src="img/empty-heart.png">未收藏');
         var selectDataUID = selectData[dataCount].UID;
+        console.log(selectDataUID);
         var favoriteData = JSON.parse(localStorage.getItem("favorite"));
         var i;
         for (i = 0; i < favoriteData.length; i++) {
+            console.log(favoriteData[i].UID);
             if (favoriteData[i].UID == selectDataUID) {
                 return;
             }
