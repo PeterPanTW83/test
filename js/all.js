@@ -138,7 +138,11 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
 
     marker.setMap(map);
     marker.addListener('click', function() {
+        if (openInfoWindow != null) {
+            openInfoWindow.close();
+        }
         infoWindow.open(map, marker);
+        openInfoWindow = infoWindow;
     });
 
     markers.push(marker);
