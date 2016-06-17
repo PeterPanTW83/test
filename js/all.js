@@ -161,30 +161,35 @@ function search() {
             if (dataType!="5") {
                 tempData.push(jsonData[i]);
             }
+        }
     }else if(activityType=="戲劇"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="2") {
                 tempData.push(jsonData[i]);
             }
+        }
     }else if(activityType=="舞蹈"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="3") {
                 tempData.push(jsonData[i]);
             }
+        }
     }else if(activityType=="電影"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="8") {
                 tempData.push(jsonData[i]);
             }
+        }
     }else if(activityType=="親子"){
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType!="4") {
                 tempData.push(jsonData[i]);
             }
+        }
     }else{
         tempData=jsonData;
     }
