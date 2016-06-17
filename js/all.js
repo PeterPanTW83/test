@@ -27,6 +27,8 @@ function includeData() {
             console.log(TodayD);
             jsonData = [];
 
+            console.log(data.length);
+
             for (var i = 0; i < data.length; i++) {
                 if(data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == ""){
                     continue;
