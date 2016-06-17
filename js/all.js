@@ -107,6 +107,7 @@ function SortByDate(x, y) {
 
 function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var dataImageUrl;
+    var oms = new OverlappingMarkerSpiderfier(map);
 
     switch (dataCategory) {
         case "2":
@@ -129,21 +130,22 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var marker = new google.maps.Marker({
         position: dataCoordinates,
         title: dataTitle,
-        icon: dataImageUrl
+        icon: dataImageUrl,
+        map: map
     });
 
     var infoWindow = new google.maps.InfoWindow({
         content: '活動名稱:' + dataTitle + '<br>' + '地址:' + dataLocation
     });
 
-    marker.setMap(map);
-    marker.addListener('click', function() {
+    oms.addListener('click', function(marker, event) {
         if (openInfoWindow != null) {
             openInfoWindow.close();
         }
         infoWindow.open(map, marker);
         openInfoWindow = infoWindow;
     });
+    oms.addMarker(marker);
 
     markers.push(marker);
     infoWindows.push(infoWindow);
