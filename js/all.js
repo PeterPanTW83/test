@@ -43,6 +43,7 @@ function showData(data) {
         var dataLocationName = data[i].showInfo[0].locationName;
         var dataCategory = data[i].category;
         var dataFavorite = data[i].favorite;
+        console.log(dataFavorite);
         createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
         var dataImageUrl;
         var dataFavoriteHtml;
