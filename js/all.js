@@ -1,9 +1,9 @@
 var map;
-var jsonData;
 var markers = [];
 var activity;
 var isSearch = false;
-var tempData1;
+var jsonData;
+var searchResult;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
@@ -14,45 +14,62 @@ function initMap() {
 }
 
 function includeData() {
-    $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(Data) {
-        jsonData = Data;
-        //jsonData.sort(SortByDate);
-
-        for (var i = 0; i < jsonData.length; i++) {
-            var dataTitle = jsonData[i].title;
-            var dataStartTime = jsonData[i].showInfo[0].time;
-            var dataEndTime = jsonData[i].showInfo[0].endTime;
-            var dataLati = jsonData[i].showInfo[0].latitude;
-            var dataLng = jsonData[i].showInfo[0].longitude;
-            var dataCoordinates = { lat: Number(dataLati), lng: Number(dataLng) };
-            var dataLocation = jsonData[i].showInfo[0].location;
-            var dataLocationName = jsonData[i].showInfo[0].locationName;
-            var dataCategory = jsonData[i].category;
-            createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
-            var dataImageUrl;
-            switch (dataCategory) {
-                case "2":
-                    dataImageUrl = "img/drama.png";
-                    break;
-                case "3":
-                    dataImageUrl = "img/dance.png";
-                    break;
-                case "5":
-                    dataImageUrl = "img/music.png";
-                    break;
-                case "8":
-                    dataImageUrl = "img/movie.png";
-                    break;
-                case "17":
-                    dataImageUrl = "img/concert.png";
-                    break;
-                case "4":
-                    dataImageUrl = "img/children.png";
-                    break;
+    jsonData = JSON.parse(localStorage.getItem("jsonData"));
+    if (jsonData == null) {
+        $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
+            jsonData = data;
+            jsonData.sort(SortByDate);
+            for (var i = 0; i < data.length; i++) {
+                jsonData[i].favorite = false;
             }
-            $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
+            localStorage.setItem("jsonData", JSON.stringify(jsonData));
+        });
+    }
+    showData(jsonData);
+}
+
+function showData(data) {
+    for (var i = 0; i < data.length; i++) {
+        var dataTitle = data[i].title;
+        var dataStartTime = data[i].showInfo[0].time;
+        var dataEndTime = data[i].showInfo[0].endTime;
+        var dataLati = data[i].showInfo[0].latitude;
+        var dataLng = data[i].showInfo[0].longitude;
+        var dataCoordinates = { lat: Number(dataLati), lng: Number(dataLng) };
+        var dataLocation = data[i].showInfo[0].location;
+        var dataLocationName = data[i].showInfo[0].locationName;
+        var dataCategory = data[i].category;
+        var dataFavorite = data[i].favorite;
+        createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
+        var dataImageUrl;
+        var dataFavoriteHtml;
+        switch (dataCategory) {
+            case "2":
+                dataImageUrl = "img/drama.png";
+                break;
+            case "3":
+                dataImageUrl = "img/dance.png";
+                break;
+            case "5":
+                dataImageUrl = "img/music.png";
+                break;
+            case "8":
+                dataImageUrl = "img/movie.png";
+                break;
+            case "17":
+                dataImageUrl = "img/concert.png";
+                break;
+            case "4":
+                dataImageUrl = "img/children.png";
+                break;
         }
-    });
+        if (dataFavorite) {
+            dataFavoriteHtml = '<img src="img/empty-heart.png">未收藏';
+        } else {
+            dataFavoriteHtml = '<img src="img/heart.png">已收藏';
+        }
+        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
+    }
 }
 
 function SortByDate(x, y) {
@@ -111,33 +128,35 @@ function focusLocation(markerCount) {
 function changeFavorite(dataCount, dataElemet) {
     var selectData;
     if (isSearch) {
-        selectData = tempData1;
+        selectData = searchResult;
     } else {
         selectData = jsonData;
     }
 
     if (dataElemet.text() == "未收藏") {
         dataElemet.html('<img src="img/heart.png">已收藏');
-        var favoriteData = JSON.parse(localStorage.getItem("favorite"));
-        if (favoriteData == null) {
-            favoriteData = [];
+        var selectDataUID = selectData[dataCount].UID;
+        jsonData = JSON.parse(localStorage.getItem("jsonData"));
+        for (var i = 0; i < jsonData.length; i++) {
+            if (jsonData[i].UID == selectDataUID) {
+                jsonData[i].favorite = true;
+                localStorage.setItem("jsonData", JSON.stringify(jsonData));
+                return;
+            }
         }
-        favoriteData.push(selectData[dataCount]);
-        localStorage.setItem("favorite", JSON.stringify(favoriteData));
+
 
     } else {
         dataElemet.html('<img src="img/empty-heart.png">未收藏');
         var selectDataUID = selectData[dataCount].UID;
-        console.log(selectDataUID);
-        var favoriteData = JSON.parse(localStorage.getItem("favorite"));
-        for (var i = 0; i < favoriteData.length; i++) {
-            console.log(favoriteData[i].UID);
-            if (favoriteData[i].UID == selectDataUID) {
-                favoriteData.splice(i, 1);
-                localStorage.setItem("favorite", JSON.stringify(favoriteData));
+        for (var i = 0; i < jsonData.length; i++) {
+            if (jsonData[i].UID == selectDataUID) {
+                jsonData[i].favorite = false;
+                localStorage.setItem("jsonData", JSON.stringify(jsonData));
                 return;
             }
         }
+
     }
 }
 
@@ -152,184 +171,151 @@ function search() {
     var activityDistrict = document.getElementById("district").value;
     var activityType = document.getElementById("type").value;
 
+    searchResult = [];
     var tempData = [];
-    tempData1 = [];
 
     $('#list').html("");
     deleteMarkers();
-    console.log(activityType);
+
     if (activityType == "concert") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType == "17") {
-                tempData.push(jsonData[i]);
+                searchResult.push(jsonData[i]);
             }
         }
     } else if (activityType == "music") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType == "5") {
-                tempData.push(jsonData[i]);
+                searchResult.push(jsonData[i]);
             }
         }
     } else if (activityType == "drama") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType == "2") {
-                tempData.push(jsonData[i]);
+                searchResult.push(jsonData[i]);
             }
         }
     } else if (activityType == "dance") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType == "3") {
-                tempData.push(jsonData[i]);
+                searchResult.push(jsonData[i]);
             }
         }
     } else if (activityType == "movie") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType == "8") {
-                tempData.push(jsonData[i]);
+                searchResult.push(jsonData[i]);
             }
         }
     } else if (activityType == "children") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
             if (dataType == "4") {
-                tempData.push(jsonData[i]);
+                searchResult.push(jsonData[i]);
             }
         }
     } else {
-        tempData = jsonData;
+        searchResult = jsonData;
     }
 
 
     if (activityTitle != null) {
-        for (var i = 0; i < tempData.length; i++) {
-            var dataTitle = tempData[i].title;
+        for (var i = 0; i < searchResult.length; i++) {
+            var dataTitle = searchResult[i].title;
             if (dataTitle.match(activityTitle) != null) {
-                tempData1.push(tempData[i]);
+                tempData.push(searchResult[i]);
             }
         }
     } else {
-        tempData1 = tempData;
+        tempData = searchResult;
+    }
+    searchResult = [];
+    if (activityLocation != null) {
+        for (var i = 0; i < tempData.length; i++) {
+            var dataLocation = tempData[i].showInfo[0].locationName;
+            if (dataLocation.match(activityLocation) != null) {
+                searchResult.push(tempData[i]);
+            }
+        }
+    } else {
+        searchResult = tempData;
     }
     tempData = [];
-    if (activityLocation != null) {
-        for (var i = 0; i < tempData1.length; i++) {
-            var dataLocation = tempData1[i].showInfo[0].locationName;
-            if (dataLocation.match(activityLocation) != null) {
-                tempData.push(tempData1[i]);
-            }
-        }
-    } else {
-        tempData = tempData1;
-    }
-    tempData1 = [];
     if (activityCity != "" && activityDistrict != "") {
-        for (var i = 0; i < tempData.length; i++) {
-            var dataaddress = tempData[i].showInfo[0].location;
+        for (var i = 0; i < searchResult.length; i++) {
+            var dataaddress = searchResult[i].showInfo[0].location;
             if (dataaddress.match(activityCity + activityDistrict)) {
-                tempData1.push(tempData[i]);
+                tempData.push(searchResult[i]);
 
             }
         }
     } else if (activityCity != "" && activityDistrict == "") {
-        for (var i = 0; i < tempData.length; i++) {
-            var dataaddress = tempData[i].showInfo[0].location;
+        for (var i = 0; i < searchResult.length; i++) {
+            var dataaddress = searchResult[i].showInfo[0].location;
             if (dataaddress.match(activityCity)) {
-                tempData1.push(tempData[i]);
+                tempData.push(searchResult[i]);
             }
         }
 
     } else if (activityCity == "" && activityDistrict != "") {
-        for (var i = 0; i < tempData.length; i++) {
-            var dataaddress = tempData[i].showInfo[0].location;
+        for (var i = 0; i < searchResult.length; i++) {
+            var dataaddress = searchResult[i].showInfo[0].location;
             if (dataaddress.match(activityDistrict)) {
-                tempData1.push(tempData[i]);
+                tempData.push(searchResult[i]);
             }
         }
     } else {
-        tempData1 = tempData;
+        tempData = searchResult;
 
     }
-    tempData = [];
+    searchResult = [];
     if (activityStartTime != 0 && activityEndTime != 0) {
         for (var i = 0; i < tempData1.length; i++) {
-            var dataStartTime = Number(tempData1[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
-            var dataEndTime = Number(tempData1[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
+            var dataStartTime = Number(tempData[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
+            var dataEndTime = Number(tempData[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
             if (dataStartTime < activityStartTime) {
                 if (dataEndTime >= activityStartTime) {
-                    tempData.push(tempData1[i]);
+                    searchResult.push(tempData[i]);
                 }
             } else if (dataStartTime > activityStartTime) {
                 if (dataStartTime <= activityEndTime) {
-                    tempData.push(tempData1[i]);
+                    searchResult.push(tempData[i]);
                 }
             } else {
-                tempData.push(tempData1[i]);
+                searchResult.push(tempData[i]);
             }
         }
     } else if (activityStartTime != 0 && activityEndTime == 0) {
-        for (var i = 0; i < tempData1.length; i++) {
-            var dataStartTime = Number(tempData1[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
-            var dataEndTime = Number(tempData1[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
+        for (var i = 0; i < tempData.length; i++) {
+            var dataStartTime = Number(tempData[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
+            var dataEndTime = Number(tempData[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
             if (activityStartTime <= dataEndTime) {
-                tempData.push(tempData1[i]);
+                searchResult.push(tempData[i]);
             }
         }
     } else if (activityStartTime == 0 && activityEndTime != 0) {
-        for (var i = 0; i < tempData1.length; i++) {
-            var dataStartTime = Number(tempData1[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
-            var dataEndTime = Number(tempData1[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
+        for (var i = 0; i < tempData.length; i++) {
+            var dataStartTime = Number(tempData[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
+            var dataEndTime = Number(tempData[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
             if (activityEndTime >= dataStartTime) {
-                tempData.push(tempData1[i]);
+                searchResult.push(tempData[i]);
             }
         }
     } else {
-        tempData = tempData1;
+        searchResult = tempData;
     }
-    tempData.sort(SortByDate);
+    searchResult.sort(SortByDate);
 
-    if (tempData.length == 0) {
+    if (searchResult.length == 0) {
         $('#list').css('overflow', 'hidden');
         $('#list').append('<div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
-    }
-
-    for (var i = 0; i < tempData.length; i++) {
-        var dataTitle = tempData[i].title;
-        var dataStartTime = tempData[i].showInfo[0].time;
-        var dataEndTime = tempData[i].showInfo[0].endTime;
-        var dataLati = tempData[i].showInfo[0].latitude;
-        var dataLng = tempData[i].showInfo[0].longitude;
-        var dataCoordinates = { lat: Number(dataLati), lng: Number(dataLng) };
-        var dataLocation = tempData[i].showInfo[0].location;
-        var dataLocationName = tempData[i].showInfo[0].locationName;
-        var dataCategory = tempData[i].category;
-        createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
-        var dataImageUrl;
-        switch (dataCategory) {
-            case "2":
-                dataImageUrl = "img/drama.png";
-                break;
-            case "3":
-                dataImageUrl = "img/dance.png";
-                break;
-            case "5":
-                dataImageUrl = "img/music.png";
-                break;
-            case "8":
-                dataImageUrl = "img/movie.png";
-                break;
-            case "17":
-                dataImageUrl = "img/concert.png";
-                break;
-            case "4":
-                dataImageUrl = "img/children.png";
-                break;
-        }
-        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
+    } else {
+        showData(searchResult);
     }
     $('.filter').hide();
 }
@@ -456,44 +442,17 @@ function Dialog(dataCount) {
 }
 
 function showFavorite() {
+
     $('#list').html("");
     deleteMarkers();
-    var favoriteData = JSON.parse(localStorage.getItem("favorite"));
-    for (var i = 0; i < favoriteData.length; i++) {
-        var dataTitle = favoriteData[i].title;
-        var dataStartTime = favoriteData[i].showInfo[0].time;
-        var dataEndTime = favoriteData[i].showInfo[0].endTime;
-        var dataLati = favoriteData[i].showInfo[0].latitude;
-        var dataLng = favoriteData[i].showInfo[0].longitude;
-        var dataCoordinates = { lat: Number(dataLati), lng: Number(dataLng) };
-        var dataLocation = favoriteData[i].showInfo[0].location;
-        var dataLocationName = favoriteData[i].showInfo[0].locationName;
-        var dataCategory = favoriteData[i].category;
-        createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
-        var dataImageUrl;
-        switch (dataCategory) {
-            case "2":
-                dataImageUrl = "img/drama.png";
-                break;
-            case "3":
-                dataImageUrl = "img/dance.png";
-                break;
-            case "5":
-                dataImageUrl = "img/music.png";
-                break;
-            case "8":
-                dataImageUrl = "img/movie.png";
-                break;
-            case "17":
-                dataImageUrl = "img/concert.png";
-                break;
-            case "4":
-                dataImageUrl = "img/children.png";
-                break;
-
+    var favoriteData = [];
+    jsonData = JSON.parse(localStorage.getItem("jsonData"));
+    for (var i = 0; i < jsonData.length; i++) {
+        if (jsonData[i].favorite) {
+            favoriteData.push(jsonData[i]);
         }
-        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/heart.png">已收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
     }
+    showData(favoriteData);
 }
 
 jQuery(document).ready(function($) {
