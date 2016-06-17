@@ -19,7 +19,6 @@ function initMap() {
 function includeData() {
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     if (jsonData == null) {
-        jsonData = [];
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
             for (var i = 0; i < data.length; i++) {
                 var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
