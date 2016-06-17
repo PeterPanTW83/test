@@ -33,7 +33,7 @@ function includeData() {
                 }
                 var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
                 console.log(rawDataEndTimeY);
-                var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(6, 2));
+                var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(7, 1));
                 console.log(rawDataEndTimeM);
                 var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
                 console.log(rawDataEndTimeD);
