@@ -47,7 +47,7 @@ function includeData() {
                     dataImageUrl = "img/concert.png";
                     break;
                 case "4":
-                	dataImageUrl = "img/children.png";
+                    dataImageUrl = "img/children.png";
                     break;
             }
             $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
@@ -109,24 +109,33 @@ function focusLocation(markerCount) {
 }
 
 function changeFavorite(dataCount, dataElemet) {
+    var selectData;
+    if (isSearch) {
+        selectData = tempData1;
+    } else {
+        selectData = jsonData;
+    }
+
     if (dataElemet.text() == "未收藏") {
         dataElemet.html('<img src="img/heart.png">已收藏');
-
         var favoriteData = JSON.parse(localStorage.getItem("favorite"));
         if (favoriteData == null) {
             favoriteData = [];
-        }
-        var selectData;
-        if (isSearch) {
-            selectData = tempData1;
-        } else {
-            selectData = jsonData;
         }
         favoriteData.push(selectData[dataCount]);
         localStorage.setItem("favorite", JSON.stringify(favoriteData));
 
     } else {
         dataElemet.html('<img src="img/empty-heart.png">未收藏');
+        var selectDataUID = selectData[dataCount].UID;
+        var favoriteData = JSON.parse(localStorage.getItem("favorite"));
+        var i;
+        for (i = 0; i < favoriteData.length; i++) {
+            if (favoriteData[i].UID == selectDataUID) {
+                return;
+            }
+        }
+        favoriteData.splice(i, 1);
     }
 }
 
@@ -147,50 +156,50 @@ function search() {
     $('#list').html("");
     deleteMarkers();
     console.log(activityType);
-    if(activityType=="concert"){
+    if (activityType == "concert") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
-            if (dataType=="17") {
+            if (dataType == "17") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="music"){
-         for (var i = 0; i < jsonData.length; i++) {
-            var dataType = jsonData[i].category;
-            if (dataType=="5") {
-                tempData.push(jsonData[i]);
-            }
-        }
-    }else if(activityType=="drama"){
+    } else if (activityType == "music") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
-            if (dataType=="2") {
+            if (dataType == "5") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="dance"){
+    } else if (activityType == "drama") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
-            if (dataType=="3") {
+            if (dataType == "2") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="movie"){
+    } else if (activityType == "dance") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
-            if (dataType=="8") {
+            if (dataType == "3") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else if(activityType=="children"){
+    } else if (activityType == "movie") {
         for (var i = 0; i < jsonData.length; i++) {
             var dataType = jsonData[i].category;
-            if (dataType=="4") {
+            if (dataType == "8") {
                 tempData.push(jsonData[i]);
             }
         }
-    }else{
-        tempData=jsonData;
+    } else if (activityType == "children") {
+        for (var i = 0; i < jsonData.length; i++) {
+            var dataType = jsonData[i].category;
+            if (dataType == "4") {
+                tempData.push(jsonData[i]);
+            }
+        }
+    } else {
+        tempData = jsonData;
     }
 
 
@@ -204,7 +213,7 @@ function search() {
     } else {
         tempData1 = tempData;
     }
-     tempData = [];
+    tempData = [];
     if (activityLocation != null) {
         for (var i = 0; i < tempData1.length; i++) {
             var dataLocation = tempData1[i].showInfo[0].locationName;
@@ -282,7 +291,7 @@ function search() {
     tempData.sort(SortByDate);
 
     if (tempData.length == 0) {
-        $('#list').css('overflow','hidden');
+        $('#list').css('overflow', 'hidden');
         $('#list').append('<div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     }
 
@@ -299,24 +308,24 @@ function search() {
         createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
         var dataImageUrl;
         switch (dataCategory) {
-        		case "2":
-                    dataImageUrl = "img/drama.png";
-                    break;
-                case "3":
-                    dataImageUrl = "img/dance.png";
-                    break;
-                case "5":
-                    dataImageUrl = "img/music.png";
-                    break;
-                case "8":
-                    dataImageUrl = "img/movie.png";
-                    break;
-                case "17":
-                    dataImageUrl = "img/concert.png";
-                    break;
-            	case "4":
-                	dataImageUrl = "img/children.png";
-                    break;
+            case "2":
+                dataImageUrl = "img/drama.png";
+                break;
+            case "3":
+                dataImageUrl = "img/dance.png";
+                break;
+            case "5":
+                dataImageUrl = "img/music.png";
+                break;
+            case "8":
+                dataImageUrl = "img/movie.png";
+                break;
+            case "17":
+                dataImageUrl = "img/concert.png";
+                break;
+            case "4":
+                dataImageUrl = "img/children.png";
+                break;
         }
         $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
     }
@@ -461,24 +470,24 @@ function showFavorite() {
         createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
         var dataImageUrl;
         switch (dataCategory) {
-            	case "2":
-                    dataImageUrl = "img/drama.png";
-                    break;
-                case "3":
-                    dataImageUrl = "img/dance.png";
-                    break;
-                case "5":
-                    dataImageUrl = "img/music.png";
-                    break;
-                case "8":
-                    dataImageUrl = "img/movie.png";
-                    break;
-                case "17":
-                    dataImageUrl = "img/concert.png";
-                    break;
-                case "4":
-                    dataImageUrl = "img/children.png";
-                    break;    
+            case "2":
+                dataImageUrl = "img/drama.png";
+                break;
+            case "3":
+                dataImageUrl = "img/dance.png";
+                break;
+            case "5":
+                dataImageUrl = "img/music.png";
+                break;
+            case "8":
+                dataImageUrl = "img/movie.png";
+                break;
+            case "17":
+                dataImageUrl = "img/concert.png";
+                break;
+            case "4":
+                dataImageUrl = "img/children.png";
+                break;
 
         }
         $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="submenu"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
