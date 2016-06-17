@@ -87,9 +87,6 @@ function showData(data) {
             case "8":
                 dataImageUrl = "img/movie.png";
                 break;
-            case "17":
-                dataImageUrl = "img/concert.png";
-                break;
             case "4":
                 dataImageUrl = "img/children.png";
                 break;
@@ -122,9 +119,6 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
             break;
         case "8":
             dataImageUrl = "img/marker-movie.png";
-            break;
-        case "17":
-            dataImageUrl = "img/marker-concert.png";
             break;
         case "4":
             dataImageUrl = "img/marker-children.png";
