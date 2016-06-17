@@ -9592,8 +9592,8 @@
         "locationName": "",
         "onSales": "UNKNOWN",
         "price": "",
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": "",
+        "longitude": "",
         "endTime": "2016/08/27 16:00:00"
       }
     ],
