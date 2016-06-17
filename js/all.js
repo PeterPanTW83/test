@@ -17,29 +17,38 @@ function includeData() {
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     if (jsonData == null) {
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
+            
             var date=new Date();
             var TodayY=date.getFullYear();
+            console.log(TodayY);
             var TodayM=date.getMonth()+1;
+            console.log(TodayM);
             var TodayD=date.getDate();
+            console.log(TodayD);
             jsonData = [];
 
             for (var i = 0; i < data.length; i++) {
+                if(data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == ""){
+                    continue;
+                }
                 var rawDataEndTimeY=Number(data[i].showInfo[0].endTime.substr(0, 4));
+                console.log(rawDataEndTimeY);
                 var rawDataEndTimeM=Number(data[i].showInfo[0].endTime.substr(6, 2));
+                console.log(rawDataEndTimeM);
                 var rawDataEndTimeD=Number(data[i].showInfo[0].endTime.substr(9, 2));
+                console.log(rawDataEndTimeD);
                 var rawDataLat=data[i].showInfo[0].latitude;
-                if(rawDataEndTimeY!=0){
-                    if(rawDataEndTimeY>TodayY&&rawDataLat!=""){
+                console.log(rawDataLat);
+                if(rawDataEndTimeY>TodayY){
+                    jsonData.push(data[i]);
+                    jsonData[i].favorite = false;
+                }else if(rawDataEndTimeY==TodayY){
+                    if(rawDataEndTimeM>TodayM){
                         jsonData.push(data[i]);
                         jsonData[i].favorite = false;
-                    }else if(rawDataEndTimeY==TodayY){
-                        if(rawDataEndTimeM>TodayM&&rawDataLat!=""){
-                            jsonData.push(data[i]);
-                            jsonData[i].favorite = false;
-                        }else if(rawDataEndTimeD>=TodayD&&rawDataLat!=""){
-                            jsonData.push(data[i]);
-                            jsonData[i].favorite = false;
-                        }
+                    }else if(rawDataEndTimeD>=TodayD){
+                        jsonData.push(data[i]);
+                        jsonData[i].favorite = false;
                     }
                 }
             }
