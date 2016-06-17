@@ -1,5 +1,6 @@
 var map;
 var markers = [];
+var infoWindows = [];
 var activity;
 var isSearch = false;
 var jsonData;
@@ -140,10 +141,13 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     });
 
     markers.push(marker);
+    infoWindows.push(infoWindow);
 }
 
 function focusLocation(markerCount) {
     var focusMarker = markers[markerCount];
+    var focusInfoWindows = infoWindows[markerCount];
+    focusInfoWindows.open();
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
     $('.filter').hide();
@@ -348,6 +352,7 @@ function deleteMarkers() {
         markers[i].setMap(null);
     }
     markers = [];
+    infoWindows = [];
 }
 
 function geoFindMe() {
