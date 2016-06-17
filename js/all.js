@@ -7,6 +7,9 @@ var isSearch = false;
 var jsonData;
 var searchResult
 
+document.write('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" async defer></script>');
+document.write('<script src="https://apis.google.com/js/client.js" async defer></script>');
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
         center: { lat: 23.973875, lng: 120.982024 },
@@ -107,7 +110,6 @@ function SortByDate(x, y) {
 
 function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var dataImageUrl;
-    var oms = new OverlappingMarkerSpiderfier(map);
 
     switch (dataCategory) {
         case "2":
@@ -130,22 +132,21 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var marker = new google.maps.Marker({
         position: dataCoordinates,
         title: dataTitle,
-        icon: dataImageUrl,
-        map: map
+        icon: dataImageUrl
     });
 
     var infoWindow = new google.maps.InfoWindow({
         content: '活動名稱:' + dataTitle + '<br>' + '地址:' + dataLocation
     });
 
-    oms.addListener('click', function(marker, event) {
+    marker.setMap(map);
+    marker.addListener('click', function() {
         if (openInfoWindow != null) {
             openInfoWindow.close();
         }
         infoWindow.open(map, marker);
         openInfoWindow = infoWindow;
     });
-    oms.addMarker(marker);
 
     markers.push(marker);
     infoWindows.push(infoWindow);
