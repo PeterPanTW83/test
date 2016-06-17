@@ -136,6 +136,7 @@ function changeFavorite(dataCount, dataElemet) {
             }
         }
         favoriteData.splice(i, 1);
+        localStorage.setItem("favorite", JSON.stringify(favoriteData));
     }
 }
 
