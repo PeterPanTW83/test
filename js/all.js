@@ -169,8 +169,8 @@ function focusLocation(markerCount) {
     focusMarker.setAnimation(google.maps.Animation.BOUNCE);
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
-    }, 2500);
-    //   $('#list li:nth-child(' + markerCount + ')').addClass('selected');
+    }, 2250);
+    $('#list li:nth-child(' + markerCount + ')').addClass('selected');
     $('.filter').hide();
 }
 
