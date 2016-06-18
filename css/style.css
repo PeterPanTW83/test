@@ -462,10 +462,6 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 @media only screen and (max-width: 768px) {
     
-    .header {
-        padding: 0px;
-    }
-
     .info {
         width: 100%;
     }
@@ -473,6 +469,10 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 }
 
 @media only screen and (max-width: 600px) {
+    
+    .header {
+        padding: 0px;
+    }
     
     .logo {
         margin: 10px 20px;
