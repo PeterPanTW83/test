@@ -78,8 +78,6 @@ function showData(data) {
         var dataImageUrl;
         var dataFavoriteHtml;
 
-        createMarkers(dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory);
-
         switch (dataCategory) {
             case "2":
                 dataImageUrl = "img/drama.png";
@@ -102,6 +100,9 @@ function showData(data) {
         } else {
             dataFavoriteHtml = '<img src="img/empty-heart.png">未收藏';
         }
+
+        createMarkers(i, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml);
+
         $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
     }
 }
@@ -110,9 +111,8 @@ function SortByDate(x, y) {
     return Number(x.showInfo[0].time.substr(0, 10).replace(/\//g, "")) - Number(y.showInfo[0].time.substr(0, 10).replace(/\//g, ""));
 }
 
-function createMarkers(dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory) {
+function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml) {
     var dataImageUrl;
-
 
     switch (dataCategory) {
         case "2":
@@ -140,7 +140,7 @@ function createMarkers(dataCoordinates, dataTitle, dataStartTime, dataEndTime, d
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
+        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + dataCount + '\', $(this)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + dataCount + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
     });
 
     marker.addListener('click', function() {
@@ -170,7 +170,7 @@ function focusLocation(markerCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2000);
- //   $('#list li:nth-child(' + markerCount + ')').addClass('selected');
+    //   $('#list li:nth-child(' + markerCount + ')').addClass('selected');
     $('.filter').hide();
 }
 
