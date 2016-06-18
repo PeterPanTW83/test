@@ -170,7 +170,7 @@ function focusLocation(markerCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2250);
-    $('#list li:nth-child(' + markerCount + ')').addClass('selected');
+    $('#list > li:nth-child(' + markerCount + ')').addClass('selected');
     $('.filter').hide();
 }
 
