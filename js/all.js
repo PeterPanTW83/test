@@ -150,9 +150,10 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
         infoWindow.open(map, marker);
         openInfoWindow = infoWindow;
         var listCount = Number(dataCount) + 1;
-        $('#list').animate({
+        $('html,body').animate({
             scrollTop: $('#list > li:nth-child(' + listCount + ')').offset().top
         }, 2000);
+
     });
 
     oms.addMarker(marker);
