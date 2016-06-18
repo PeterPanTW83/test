@@ -8,11 +8,7 @@ require.config({
         'taiwanCity': 'js/taiwan-city-selector.js',
         'all': 'js/all.js'
     },
-    shim: {
-        'oms': ['googleMap'],
-        'taiwanCity': ['jquery'],
-        'all': ['oms']
-    }
+
 });
 
 require(['jquery', 'googleMap', 'oms', 'googleClient', 'sweetAlert', 'taiwanCity', 'all'], function() {
