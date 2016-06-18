@@ -171,7 +171,7 @@ function focusLocation(markerCount) {
         focusMarker.setAnimation(null);
     }, 2000);
     $('#list').addClass('reset');
-    $('#list li:eq(' + markerCount + ')').addClass('selected');
+    $('#list li:eq(' + markerCount+5 + ')').addClass('selected');
     $('.filter').hide();
 }
 
