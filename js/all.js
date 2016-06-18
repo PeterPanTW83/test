@@ -170,6 +170,8 @@ function focusLocation(markerCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2000);
+    console.log(markerCount);
+    console.log(focusMarker);
     $('.filter').hide();
 }
 
