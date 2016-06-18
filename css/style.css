@@ -455,3 +455,17 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 }   
 
+@media only screen and (max-width: 320px) {
+    
+    .header {
+        padding: 0px;
+    }
+    
+    .logo {
+        margin: 10px 20px;
+        padding: 0px;
+        border: 0px;
+    }
+       
+}
+
