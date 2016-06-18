@@ -170,8 +170,8 @@ function focusLocation(markerCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2000);
-    console.log(markerCount);
-    console.log(focusMarker);
+    $('#list').css('background-color','#fff');
+    $('#list').html('li:nth-child(markerCount+1)').addClass('selected');
     $('.filter').hide();
 }
 
