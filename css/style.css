@@ -416,7 +416,19 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     border-radius: 10px;
 }
 
-/* Other Elments */
-
-
 /* RWD*/
+
+@media only screen and (max-width: 1085px) {
+    
+    #map-list {
+        width: calc(100% - 430px);
+    }
+    
+    .info {
+        width: 430px;
+    }
+
+    #list li img {
+        display: none;
+    }
+}
