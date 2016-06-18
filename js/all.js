@@ -501,3 +501,7 @@ function showFavorite() {
     }
     showData(favoriteData);
 }
+
+$( document ).ready(function() {
+    initMap();
+});
