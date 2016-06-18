@@ -78,7 +78,7 @@ function showData(data) {
         var dataImageUrl;
         var dataFavoriteHtml;
 
-        createMarkers(dataCoordinates, dataTitle, dataLocation, dataLocationName, dataCategory);
+        createMarkers(dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml);
 
         switch (dataCategory) {
             case "2":
@@ -110,7 +110,7 @@ function SortByDate(x, y) {
     return Number(x.showInfo[0].time.substr(0, 10).replace(/\//g, "")) - Number(y.showInfo[0].time.substr(0, 10).replace(/\//g, ""));
 }
 
-function createMarkers(dataCoordinates, dataTitle, dataLocation, dataLocationName, dataCategory) {
+function createMarkers(dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml) {
     var dataImageUrl;
 
 
