@@ -425,7 +425,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     border-radius: 10px;
 }
 
-/* RWD*/
+/* RWD
 
 @media only screen and (max-width: 1085px) {
     
@@ -511,7 +511,5 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 }
 
 @media only screen and (max-width: 320px) {
-    
-
-       
-}
+     
+}*/
