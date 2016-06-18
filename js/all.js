@@ -103,7 +103,7 @@ function showData(data) {
 
         createMarkers(i, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml);
 
-        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
+        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this), true)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
     }
 }
 
@@ -140,7 +140,7 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this))" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
+        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
     });
 
     marker.addListener('click', function() {
@@ -190,7 +190,7 @@ function focusLocation(dataCount) {
     $('.filter').hide();
 }
 
-function changeFavorite(dataCount, dataElemet) {
+function changeFavorite(dataCount, dataElemet, isList) {
     var selectData;
     if (isSearch) {
         selectData = searchResult;
@@ -200,6 +200,11 @@ function changeFavorite(dataCount, dataElemet) {
 
     if (dataElemet.text() == "未收藏") {
         dataElemet.html('<img src="img/heart.png">已收藏');
+        if(isList){
+            var 
+        }else{
+            $('#list > li:nth-child(' + listCount + ') button:nth-child('1')').html('<img src="img/heart.png">已收藏');
+        }
         var selectDataUID = selectData[dataCount].UID;
         jsonData = JSON.parse(localStorage.getItem("jsonData"));
         for (var i = 0; i < jsonData.length; i++) {
@@ -209,8 +214,6 @@ function changeFavorite(dataCount, dataElemet) {
                 return;
             }
         }
-
-
     } else {
         dataElemet.html('<img src="img/empty-heart.png">未收藏');
         var selectDataUID = selectData[dataCount].UID;
