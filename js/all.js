@@ -140,12 +140,18 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
         content: '活動名稱:' + dataTitle + '<br>' + '地址:' + dataLocation
     });
 
+    oms.addListener('spiderfy', function(markers) {
+        infoWindow.close();
+    });
+
     oms.addListener('click', function(marker, event) {
+        /**
         if (openInfoWindow != null) {
             openInfoWindow.close();
         }
+        **/
         infoWindow.open(map, marker);
-        openInfoWindow = infoWindow;
+        //openInfoWindow = infoWindow;
     });
     oms.addMarker(marker);
 
@@ -171,7 +177,7 @@ function focusLocation(markerCount) {
     var focusMarker = markers[markerCount];
     var focusInfoWindow = infoWindows[markerCount];
     focusInfoWindow.open(map, focusMarker);
-    openInfoWindow = focusInfoWindow;
+    //openInfoWindow = focusInfoWindow;
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
     focusMarker.setAnimation(google.maps.Animation.BOUNCE);
