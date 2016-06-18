@@ -471,7 +471,19 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
         border: 0px;
     }
     
+    .info {
+        width: 100%;
+    }
+       
+}
+
+@media only screen and (max-width: 320px) {
+    
     .source {
+        display: none;
+    }
+    
+    .menu a span {
         display: none;
     }
     
@@ -479,14 +491,5 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
         padding: 17.5px 14px;
         font-size: 18px;
     }
-    
-    .menu a span {
-        display: none;
-    }
-    
-    .info {
-        width: 100%;
-    }
        
 }
-
