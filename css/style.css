@@ -330,6 +330,11 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     color: #38447e;
 }
 
+.selected {
+    border: 1px solid #12BDBC;
+    background-color: #f1ffff;
+}
+
 /* Map */
 
 #map-list {
