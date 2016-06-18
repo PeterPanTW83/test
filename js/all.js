@@ -169,7 +169,7 @@ function focusLocation(markerCount) {
     focusMarker.setAnimation(google.maps.Animation.BOUNCE);
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
-    }, 2000);
+    }, 2500);
     //   $('#list li:nth-child(' + markerCount + ')').addClass('selected');
     $('.filter').hide();
 }
@@ -395,7 +395,7 @@ function geoFindMe() {
     };
 
     function error() {
-        alert("定位時發生錯誤，請稍後再試");
+        //alert("定位時發生錯誤，請稍後再試");
     };
     navigator.geolocation.getCurrentPosition(success, error);
 }
