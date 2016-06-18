@@ -1,12 +1,15 @@
-require([
-    'https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js',
-    'https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ',
-    'https://apis.google.com/js/client.js',
-    'js/sweetalert.min.js',
-    'js/taiwan-city-selector.js',
-    'js/all.js'
+require.config({
+    paths: {
+        jquery: 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js',
+        googleMap: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ',
+        googleClient: 'https://apis.google.com/js/client.js',
+        sweetAlert: 'js/sweetalert.min.js',
+        taiwanCity: 'js/taiwan-city-selector.js',
+        all: 'js/all.js'
+    }
+});
 
-], function() {
+require([jquery, googleMap, googleClient, sweetAlert, taiwanCity, all], function() {
 
     initMap();
 
