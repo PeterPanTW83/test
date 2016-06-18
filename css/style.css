@@ -427,8 +427,16 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     .info {
         width: 430px;
     }
+    
+    #list a {
+        padding: 20px;
+    }
 
-    #list li img {
+    .photo {
         display: none;
+    }
+    
+    .activity-info {
+        width: 100%;
     }
 }
