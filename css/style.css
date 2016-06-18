@@ -342,7 +342,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     width: 430px;
     height: auto;
     margin: 15px 10px 5px 10px;
-    font-weight: "微軟正黑體";
+    font-family: "微軟正黑體";
 }
 
 /* No Result */
