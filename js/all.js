@@ -14,7 +14,7 @@ function initMap() {
         center: { lat: 23.973875, lng: 120.982024 },
         zoom: 8
     });
-    oms = new OverlappingMarkerSpidHerfier(map);
+    oms = new OverlappingMarkerSpiderfier(map);
     includeData();
     geoFindMe();
 }
