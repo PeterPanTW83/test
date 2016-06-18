@@ -439,4 +439,18 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     .activity-info {
         width: 100%;
     }
+    
+    #map-list .activity-info {
+        width: auto;
+        min-width: 375px;
+    }
 }
+
+@media only screen and (max-width: 940px) {
+
+    #map-list .activity-info {
+        min-width: 375px;
+    }
+
+}   
+
