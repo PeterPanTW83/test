@@ -345,6 +345,10 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     font-family: "微軟正黑體";
 }
 
+#map-list .activity-info li {
+    font-size: 14px;
+}
+
 /* No Result */
 
 .noresult {
