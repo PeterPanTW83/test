@@ -8,7 +8,7 @@ var jsonData;
 var searchResult
 
 document.write('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" async defer></script>');
-document.write('<script src="https://apis.google.com/js/client.js" async defer></script>');
+document.write('<script type="text/javascript" src="js/oms.min.js" async defer></script>');
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
@@ -110,6 +110,7 @@ function SortByDate(x, y) {
 
 function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var dataImageUrl;
+    var oms = new OverlappingMarkerSpiderfier(map);
 
     switch (dataCategory) {
         case "2":
@@ -139,14 +140,25 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
         content: '活動名稱:' + dataTitle + '<br>' + '地址:' + dataLocation
     });
 
-    marker.setMap(map);
-    marker.addListener('click', function() {
+    oms.addListener('click', function(marker, event) {
         if (openInfoWindow != null) {
             openInfoWindow.close();
         }
         infoWindow.open(map, marker);
         openInfoWindow = infoWindow;
     });
+    oms.addMarker(marker);
+
+    /**
+       marker.setMap(map);
+       marker.addListener('click', function() {
+           if (openInfoWindow != null) {
+               openInfoWindow.close();
+           }
+           infoWindow.open(map, marker);
+           openInfoWindow = infoWindow;
+       });
+    **/
 
     markers.push(marker);
     infoWindows.push(infoWindow);
