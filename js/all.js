@@ -15,6 +15,7 @@ function initMap() {
     });
     oms = new OverlappingMarkerSpiderfier(map);
     includeData();
+    geoFindMe();
 }
 
 function includeData() {
@@ -375,6 +376,7 @@ function deleteMarkers() {
 }
 
 function geoFindMe() {
+    var infoWindow = new google.maps.InfoWindow({ map: map });
 
     if (!navigator.geolocation) {
         alert("很抱歉，您的瀏覽器不支援定位服務");
@@ -382,9 +384,13 @@ function geoFindMe() {
     }
 
     function success(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        initMap(latitude, longitude);
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Location found.');
+        map.setCenter(pos);
     };
 
     function error() {
@@ -502,7 +508,7 @@ function showFavorite() {
     showData(favoriteData);
 }
 
-$( document ).ready(function() {
+$(document).ready(function() {
     initMap();
     $('.btn-filter').on('click', function() {
         $('.filter').toggle();
