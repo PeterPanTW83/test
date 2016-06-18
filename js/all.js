@@ -6,12 +6,14 @@ var activity;
 var isSearch = false;
 var jsonData;
 var searchResult
+var oms;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
         center: { lat: 23.973875, lng: 120.982024 },
         zoom: 8
     });
+    oms = new OverlappingMarkerSpiderfier(map);
     includeData();
 }
 
@@ -107,7 +109,7 @@ function SortByDate(x, y) {
 
 function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var dataImageUrl;
-    var oms = new OverlappingMarkerSpiderfier(map);
+
 
     switch (dataCategory) {
         case "2":
