@@ -1,5 +1,6 @@
 $.dk_tw_citySelector = { version: "0.0.1", debug: !0, log: function() {} },
-    function($) { "use strict";
+    function($) {
+        "use strict";
         $.fn.dk_tw_citySelector = function(t, e, o) {
             function n() { this.init(), this.countryChange(), this.districtChange(), this.selected(p), this.selected(c) }
             var i = ["基隆市", "臺北市", "新北市", "桃園市", "新竹市", "新竹縣", "苗栗縣", "臺中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "臺南市", "高雄市", "屏東縣", "臺東縣", "花蓮縣", "宜蘭縣", "澎湖縣", "金門縣", "連江縣"],
@@ -105,15 +106,26 @@ $.dk_tw_citySelector = { version: "0.0.1", debug: !0, log: function() {} },
                     e = !1;
                 void 0 !== u && (e = u.replace(/\s/g, ""), e = e.split(","));
                 for (var o = 0, n = i.length; n > o; o++)("object" != typeof e || -1 !== $.inArray(i[o], e)) && (t += '<option value="' + i[o] + '" data-order="' + o + '">' + i[o] + "</option>");
-                p.prepend(t), c.prepend(l) }, n.prototype.countryChange = function() {
+                p.prepend(t), c.prepend(l)
+            }, n.prototype.countryChange = function() {
                 var t = this;
                 p.change(function() {
                     var e = $("option:selected", this).data("order");
-                    if (void 0 !== e) { c.prepend('<option value="">不限</option>'), c.find("option:gt(0)").remove();
+                    if (void 0 !== e) {
+                        c.prepend('<option value="">不限</option>'), c.find("option:gt(0)").remove();
                         for (var o = 0, n = r[e][0].length - 1; n >= o; o++) c.append('<option value="' + r[e][0][o] + '" data-zip="' + r[e][1][o] + '">' + r[e][0][o] + "</option>");
-                        c.find("option:eq(0)").attr("selected", "selected") } else t.reset();
-                    d.val("") }) }, n.prototype.districtChange = function() { c.on("change", function() {
+                        c.find("option:eq(0)").attr("selected", "selected")
+                    } else t.reset();
+                    d.val("")
+                })
+            }, n.prototype.districtChange = function() {
+                c.on("change", function() {
                     var t = $("option:selected", this).data("zip");
-                    d.val(t) }) }, n.prototype.selected = function(t) {
+                    d.val(t)
+                })
+            }, n.prototype.selected = function(t) {
                 var e = t.data("selected");
-                return void 0 !== e ? void t.val(e).trigger("change") : void 0 }, n.prototype.reset = function() { c.prepend(l), c.find("option:gt(0)").remove() }, this.each(function() { this.dkSelector = new n }), this } }(jQuery);
+                return void 0 !== e ? void t.val(e).trigger("change") : void 0
+            }, n.prototype.reset = function() { c.prepend(l), c.find("option:gt(0)").remove() }, this.each(function() { this.dkSelector = new n }), this
+        }
+    }(jQuery);
