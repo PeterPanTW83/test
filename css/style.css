@@ -459,7 +459,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 }   
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 768px) {
     
     .header {
         padding: 0px;
@@ -482,6 +482,10 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     
     .menu a span {
         display: none;
+    }
+    
+    .info {
+        width: 100%;
     }
        
 }
