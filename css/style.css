@@ -340,6 +340,9 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 #map-list .activity-info {
     width: 430px;
+    height: auto;
+    margin: 15px 10px 5px 10px;
+    font-weight: "微軟正黑體";
 }
 
 /* No Result */
