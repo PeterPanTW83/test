@@ -7,13 +7,17 @@ require([
     'js/taiwan-city-selector.js',
     'js/all.js'
 ], function() {
+    require([
+        'js/all.js'
+    ], function() {
 
-    initMap();
+        initMap();
 
-    $('.btn-filter').on('click', function() {
-        $('.filter').toggle();
+        $('.btn-filter').on('click', function() {
+            $('.filter').toggle();
+        });
+
+        $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
+
     });
-
-    $('#form').dk_tw_citySelector('#city', '#district', '#zipcode');
-
 });
