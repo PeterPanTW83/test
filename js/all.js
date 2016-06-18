@@ -74,9 +74,11 @@ function showData(data) {
         var dataLocationName = data[i].showInfo[0].locationName;
         var dataCategory = data[i].category;
         var dataFavorite = data[i].favorite;
-        createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
         var dataImageUrl;
         var dataFavoriteHtml;
+
+        createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
+
         switch (dataCategory) {
             case "2":
                 dataImageUrl = "img/drama.png";
@@ -140,30 +142,15 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
         content: '活動名稱:' + dataTitle + '<br>' + '地址:' + dataLocation
     });
 
-/**
-    oms.addListener('click', function(marker, event) {
-        
+    marker.addListener('click', function() {
         if (openInfoWindow != null) {
             openInfoWindow.close();
         }
-        
         infoWindow.open(map, marker);
-        //openInfoWindow = infoWindow;
+        openInfoWindow = infoWindow;
     });
-    **/
+
     oms.addMarker(marker);
-
-    /**
-       marker.setMap(map);
-       marker.addListener('click', function() {
-           if (openInfoWindow != null) {
-               openInfoWindow.close();
-           }
-           infoWindow.open(map, marker);
-           openInfoWindow = infoWindow;
-       });
-    **/
-
     markers.push(marker);
     infoWindows.push(infoWindow);
 }
@@ -175,7 +162,7 @@ function focusLocation(markerCount) {
     var focusMarker = markers[markerCount];
     var focusInfoWindow = infoWindows[markerCount];
     focusInfoWindow.open(map, focusMarker);
-    //openInfoWindow = focusInfoWindow;
+    openInfoWindow = focusInfoWindow;
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
     focusMarker.setAnimation(google.maps.Animation.BOUNCE);
