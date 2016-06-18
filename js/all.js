@@ -140,7 +140,7 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
         content: '活動名稱:' + dataTitle + '<br>' + '地址:' + dataLocation
     });
 
-    oms.addListener('spiderfy', function(markers) {
+    oms.addListener('spiderfy', function(marker) {
         infoWindow.close();
     });
 
