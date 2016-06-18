@@ -202,6 +202,8 @@ function changeFavorite(dataCount, dataElemet, isList) {
     if (dataElemet.text() == "未收藏") {
         dataElemet.html('<img src="img/heart.png">已收藏');
         if(isList){
+            var infoWindow = infoWindows[dataCount];
+            var infoContent = infoWindows.getContent();
         }else{
             $('#list > li:nth-child(' + listCount + ') button:nth-child('+1+')').html('<img src="img/heart.png">已收藏');
         }
@@ -216,6 +218,11 @@ function changeFavorite(dataCount, dataElemet, isList) {
         }
     } else {
         dataElemet.html('<img src="img/empty-heart.png">未收藏');
+        if(isList){
+
+        }else{
+            $('#list > li:nth-child(' + listCount + ') button:nth-child('+1+')').html('<img src="img/empty-heart.png">未收藏');
+        }
         var selectDataUID = selectData[dataCount].UID;
         for (var i = 0; i < jsonData.length; i++) {
             if (jsonData[i].UID == selectDataUID) {
