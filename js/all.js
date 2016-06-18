@@ -110,7 +110,7 @@ function SortByDate(x, y) {
 
 function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     var dataImageUrl;
-    var oms = new OverlappingMarkerSpiderfier(map);
+    var oms = new oms.min.OverlappingMarkerSpiderfier(map);
 
     switch (dataCategory) {
         case "2":
