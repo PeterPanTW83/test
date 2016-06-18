@@ -155,11 +155,6 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     float: left;
 }
 
-.menu li:last-child a {
-    margin: 17px 0;
-    border-left: 1px solid #fff;
-}
-
 .menu a {
     color: white;
     display: block;
