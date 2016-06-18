@@ -477,6 +477,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     
     .menu a {
         padding: 17.5px 14px;
+        font-size: 18px;
     }
     
     .menu a span {
