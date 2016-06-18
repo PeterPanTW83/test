@@ -78,7 +78,7 @@ function showData(data) {
         var dataImageUrl;
         var dataFavoriteHtml;
 
-        createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory);
+        createMarkers(dataCoordinates, dataTitle, dataLocation, dataLocationName, dataCategory);
 
         switch (dataCategory) {
             case "2":
@@ -110,7 +110,7 @@ function SortByDate(x, y) {
     return Number(x.showInfo[0].time.substr(0, 10).replace(/\//g, "")) - Number(y.showInfo[0].time.substr(0, 10).replace(/\//g, ""));
 }
 
-function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
+function createMarkers(dataCoordinates, dataTitle, dataLocation, dataLocationName, dataCategory) {
     var dataImageUrl;
 
 
@@ -140,7 +140,7 @@ function createMarkers(dataCoordinates, dataTitle, dataLocation, dataCategory) {
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '活動名稱:' + dataTitle + '<br>' + '地址:' + dataLocation
+        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this))" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
     });
 
     marker.addListener('click', function() {
