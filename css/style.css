@@ -351,7 +351,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 }
 
 #list .selected {
-    border-left: 8px solid #12BDBC
+    border-left: 8px solid #12BDBC;
     box-shadow: 0px 2px 20px 2px rgba(18, 189, 188, 0.61);
     border-bottom: 0px;
 }
