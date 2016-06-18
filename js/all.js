@@ -1,7 +1,7 @@
 var map;
 var markers = [];
 var infoWindows = [];
-var openInfoWindow;
+var focusInfoWindow;
 var focusList;
 var activity;
 var isSearch = false;
@@ -144,15 +144,17 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
     });
 
     marker.addListener('click', function() {
-        if (openInfoWindow != null) {
-            openInfoWindow.close();
+        if (focusInfoWindow != null) {
+            focusInfoWindow.close();
         }
         infoWindow.open(map, marker);
-        openInfoWindow = infoWindow;
+        focusInfoWindow = infoWindow;
         var listCount = Number(dataCount) + 1;
+        /**
         $('html,body').animate({
             scrollTop: $('#list > li:nth-child(' + listCount + ')').offset().top
         }, 2000);
+        **/
 
     });
 
@@ -161,22 +163,30 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
     infoWindows.push(infoWindow);
 }
 
-function focusLocation(markerCount) {
-    if (openInfoWindow != null) {
-        openInfoWindow.close();
+function focusLocation(dataCount) {
+    if (focusInfoWindow != null) {
+        focusInfoWindow.close();
     }
-    var focusMarker = markers[markerCount];
-    var focusInfoWindow = infoWindows[markerCount];
+    if (focusList != null){
+        focusList.removeClass('selected');
+    }
+
+    var focusMarker = markers[dataCount];
+    var focusInfoWindow = infoWindows[dataCount];
+    var listCount = Number(dataCount) + 1;
+    var focusList = $('#list > li:nth-child(' + listCount + ')');
+
     focusInfoWindow.open(map, focusMarker);
-    openInfoWindow = focusInfoWindow;
     map.panTo(focusMarker.getPosition());
     map.setZoom(15);
+
     focusMarker.setAnimation(google.maps.Animation.BOUNCE);
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2250);
-    var listCount = Number(markerCount) + 1;
-    $('#list > li:nth-child(' + listCount + ')').addClass('selected');
+    
+    focusList.addClass('selected');
+    
     $('.filter').hide();
 }
 
