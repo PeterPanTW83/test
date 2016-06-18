@@ -2,6 +2,7 @@ var map;
 var markers = [];
 var infoWindows = [];
 var openInfoWindow;
+var focusList;
 var activity;
 var isSearch = false;
 var jsonData;
@@ -13,7 +14,7 @@ function initMap() {
         center: { lat: 23.973875, lng: 120.982024 },
         zoom: 8
     });
-    oms = new OverlappingMarkerSpiderfier(map);
+    oms = new OverlappingMarkerSpidHerfier(map);
     includeData();
     geoFindMe();
 }
@@ -23,14 +24,13 @@ function includeData() {
     if (jsonData == null) {
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
 
-            var date = new Date();
-            var TodayY = date.getFullYear();
-            var TodayM = date.getMonth() + 1;
-            var TodayD = date.getDate();
+            var today = new Date();
+            var todayYear = today.getFullYear();
+            var todayMonth = today.getMonth() + 1;
+            var todayDate = today.getDate();
             jsonData = [];
 
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i].showInfo[0].time);
                 if (data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == "") {
                     continue;
                 }
@@ -40,14 +40,14 @@ function includeData() {
                 var rawDataEndTimeD = Number(data[i].showInfo[0].endTime.substr(8, 2));
                 var rawDataLat = data[i].showInfo[0].latitude;
 
-                if (rawDataEndTimeY > TodayY) {
+                if (rawDataEndTimeY > todayYear) {
                     jsonData.push(data[i]);
                     jsonData[jsonData.length - 1].favorite = false;
-                } else if (rawDataEndTimeY == TodayY) {
-                    if (rawDataEndTimeM > TodayM) {
+                } else if (rawDataEndTimeY == todayYear) {
+                    if (rawDataEndTimeM > todayMonth) {
                         jsonData.push(data[i]);
                         jsonData[jsonData.length - 1].favorite = false;
-                    } else if (rawDataEndTimeD >= TodayD) {
+                    } else if (rawDataEndTimeD >= todayDate) {
                         jsonData.push(data[i]);
                         jsonData[jsonData.length - 1].favorite = false;
                     }
@@ -140,7 +140,7 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite('+ dataCount + ', $(this))" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
+        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this))" class="favorite">' + dataFavoriteHtml + '</button><button onclick="" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
     });
 
     marker.addListener('click', function() {
@@ -149,6 +149,10 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
         }
         infoWindow.open(map, marker);
         openInfoWindow = infoWindow;
+        var listCount = Number(dataCount) + 1;
+        $('#list').animate({
+            scrollTop: $('#list > li:nth-child(' + listCount + ')').offset().top
+        }, 2000);
     });
 
     oms.addMarker(marker);
@@ -170,7 +174,7 @@ function focusLocation(markerCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2250);
-    var listCount = Number(markerCount)+1;
+    var listCount = Number(markerCount) + 1;
     $('#list > li:nth-child(' + listCount + ')').addClass('selected');
     $('.filter').hide();
 }
