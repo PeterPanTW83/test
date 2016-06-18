@@ -167,14 +167,14 @@ function focusLocation(dataCount) {
     if (focusInfoWindow != null) {
         focusInfoWindow.close();
     }
-    if (focusList != null){
+    if (focusList != null) {
         focusList.removeClass('selected');
     }
 
     var focusMarker = markers[dataCount];
-    var focusInfoWindow = infoWindows[dataCount];
+    focusInfoWindow = infoWindows[dataCount];
     var listCount = Number(dataCount) + 1;
-    var focusList = $('#list > li:nth-child(' + listCount + ')');
+    focusList = $('#list > li:nth-child(' + listCount + ')');
 
     focusInfoWindow.open(map, focusMarker);
     map.panTo(focusMarker.getPosition());
@@ -184,9 +184,9 @@ function focusLocation(dataCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2250);
-    
+
     focusList.addClass('selected');
-    
+
     $('.filter').hide();
 }
 
