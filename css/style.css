@@ -475,16 +475,12 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     }
     
     .source {
-        margin: 0px;
+        margin-left: 0px;
     }
        
 }
 
 @media only screen and (max-width: 600px) {
-    
-    .header {
-        padding: 0px;
-    }
     
     .logo {
         border: 0px;
