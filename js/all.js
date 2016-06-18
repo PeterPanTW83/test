@@ -192,6 +192,7 @@ function focusLocation(dataCount) {
 
 function changeFavorite(dataCount, dataElemet, isList) {
     var selectData;
+    var listCount = Number(dataCount) + 1;
     if (isSearch) {
         selectData = searchResult;
     } else {
