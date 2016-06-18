@@ -8,14 +8,13 @@ var jsonData;
 var searchResult
 
 document.write('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0UyOx-fxoHQGbHLnU9475buiCyfR28kQ&callback=initMap" ></script>');
-document.write('<script type="text/javascript" src="js/oms.min.js" ></script>');
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
         center: { lat: 23.973875, lng: 120.982024 },
         zoom: 8
     });
-    includeData();
+    document.write('<script type="text/javascript" src="js/oms.min.js&callback=includeData" ></script>');
 }
 
 function includeData() {
