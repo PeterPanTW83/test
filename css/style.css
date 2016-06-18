@@ -166,6 +166,10 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     background-color: #0FA7A6;
 }
 
+.menu a span {
+    margin-left: 8px;
+}
+
 /* Filter */
 
 .filter {
@@ -475,7 +479,9 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
         padding: 17.5px 14px;
     }
     
-    
+    .menu a span {
+        display: none;
+    }
        
 }
 
