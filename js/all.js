@@ -170,7 +170,7 @@ function focusLocation(markerCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2250);
-    var listCount = markerCount+1;
+    var listCount = Number(markerCount)+1;
     console.log(markerCount);
     console.log(listCount);
     $('#list > li:nth-child(' + markerCount + ')').addClass('selected');
