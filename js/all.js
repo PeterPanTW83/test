@@ -201,7 +201,6 @@ function changeFavorite(dataCount, dataElemet, isList) {
     if (dataElemet.text() == "未收藏") {
         dataElemet.html('<img src="img/heart.png">已收藏');
         if(isList){
-            var 
         }else{
             $('#list > li:nth-child(' + listCount + ') button:nth-child('+1+')').html('<img src="img/heart.png">已收藏');
         }
