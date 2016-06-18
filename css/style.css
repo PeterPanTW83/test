@@ -465,24 +465,28 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     .header {
         padding: 0px;
     }
-    
-    .logo {
-        margin: 10px 20px;
-        padding: 0px;
-        border: 0px;
-    }
-    
+
     .info {
         width: 100%;
     }
        
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 600px) {
+    
+    .logo {
+        margin: 10px 20px;
+        border: 0px;
+        padding: 0px;
+    }
     
     .source {
         display: none;
     }
+    
+}
+
+@media only screen and (max-width: 320px) {
     
     .menu a span {
         display: none;
