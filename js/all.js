@@ -418,7 +418,7 @@ function geoFindMe() {
             lng: position.coords.longitude
         };
         infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
+        infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-home" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
         map.setCenter(pos);
     };
 
