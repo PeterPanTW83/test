@@ -592,14 +592,13 @@ function showFavorite() {
     $('.info').html('<img src="img/banner-favorite.png" class="banner"><ul id="list"></ul>');
     deleteMarkers();
 
-    var favoriteData = [];
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     for (var i = 0; i < jsonData.length; i++) {
         if (jsonData[i].favorite) {
-            favoriteData.push(jsonData[i]);
+            favoriteResult.push(jsonData[i]);
         }
     }
-    showData(favoriteData, "favorite");
+    showData(favoriteResult, "favorite");
     $('.filter').hide();
 }
 
