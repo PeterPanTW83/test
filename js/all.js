@@ -6,8 +6,8 @@ var focusList;
 var activity;
 var isSearch = false;
 var jsonData;
-var searchResult
-var oms;
+var searchResult;
+var favoriteResult;
 var userPosition = { lat: 23.973875, lng: 120.982024 };
 
 function initMap() {
@@ -15,8 +15,31 @@ function initMap() {
         center: { lat: 23.973875, lng: 120.982024 },
         zoom: 8
     });
-    oms = new OverlappingMarkerSpiderfier(map);
     geoFindMe();
+}
+
+function geoFindMe() {
+    if (!navigator.geolocation) {
+        alert("很抱歉，您的瀏覽器不支援定位服務");
+        includeData();
+        return;
+    }
+
+    function success(position) {
+        var userLat = position.coords.latitude;
+        var userLng = position.coords.longitude;
+        userPosition = {
+            lat: userLat,
+            lng: userLng
+        };
+        includeData();
+    };
+
+    function error() {
+        //alert("取消定位功能");
+        includeData();
+    };
+    navigator.geolocation.getCurrentPosition(success, error);
 }
 
 function includeData() {
@@ -56,15 +79,16 @@ function includeData() {
             }
             jsonData.sort(SortByDate);
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
-            showData(jsonData);
         });
-    } else {
-        showData(jsonData);
     }
-
+    showData(jsonData, "all");
 }
 
-function showData(data) {
+function SortByDate(x, y) {
+    return Number(x.showInfo[0].time.substr(0, 10).replace(/\//g, "")) - Number(y.showInfo[0].time.substr(0, 10).replace(/\//g, ""));
+}
+
+function showData(data, mode) {
     for (var i = 0; i < data.length; i++) {
         var dataTitle = data[i].title;
         var dataStartTime = data[i].showInfo[0].time;
@@ -96,23 +120,21 @@ function showData(data) {
                 dataImageUrl = "img/children.png";
                 break;
         }
+
         if (dataFavorite) {
             dataFavoriteHtml = '<img src="img/heart.png">已收藏';
         } else {
             dataFavoriteHtml = '<img src="img/empty-heart.png">未收藏';
         }
 
-        createMarkers(i, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml, data);
+        createMarkers(i, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml, mode);
 
-        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this), true,'+data+')" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
+        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this), true,' + mode + ')" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
     }
 }
 
-function SortByDate(x, y) {
-    return Number(x.showInfo[0].time.substr(0, 10).replace(/\//g, "")) - Number(y.showInfo[0].time.substr(0, 10).replace(/\//g, ""));
-}
 
-function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml, data) {
+function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml, mode) {
     var dataImageUrl;
 
     switch (dataCategory) {
@@ -141,7 +163,7 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false,'+data+')" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
+        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false,' + mode + ')" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
     });
 
     marker.addListener('click', function() {
@@ -158,7 +180,7 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
         **/
 
     });
-
+    var oms = new OverlappingMarkerSpiderfier(map);
     oms.addMarker(marker);
     markers.push(marker);
     infoWindows.push(infoWindow);
@@ -191,8 +213,19 @@ function focusLocation(dataCount) {
     $('.filter').hide();
 }
 
-function changeFavorite(dataCount, dataElemet, isList, data) {
-    var selectData = data;
+function changeFavorite(dataCount, dataElemet, isList, mode) {
+    var selectData;
+    switch (mode) {
+        case "all":
+            selectData = jsonData;
+            break;
+        case "search":
+            selectData = searchResult;
+            break;
+        case "favorite":
+            selectData = favoriteResult;
+            break;
+    } 
     var listCount = Number(dataCount) + 1;
 
     if (dataElemet.text() == "未收藏") {
@@ -204,7 +237,7 @@ function changeFavorite(dataCount, dataElemet, isList, data) {
             var dataLocation = selectData[dataCount].showInfo[0].location;
             var dataLocationName = selectData[dataCount].showInfo[0].locationName;
             var infowindow = infoWindows[dataCount];
-            infowindow.setContent('<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false,'+data+')" class="favorite"><img src="img/heart.png">已收藏</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>');
+            infowindow.setContent('<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false,' + mode + ')" class="favorite"><img src="img/heart.png">已收藏</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>');
         } else {
             $('#list > li:nth-child(' + listCount + ') button:nth-child(' + 1 + ')').html('<img src="img/heart.png">已收藏');
         }
@@ -226,7 +259,7 @@ function changeFavorite(dataCount, dataElemet, isList, data) {
             var dataLocation = selectData[dataCount].showInfo[0].location;
             var dataLocationName = selectData[dataCount].showInfo[0].locationName;
             var infowindow = infoWindows[dataCount];
-            infowindow.setContent('<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false,'+data+')" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>');
+            infowindow.setContent('<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false,' + mode + ')" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>');
 
         } else {
             $('#list > li:nth-child(' + listCount + ') button:nth-child(' + 1 + ')').html('<img src="img/empty-heart.png">未收藏');
@@ -399,7 +432,7 @@ function search() {
         $('.info').css('overflow-x', 'hidden');
         $('.info').html('<img src="img/banner-search.png" class="banner"><div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     } else {
-        showData(searchResult);
+        showData(searchResult, "search");
     }
     $('.filter').hide();
 }
@@ -410,30 +443,6 @@ function deleteMarkers() {
     }
     markers = [];
     infoWindows = [];
-}
-
-function geoFindMe() {
-    if (!navigator.geolocation) {
-        alert("很抱歉，您的瀏覽器不支援定位服務");
-        includeData();
-        return;
-    }
-
-    function success(position) {
-        var userLat = position.coords.latitude;
-        var userLng = position.coords.longitude;
-        userPosition = {
-            lat: userLat,
-            lng: userLng
-        };
-        includeData();
-    };
-
-    function error() {
-        //alert("取消定位功能");
-        includeData();
-    };
-    navigator.geolocation.getCurrentPosition(success, error);
 }
 
 function showNearBy() {
@@ -587,7 +596,7 @@ function showFavorite() {
             favoriteData.push(jsonData[i]);
         }
     }
-    showData(favoriteData);
+    showData(favoriteData, "favorite");
     $('.filter').hide();
 }
 
