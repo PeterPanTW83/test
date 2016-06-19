@@ -43,6 +43,8 @@ function geoFindMe() {
 }
 
 function includeData() {
+    $('.info').html('<img src="img/banner.png" class="banner"><ul id="list"></ul>');
+    deleteMarkers();
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     if (jsonData == null) {
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
@@ -277,8 +279,8 @@ function changeFavorite(dataCount, dataElemet, isList, mode) {
 
 function search() {
     $('.info').html('<img src="img/banner-search.png" class="banner"><ul id="list"></ul>');
+    deleteMarkers();
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
-    isSearch = true;
     var activityTitle = document.getElementById("name").value;
     var activityLocation = document.getElementById("location").value;
     var activityStartTime = Number(document.getElementById("starttime").value.replace(/-/g, ""));
@@ -589,6 +591,7 @@ function Dialog(dataCount) {
 function showFavorite() {
     $('.info').html('<img src="img/banner-favorite.png" class="banner"><ul id="list"></ul>');
     deleteMarkers();
+
     var favoriteData = [];
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     for (var i = 0; i < jsonData.length; i++) {
