@@ -216,7 +216,7 @@ function focusLocation(dataCount) {
 }
 
 function changeFavorite(dataCount, dataElemet, isList, mode) {
-    var selectData;
+    var selectData= [];
     switch (mode) {
         case "all":
             selectData = jsonData;
