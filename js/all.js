@@ -192,6 +192,7 @@ function focusLocation(dataCount) {
 }
 
 function changeFavorite(dataCount, dataElemet, isList) {
+	jsonData = JSON.parse(localStorage.getItem("jsonData"));
     var selectData;
     var listCount = Number(dataCount) + 1;
     if (isSearch) {
@@ -246,7 +247,7 @@ function changeFavorite(dataCount, dataElemet, isList) {
 }
 
 function search() {
-
+	jsonData = JSON.parse(localStorage.getItem("jsonData"));
     isSearch = true;
     var activityTitle = document.getElementById("name").value;
     var activityLocation = document.getElementById("location").value;
