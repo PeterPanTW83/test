@@ -387,7 +387,8 @@ function search() {
     searchResult.sort(SortByDate);
 
     if (searchResult.length == 0) {
-        $('.info').html('<img src="img/banner-search.png"><div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
+        $('.info').css('overflow-x','hidden');
+        $('.info').html('<img src="img/banner-search.png" class="banner"><div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     } else {
         showData(searchResult);
     }
