@@ -8,7 +8,7 @@ var isSearch = false;
 var jsonData;
 var searchResult
 var oms;
-var userPosition;
+var userPosition = { lat: 23.973875, lng: 120.982024 };
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map-list'), {
@@ -17,7 +17,6 @@ function initMap() {
     });
     oms = new OverlappingMarkerSpiderfier(map);
     geoFindMe();
-    includeData();
 }
 
 function includeData() {
@@ -409,6 +408,7 @@ function deleteMarkers() {
 function geoFindMe() {
     if (!navigator.geolocation) {
         alert("很抱歉，您的瀏覽器不支援定位服務");
+        includeData();
         return;
     }
 
@@ -419,10 +419,12 @@ function geoFindMe() {
             lat: userLat,
             lng: userLng
         };
+        includeData();
     };
 
     function error() {
         //alert("定位時發生錯誤，請稍後再試");
+        includeData();
     };
     navigator.geolocation.getCurrentPosition(success, error);
 }
