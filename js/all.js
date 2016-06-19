@@ -104,7 +104,7 @@ function showData(data) {
 
         createMarkers(i, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml);
 
-        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this), true)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
+        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this), true)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
     }
 }
 
@@ -141,7 +141,7 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
+        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
     });
 
     marker.addListener('click', function() {
@@ -406,46 +406,53 @@ function deleteMarkers() {
 }
 
 function geoFindMe() {
-    var infoWindow = new google.maps.InfoWindow({ map: map });
-
     if (!navigator.geolocation) {
         alert("很抱歉，您的瀏覽器不支援定位服務");
         return;
     }
 
     function success(position) {
-        $('#list').html("");
-        deleteMarkers();
-        jsonData = JSON.parse(localStorage.getItem("jsonData"));
-        var nearByData = [];
         var userLat = position.coords.latitude;
         var userLng = position.coords.longitude;
         userPosition = {
             lat: userLat,
             lng: userLng
         };
-        infoWindow.setPosition(userPosition);
-        infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-home" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
-        map.setCenter(userPosition);
-        $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + userLat + '&lon=' + userLng + '&range=20&uk=API105080', function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var dataCategory = data[i].category;
-                if (dataCategory == '2' || dataCategory == '3' || dataCategory == '4' || dataCategory == '5' || dataCategory == '8') {
-                    for (var j = 0; j < jsonData.length; j++) {
-                        if (data[i].UID == jsonData[j].UID) {
-                            nearByData.push(jsonData[j]);
-                        }
-                    }
-                }
-            }
-            showData(nearByData);
-        });
     };
 
     function error() {
         //alert("定位時發生錯誤，請稍後再試");
     };
     navigator.geolocation.getCurrentPosition(success, error);
+}
+
+function showNearBy() {
+    if (focusInfoWindow != null) {
+        focusInfoWindow.close();
+    }
+    var infoWindow = new google.maps.InfoWindow({ map: map });
+    var nearByData = [];
+    jsonData = JSON.parse(localStorage.getItem("jsonData"));
+    $('#list').html("");
+    deleteMarkers();
+    infoWindow.setPosition(userPosition);
+    infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-home" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
+    focusInfoWindow = infoWindow;
+    map.setCenter(userPosition);
+
+    $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + userPosition.lat + '&lon=' + userPosition.lng + '&range=20&uk=API105080', function(data) {
+        for (var i = 0; i < data.length; i++) {
+            var dataCategory = data[i].category;
+            if (dataCategory == '2' || dataCategory == '3' || dataCategory == '4' || dataCategory == '5' || dataCategory == '8') {
+                for (var j = 0; j < jsonData.length; j++) {
+                    if (data[i].UID == jsonData[j].UID) {
+                        nearByData.push(jsonData[j]);
+                    }
+                }
+            }
+        }
+        showData(nearByData);
+    });
 }
 
 var CLIENT_ID = '998871371950-c95ffdeu6pee5bal5l4pmio9911gjdva.apps.googleusercontent.com';
