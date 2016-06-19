@@ -450,18 +450,15 @@ function showNearBy() {
     if (focusInfoWindow != null) {
         focusInfoWindow.close();
     }
-    var infoWindow = new google.maps.InfoWindow({ map: map });
     var nearByData = [];
-    
-    infoWindow.setPosition(userPosition);
-    infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
-
+    var infoWindow = new google.maps.InfoWindow({
+        content: '<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>這裡放定位地址</li></ul></div>'
+    });
     var marker = new google.maps.Marker({
         position: userPosition,
         title: "你的位置",
         icon: "img/googleman.png",
     });
-    
     marker.addListener('click', function() {
         if (focusInfoWindow != null) {
             focusInfoWindow.close();
@@ -469,10 +466,11 @@ function showNearBy() {
         infoWindow.open(map, marker);
         focusInfoWindow = infoWindow;
     });
-    
     marker.setMap(map);
+    infoWindow.open(map, marker);
     focusInfoWindow = infoWindow;
-    map.setCenter(userPosition);
+    map.panTo(marker.getPosition());
+    map.setZoom(15);
 
     $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + userPosition.lat + '&lon=' + userPosition.lng + '&range=20&uk=API105080', function(data) {
         for (var i = 0; i < data.length; i++) {
