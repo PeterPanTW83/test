@@ -203,8 +203,7 @@ function changeFavorite(dataCount, dataElemet, isList) {
     if (dataElemet.text() == "未收藏") {
         dataElemet.html('<img src="img/heart.png">已收藏');
         if(isList){
-            var infoWindow = infoWindows[dataCount];
-            var infoContent = infoWindow.getContent();
+            infoContent.focusInfoWindow.getContent();
             console.log(infoContent);
         }else{
             $('#list > li:nth-child(' + listCount + ') button:nth-child('+1+')').html('<img src="img/heart.png">已收藏');
@@ -352,7 +351,7 @@ function search() {
     }
     searchResult = [];
     if (activityStartTime != 0 && activityEndTime != 0) {
-        for (var i = 0; i < tempData1.length; i++) {
+        for (var i = 0; i < tempData.length; i++) {
             var dataStartTime = Number(tempData[i].showInfo[0].time.substr(0, 10).replace(/\//g, ""));
             var dataEndTime = Number(tempData[i].showInfo[0].endTime.substr(0, 10).replace(/\//g, ""));
             if (dataStartTime < activityStartTime) {
