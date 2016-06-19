@@ -418,14 +418,16 @@ function geoFindMe() {
         deleteMarkers();
         jsonData = JSON.parse(localStorage.getItem("jsonData"));
         var nearByData = [];
+        var userLat = position.coords.latitude;
+        var userLng = position.coords.longitude;
         userPosition = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lat: userLat,
+            lng: userLng
         };
         infoWindow.setPosition(userPosition);
         infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-home" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
         map.setCenter(userPosition);
-        $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + lat + '&lon=' + lng + '&range=2&uk=API105080', function(data) {
+        $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + userLat + '&lon=' + userLng + '&range=2&uk=API105080', function(data) {
             for (var i = 0; i < data.length; i++) {
                 var dataCategory = data[i].category;
                 if (dataCategory == '2' || dataCategory == '3' || dataCategory == '4' || dataCategory == '5' || dataCategory == '8') {
