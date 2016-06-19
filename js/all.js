@@ -443,18 +443,40 @@ function geoFindMe() {
 }
 
 function showNearBy() {
+    jsonData = JSON.parse(localStorage.getItem("jsonData"));
+    $('.info').find('img').attr('src', 'img/banner-near.png');
+    $('#list').html("");
+    deleteMarkers();
     if (focusInfoWindow != null) {
         focusInfoWindow.close();
     }
     var infoWindow = new google.maps.InfoWindow({ map: map });
     var nearByData = [];
-    jsonData = JSON.parse(localStorage.getItem("jsonData"));
     
-    $('.info').find('img').attr('src', 'img/banner-near.png');
-    $('#list').html("");
-    deleteMarkers();
     infoWindow.setPosition(userPosition);
-    infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-map-marker" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
+    infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
+
+    var marker = new google.maps.Marker({
+        position: userPosition,
+        title: "你的位置",
+        icon: "img/googleman.png",
+        map: map
+    });
+    
+    marker.addListener('click', function() {
+        if (focusInfoWindow != null) {
+            focusInfoWindow.close();
+        }
+        infoWindow.open(map, marker);
+        focusInfoWindow = infoWindow;
+        /**
+        var listCount = Number(dataCount) + 1;
+        $('html,body').animate({
+            scrollTop: $('#list > li:nth-child(' + listCount + ')').offset().top
+        }, 2000);
+        **/
+    });
+    
     focusInfoWindow = infoWindow;
     map.setCenter(userPosition);
 
