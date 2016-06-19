@@ -452,7 +452,7 @@ function showNearBy() {
     }
     var nearByData = [];
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>這裡放定位地址</li></ul></div>'
+        content: '<div class="site"><h2>你的位置</h2></div>'
     });
     var marker = new google.maps.Marker({
         position: userPosition,
@@ -485,6 +485,7 @@ function showNearBy() {
         }
         showData(nearByData);
     });
+    $('.filter').hide();
 }
 
 var CLIENT_ID = '998871371950-c95ffdeu6pee5bal5l4pmio9911gjdva.apps.googleusercontent.com';
@@ -594,6 +595,7 @@ function showFavorite() {
         }
     }
     showData(favoriteData);
+    $('.filter').hide();
 }
 
 $(document).ready(function() {
