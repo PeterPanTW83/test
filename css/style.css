@@ -372,15 +372,16 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     float: left;
 }
 
-#map-list .activity-info {
-    width: 430px;
+#map-list .site {
+    width: 100px;
     height: auto;
     margin: 15px 10px 5px 10px;
     font-family: "微軟正黑體";
 }
 
-#map-list .activity-info li {
-    font-size: 14px;
+#map-list .site h2 {
+    font-weight: bold;
+    font-size: 16px;
 }
 
 /* No Result */
