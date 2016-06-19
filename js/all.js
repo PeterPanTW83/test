@@ -404,7 +404,7 @@ function search() {
         $('.info').css('overflow-x', 'hidden');
         $('.info').html('<img src="img/banner-search.png" class="banner"><div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     } else {
-        $('.info').html('<img src="img/banner-all.png" class="banner"><ul id="list"></ul>');
+        $('.info').html('<img src="img/banner-search.png" class="banner"><ul id="list"></ul>');
         showData(searchResult);
     }
     $('.filter').hide();
