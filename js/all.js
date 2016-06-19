@@ -82,8 +82,11 @@ function includeData() {
             jsonData.sort(SortByDate);
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
         });
+        showData(jsonData, "all");
+    } else {
+        showData(jsonData, "all");
     }
-    showData(jsonData, "all");
+
 }
 
 function SortByDate(x, y) {
@@ -216,7 +219,7 @@ function focusLocation(dataCount) {
 }
 
 function changeFavorite(dataCount, dataElemet, isList, mode) {
-    var selectData= [];
+    var selectData = [];
     switch (mode) {
         case "all":
             selectData = jsonData;
@@ -227,7 +230,7 @@ function changeFavorite(dataCount, dataElemet, isList, mode) {
         case "favorite":
             selectData = favoriteResult;
             break;
-    } 
+    }
     var listCount = Number(dataCount) + 1;
 
     if (dataElemet.text() == "未收藏") {
