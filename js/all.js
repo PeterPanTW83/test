@@ -204,7 +204,7 @@ function changeFavorite(dataCount, dataElemet, isList) {
         dataElemet.html('<img src="img/heart.png">已收藏');
         if(isList){
             var infoWindow = infoWindows[dataCount];
-            var infoContent = infoWindows.getContent();
+            var infoContent = infoWindow.getContent();
             console.log(infoContent);
         }else{
             $('#list > li:nth-child(' + listCount + ') button:nth-child('+1+')').html('<img src="img/heart.png">已收藏');
