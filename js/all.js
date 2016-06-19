@@ -31,7 +31,7 @@ function includeData() {
             jsonData = [];
 
             for (var i = 0; i < data.length; i++) {
-                if (data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == "") {
+                if (data[i].showInfo[0].time == "" || data[i].showInfo[0].endTime == "" || data[i].showInfo[0].latitude == "" || data[i].showInfo[0].locationName == "") {
                     continue;
                 }
 
@@ -39,6 +39,7 @@ function includeData() {
                 var rawDataEndTimeM = Number(data[i].showInfo[0].endTime.substr(5, 2));
                 var rawDataEndTimeD = Number(data[i].showInfo[0].endTime.substr(8, 2));
                 var rawDataLat = data[i].showInfo[0].latitude;
+
 
                 if (rawDataEndTimeY > todayYear) {
                     jsonData.push(data[i]);
