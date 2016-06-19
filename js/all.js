@@ -452,7 +452,7 @@ function showNearBy() {
     }
     var nearByData = [];
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="site"><h2><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;你的位置</h2></div>'
+        content: '<div class="site"><h2><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;你的位置</h2></div>'
     });
     var marker = new google.maps.Marker({
         position: userPosition,
