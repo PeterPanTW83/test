@@ -16,6 +16,7 @@ function initMap() {
         zoom: 8
     });
     oms = new OverlappingMarkerSpiderfier(map);
+    geoFindMe();
     includeData();
 }
 
