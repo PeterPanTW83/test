@@ -184,7 +184,11 @@ function focusLocation(dataCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2250);
-
+    
+    focusList..mouseover(function(){
+        $("a").css("background-color","#fff");
+    }
+    
     focusList.addClass('selected');
 
     $('.filter').hide();
@@ -522,7 +526,7 @@ function Dialog(dataCount) {
 }
 
 function showFavorite() {
-
+    $('.info').find('img').attr('src','img/banner-favorite.png');
     $('#list').html("");
     deleteMarkers();
     var favoriteData = [];
