@@ -387,7 +387,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 .noresult {
     background-color: #D2D2D2;
-    height: 100%;
+    height: calc(100% - 60px);
     overflow-x: hidden;
     overflow-y: scroll;
     width: 500px;
