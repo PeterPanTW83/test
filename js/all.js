@@ -82,11 +82,8 @@ function includeData() {
             jsonData.sort(SortByDate);
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
         });
-        showData(jsonData, "all");
-    } else {
-        showData(jsonData, "all");
     }
-
+    showData(jsonData, "all");
 }
 
 function SortByDate(x, y) {
