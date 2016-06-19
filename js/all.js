@@ -185,7 +185,6 @@ function focusLocation(dataCount) {
         focusMarker.setAnimation(null);
     }, 2250);
     
-    focusList.find('a').unbind('mouseenter').unbind('mouseleave')
     focusList.addClass('selected');
 
     $('.filter').hide();
