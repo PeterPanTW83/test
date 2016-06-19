@@ -445,7 +445,7 @@ function geoFindMe() {
 function showNearBy() {
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     $('.info').find('img').attr('src', 'img/banner-near.png');
-    $('.info').html('<img src="img/banner-ner.png" class="banner"><ul id="list"></ul>');
+    $('.info').html('<img src="img/banner-near.png" class="banner"><ul id="list"></ul>');
     deleteMarkers();
     if (focusInfoWindow != null) {
         focusInfoWindow.close();
