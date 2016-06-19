@@ -248,7 +248,7 @@ function search() {
     searchResult = [];
     var tempData = [];
     
-    $('.info').find('img').attr('src','img/banner-search.png');
+  //  $('.info').find('img').attr('src','img/banner-search.png');
     $('#list').html("");
     deleteMarkers();
 
@@ -387,8 +387,7 @@ function search() {
     searchResult.sort(SortByDate);
 
     if (searchResult.length == 0) {
-        $('.info').css('overflow', 'hidden');
-        $('.info').append('<div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
+        $('.info').html('<img src="img/banner-search.png"><div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     } else {
         showData(searchResult);
     }
