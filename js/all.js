@@ -17,7 +17,6 @@ function initMap() {
     });
     oms = new OverlappingMarkerSpiderfier(map);
     includeData();
-    geoFindMe();
 }
 
 function includeData() {
@@ -105,7 +104,7 @@ function showData(data) {
 
         createMarkers(i, dataCoordinates, dataTitle, dataStartTime, dataEndTime, dataLocation, dataLocationName, dataCategory, dataFavoriteHtml);
 
-        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this), true)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr='+userPosition+'&daddr='+dataLocation+'\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
+        $('#list').append('<li><a href="javascript:focusLocation(\'' + i + '\')" class="clearfix"><img src="' + dataImageUrl + '" class="photo"><div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(\'' + i + '\', $(this), true)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(\'' + i + '\')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div></a></li>');
     }
 }
 
@@ -142,7 +141,7 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr='+userPosition+'&daddr='+dataLocation+'\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
+        content: '<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite">' + dataFavoriteHtml + '</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>'
     });
 
     marker.addListener('click', function() {
@@ -186,7 +185,7 @@ function focusLocation(dataCount) {
     window.setTimeout(function() {
         focusMarker.setAnimation(null);
     }, 2250);
-    
+
     focusList.addClass('selected');
 
     $('.filter').hide();
@@ -203,11 +202,11 @@ function changeFavorite(dataCount, dataElemet, isList) {
 
     if (dataElemet.text() == "未收藏") {
         dataElemet.html('<img src="img/heart.png">已收藏');
-        if(isList){
+        if (isList) {
             infoContent.focusInfoWindow.getContent();
             console.log(infoContent);
-        }else{
-            $('#list > li:nth-child(' + listCount + ') button:nth-child('+1+')').html('<img src="img/heart.png">已收藏');
+        } else {
+            $('#list > li:nth-child(' + listCount + ') button:nth-child(' + 1 + ')').html('<img src="img/heart.png">已收藏');
         }
         var selectDataUID = selectData[dataCount].UID;
         jsonData = JSON.parse(localStorage.getItem("jsonData"));
@@ -220,10 +219,10 @@ function changeFavorite(dataCount, dataElemet, isList) {
         }
     } else {
         dataElemet.html('<img src="img/empty-heart.png">未收藏');
-        if(isList){
+        if (isList) {
 
-        }else{
-            $('#list > li:nth-child(' + listCount + ') button:nth-child('+1+')').html('<img src="img/empty-heart.png">未收藏');
+        } else {
+            $('#list > li:nth-child(' + listCount + ') button:nth-child(' + 1 + ')').html('<img src="img/empty-heart.png">未收藏');
         }
         var selectDataUID = selectData[dataCount].UID;
         for (var i = 0; i < jsonData.length; i++) {
@@ -249,8 +248,8 @@ function search() {
 
     searchResult = [];
     var tempData = [];
-    
-    $('.info').find('img').attr('src','img/banner-search.png');
+
+    $('.info').find('img').attr('src', 'img/banner-search.png');
     $('#list').html("");
     deleteMarkers();
 
@@ -389,7 +388,7 @@ function search() {
     searchResult.sort(SortByDate);
 
     if (searchResult.length == 0) {
-        $('.info').css('overflow-x','hidden');
+        $('.info').css('overflow-x', 'hidden');
         $('.info').html('<img src="img/banner-search.png" class="banner"><div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     } else {
         $('.info').html('<img src="img/banner-all.png" class="banner"><ul id="list"></ul>');
@@ -415,6 +414,10 @@ function geoFindMe() {
     }
 
     function success(position) {
+        $('#list').html("");
+        deleteMarkers();
+        jsonData = JSON.parse(localStorage.getItem("jsonData"));
+        var nearByData = [];
         userPosition = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
@@ -422,6 +425,19 @@ function geoFindMe() {
         infoWindow.setPosition(userPosition);
         infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-home" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
         map.setCenter(userPosition);
+        $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + lat + '&lon=' + lng + '&range=2&uk=API105080', function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var dataCategory = data[i].category;
+                if (dataCategory == '2' || dataCategory == '3' || dataCategory == '4' || dataCategory == '5' || dataCategory == '8') {
+                    for (var j = 0; j < jsonData.length; j++) {
+                        if (data[i].UID == jsonData[j].UID) {
+                            nearByData.push(jsonData[j]);
+                        }
+                    }
+                }
+            }
+            showData(nearByData);
+        });
     };
 
     function error() {
@@ -526,7 +542,7 @@ function Dialog(dataCount) {
 }
 
 function showFavorite() {
-    $('.info').find('img').attr('src','img/banner-favorite.png');
+    $('.info').find('img').attr('src', 'img/banner-favorite.png');
     $('#list').html("");
     deleteMarkers();
     var favoriteData = [];
