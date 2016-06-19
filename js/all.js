@@ -91,6 +91,7 @@ function SortByDate(x, y) {
 }
 
 function showData(data, mode) {
+    console.log(data.length);
     for (var i = 0; i < data.length; i++) {
         var dataTitle = data[i].title;
         var dataStartTime = data[i].showInfo[0].time;
@@ -589,6 +590,7 @@ function Dialog(dataCount) {
 }
 
 function showFavorite() {
+    favoriteResult = [];
     $('.info').html('<img src="img/banner-favorite.png" class="banner"><ul id="list"></ul>');
     deleteMarkers();
 
