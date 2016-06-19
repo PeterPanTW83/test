@@ -449,10 +449,12 @@ function showNearBy() {
     var infoWindow = new google.maps.InfoWindow({ map: map });
     var nearByData = [];
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
+    
+    $('.info').find('img').attr('src', 'img/banner-near.png');
     $('#list').html("");
     deleteMarkers();
     infoWindow.setPosition(userPosition);
-    infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-home" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
+    infoWindow.setContent('<div class="activity-info"><h2>你的位置</h2><ul><li><i class="fa fa-map-marker" aria-hidden="true"></i>這裡放定位地址</li></ul></div>');
     focusInfoWindow = infoWindow;
     map.setCenter(userPosition);
 
