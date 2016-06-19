@@ -247,7 +247,8 @@ function search() {
 
     searchResult = [];
     var tempData = [];
-
+    
+    $('.info').find('img').attr('src','img/banner-search.png');
     $('#list').html("");
     deleteMarkers();
 
