@@ -249,6 +249,7 @@ function changeFavorite(dataCount, dataElemet, isList) {
 }
 
 function search() {
+    $('.info').html('<img src="img/banner-search.png" class="banner"><ul id="list"></ul>');
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     isSearch = true;
     var activityTitle = document.getElementById("name").value;
@@ -404,7 +405,6 @@ function search() {
         $('.info').css('overflow-x', 'hidden');
         $('.info').html('<img src="img/banner-search.png" class="banner"><div class="noresult"><img src="img/noresult.png"><h2>查無任何符合之活動！</h2></div>');
     } else {
-        $('.info').html('<img src="img/banner-search.png" class="banner"><ul id="list"></ul>');
         showData(searchResult);
     }
     $('.filter').hide();
@@ -445,7 +445,7 @@ function geoFindMe() {
 function showNearBy() {
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     $('.info').find('img').attr('src', 'img/banner-near.png');
-    $('#list').html("");
+    $('.info').html('<img src="img/banner-ner.png" class="banner"><ul id="list"></ul>');
     deleteMarkers();
     if (focusInfoWindow != null) {
         focusInfoWindow.close();
@@ -584,8 +584,7 @@ function Dialog(dataCount) {
 }
 
 function showFavorite() {
-    $('.info').find('img').attr('src', 'img/banner-favorite.png');
-    $('#list').html("");
+    $('.info').html('<img src="img/banner-favorite.png" class="banner"><ul id="list"></ul>');
     deleteMarkers();
     var favoriteData = [];
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
