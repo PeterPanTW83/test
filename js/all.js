@@ -43,7 +43,7 @@ function geoFindMe() {
 }
 
 function includeData() {
-    $('.info').html('<img src="img/banner.png" class="banner"><ul id="list"></ul>');
+    $('.info').html('<img src="img/banner-all.png" class="banner"><ul id="list"></ul>');
     deleteMarkers();
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     if (jsonData == null) {
