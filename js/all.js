@@ -460,7 +460,6 @@ function showNearBy() {
         position: userPosition,
         title: "你的位置",
         icon: "img/googleman.png",
-        map: map
     });
     
     marker.addListener('click', function() {
@@ -469,14 +468,9 @@ function showNearBy() {
         }
         infoWindow.open(map, marker);
         focusInfoWindow = infoWindow;
-        /**
-        var listCount = Number(dataCount) + 1;
-        $('html,body').animate({
-            scrollTop: $('#list > li:nth-child(' + listCount + ')').offset().top
-        }, 2000);
-        **/
     });
     
+    marker.setMap(map);
     focusInfoWindow = infoWindow;
     map.setCenter(userPosition);
 
