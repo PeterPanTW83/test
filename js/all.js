@@ -192,7 +192,7 @@ function focusLocation(dataCount) {
 }
 
 function changeFavorite(dataCount, dataElemet, isList) {
-	jsonData = JSON.parse(localStorage.getItem("jsonData"));
+    jsonData = JSON.parse(localStorage.getItem("jsonData"));
     var selectData;
     var listCount = Number(dataCount) + 1;
     if (isSearch) {
@@ -209,7 +209,8 @@ function changeFavorite(dataCount, dataElemet, isList) {
             var dataEndTime = selectData[dataCount].showInfo[0].endTime;
             var dataLocation = selectData[dataCount].showInfo[0].location;
             var dataLocationName = selectData[dataCount].showInfo[0].locationName;
-            focusInfoWindow.setContent('<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite"><img src="img/heart.png">已收藏</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>');
+            var infowindow = infoWindows[dataCount];
+            infowindow.setContent('<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite"><img src="img/heart.png">已收藏</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>');
         } else {
             $('#list > li:nth-child(' + listCount + ') button:nth-child(' + 1 + ')').html('<img src="img/heart.png">已收藏');
         }
@@ -230,7 +231,8 @@ function changeFavorite(dataCount, dataElemet, isList) {
             var dataEndTime = selectData[dataCount].showInfo[0].endTime;
             var dataLocation = selectData[dataCount].showInfo[0].location;
             var dataLocationName = selectData[dataCount].showInfo[0].locationName;
-            focusInfoWindow.setContent('<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>');
+            var infowindow = infoWindows[dataCount];
+            infowindow.setContent('<div class="activity-info"><h2>' + dataTitle + '</h2><ul><li><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>' + dataStartTime + '~' + dataEndTime + '</li><li><i class="fa fa-home fa-lg" aria-hidden="true"></i>' + dataLocationName + '</li><li><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>' + dataLocation + '</li></ul><div class="activity-btn"><button onclick="changeFavorite(' + dataCount + ', $(this), false)" class="favorite"><img src="img/empty-heart.png">未收藏</button><button onclick="window.open(\'https://maps.google.com/?saddr=' + userPosition.lat + ',' + userPosition.lng + '&daddr=' + dataLocation + '\',\'_blank\')" class="route"><img src="img/route.png">路線規劃</button><button onclick="Dialog(' + dataCount + ')" class="add-calendar"><img src="img/min-calendar.png">加至Google日曆</button></div></div>');
 
         } else {
             $('#list > li:nth-child(' + listCount + ') button:nth-child(' + 1 + ')').html('<img src="img/empty-heart.png">未收藏');
@@ -247,7 +249,7 @@ function changeFavorite(dataCount, dataElemet, isList) {
 }
 
 function search() {
-	jsonData = JSON.parse(localStorage.getItem("jsonData"));
+    jsonData = JSON.parse(localStorage.getItem("jsonData"));
     isSearch = true;
     var activityTitle = document.getElementById("name").value;
     var activityLocation = document.getElementById("location").value;
