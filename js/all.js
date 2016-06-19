@@ -7,7 +7,7 @@ var activity;
 var isSearch = false;
 var jsonData;
 var searchResult;
-var favoriteResult;
+var favoriteResult = [];
 var userPosition = { lat: 23.973875, lng: 120.982024 };
 
 function initMap() {
