@@ -185,7 +185,7 @@ function focusLocation(dataCount) {
         focusMarker.setAnimation(null);
     }, 2250);
     
-    focusList..mouseover(function(){
+    focusList.mouseover(function(){
         $("a").css("background-color","#fff");
     }
     
