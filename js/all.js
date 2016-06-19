@@ -81,9 +81,12 @@ function includeData() {
             }
             jsonData.sort(SortByDate);
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
+            showData(jsonData, "all");
         });
+    }else{
+        showData(jsonData, "all");
     }
-    showData(jsonData, "all");
+    
 }
 
 function SortByDate(x, y) {
@@ -91,7 +94,6 @@ function SortByDate(x, y) {
 }
 
 function showData(data, mode) {
-    console.log(data.length);
     for (var i = 0; i < data.length; i++) {
         var dataTitle = data[i].title;
         var dataStartTime = data[i].showInfo[0].time;
