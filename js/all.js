@@ -10,7 +10,6 @@ var favoriteResult = [];
 var nearByResult = [];
 var activity;
 var isSearch = false;
-
 var userPosition = { lat: 23.973875, lng: 120.982024 };
 
 function initMap() {
@@ -49,8 +48,18 @@ function geoFindMe() {
 function includeData() {
     $('.info').html('<img src="img/banner-all.png" class="banner"><ul id="list"></ul>');
     deleteMarkers();
+
+    var today = new Date();
+    var todayYear = today.getFullYear().toString();
+    var todayMonth = (today.getMonth() + 1).toString();
+    var todayDate = today.getDate().toString();
+    today = todayYear + todayMonth + todayDate;
+    var dataDate = localStorage.getItem("dataDate");
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
-    if (jsonData == null) {
+
+    if (jsonData == null || today != dataDate) {
+        dataDate = today;
+        localStorage.setItem("dataDate", dataDate);
         $.getJSON('https://raw.githubusercontent.com/beibeihuang/test/gh-pages/js/all.json', function(data) {
 
             var today = new Date();
