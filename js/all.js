@@ -8,6 +8,7 @@ var isSearch = false;
 var jsonData;
 var searchResult;
 var favoriteResult = [];
+var nearByResult = [];
 var userPosition = { lat: 23.973875, lng: 120.982024 };
 
 function initMap() {
@@ -83,10 +84,10 @@ function includeData() {
             localStorage.setItem("jsonData", JSON.stringify(jsonData));
             showData(jsonData, "all");
         });
-    }else{
+    } else {
         showData(jsonData, "all");
     }
-    
+
 }
 
 function SortByDate(x, y) {
@@ -230,6 +231,8 @@ function changeFavorite(dataCount, dataElemet, isList, mode) {
         case "favorite":
             selectData = favoriteResult;
             break;
+        case "nearBy":
+            selectData = nearByResult;
     }
     var listCount = Number(dataCount) + 1;
 
@@ -450,52 +453,6 @@ function deleteMarkers() {
     infoWindows = [];
 }
 
-function showNearBy() {
-    jsonData = JSON.parse(localStorage.getItem("jsonData"));
-    $('.info').find('img').attr('src', 'img/banner-near.png');
-    $('.info').html('<img src="img/banner-near.png" class="banner"><ul id="list"></ul>');
-    deleteMarkers();
-    if (focusInfoWindow != null) {
-        focusInfoWindow.close();
-    }
-    var nearByData = [];
-    var infoWindow = new google.maps.InfoWindow({
-        content: '<div class="site"><h2><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;你的位置</h2></div>'
-    });
-    var marker = new google.maps.Marker({
-        position: userPosition,
-        title: "你的位置",
-        icon: "img/googleman.png",
-    });
-    marker.addListener('click', function() {
-        if (focusInfoWindow != null) {
-            focusInfoWindow.close();
-        }
-        infoWindow.open(map, marker);
-        focusInfoWindow = infoWindow;
-    });
-    marker.setMap(map);
-    infoWindow.open(map, marker);
-    focusInfoWindow = infoWindow;
-    map.panTo(marker.getPosition());
-    map.setZoom(15);
-
-    $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + userPosition.lat + '&lon=' + userPosition.lng + '&range=20&uk=API105080', function(data) {
-        for (var i = 0; i < data.length; i++) {
-            var dataCategory = data[i].category;
-            if (dataCategory == '2' || dataCategory == '3' || dataCategory == '4' || dataCategory == '5' || dataCategory == '8') {
-                for (var j = 0; j < jsonData.length; j++) {
-                    if (data[i].UID == jsonData[j].UID) {
-                        nearByData.push(jsonData[j]);
-                    }
-                }
-            }
-        }
-        showData(nearByData);
-    });
-    $('.filter').hide();
-}
-
 var CLIENT_ID = '998871371950-c95ffdeu6pee5bal5l4pmio9911gjdva.apps.googleusercontent.com';
 var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
@@ -604,6 +561,74 @@ function showFavorite() {
     }
     showData(favoriteResult, "favorite");
     $('.filter').hide();
+}
+
+function showNearBy() {
+    nearByResult = [];
+    $('.info').html('<img src="img/banner-near.png" class="banner"><ul id="list"></ul>');
+    deleteMarkers();
+    if (focusInfoWindow != null) {
+        focusInfoWindow.close();
+    }
+    var infoWindow = new google.maps.InfoWindow({
+        content: '<div class="site"><h2><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;你的位置</h2></div>'
+    });
+    var marker = new google.maps.Marker({
+        position: userPosition,
+        title: "你的位置",
+        icon: "img/googleman.png",
+    });
+    marker.addListener('click', function() {
+        if (focusInfoWindow != null) {
+            focusInfoWindow.close();
+        }
+        infoWindow.open(map, marker);
+        focusInfoWindow = infoWindow;
+    });
+    marker.setMap(map);
+    infoWindow.open(map, marker);
+    focusInfoWindow = infoWindow;
+    map.panTo(marker.getPosition());
+    map.setZoom(15);
+
+    jsonData = JSON.parse(localStorage.getItem("jsonData"));
+    for (var i = 0; i < jsonData.length; i++) {
+        var dataLat = jsonData[i].showInfo[0].latitude;
+        var dataLng = jsonData[i].showInfo[0].longitude;
+        var distance = distVincenty(userPosition.lat, userPosition.lng, dataLat, dataLng);
+        if (distance<=10){
+            nearByResult.push(data[i]);
+        }
+    }
+    showData(nearByResult);
+    /*
+    $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + userPosition.lat + '&lon=' + userPosition.lng + '&range=20&uk=API105080', function(data) {
+        for (var i = 0; i < data.length; i++) {
+            var dataCategory = data[i].category;
+            if (dataCategory == '2' || dataCategory == '3' || dataCategory == '4' || dataCategory == '5' || dataCategory == '8') {
+                for (var j = 0; j < jsonData.length; j++) {
+                    if (data[i].UID == jsonData[j].UID) {
+                        nearByData.push(jsonData[j]);
+                    }
+                }
+            }
+        }
+        showData(nearByData);
+    });
+    */
+    $('.filter').hide();
+}
+
+function distance(lat1, lon1, lat2, lon2) {
+    var R = 6371; // km (change this constant to get miles)
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    return d;
 }
 
 $(document).ready(function() {
