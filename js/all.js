@@ -37,7 +37,7 @@ function geoFindMe() {
     };
 
     function error() {
-        //alert("取消定位功能");
+        //alert("已取消定位功能");
         includeData();
     };
     navigator.geolocation.getCurrentPosition(success, error);
@@ -561,6 +561,9 @@ function showFavorite() {
     }
     showData(favoriteResult, "favorite");
     $('.filter').hide();
+    var center = { lat: 23.973875, lng: 120.982024 };
+    map.panTo(center);
+    map.setZoom(8);
 }
 
 function showNearBy() {
@@ -589,38 +592,23 @@ function showNearBy() {
     infoWindow.open(map, marker);
     focusInfoWindow = infoWindow;
     map.panTo(marker.getPosition());
-    map.setZoom(15);
+    map.setZoom(12);
 
     jsonData = JSON.parse(localStorage.getItem("jsonData"));
     for (var i = 0; i < jsonData.length; i++) {
         var dataLat = jsonData[i].showInfo[0].latitude;
         var dataLng = jsonData[i].showInfo[0].longitude;
         var distance = distVincenty(userPosition.lat, userPosition.lng, dataLat, dataLng);
-        if (distance<=10){
-            nearByResult.push(data[i]);
+        if (distance <= 10) {
+            nearByResult.push(jsonData[i]);
         }
     }
-    showData(nearByResult);
-    /*
-    $.getJSON('http://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesNearBy&lat=' + userPosition.lat + '&lon=' + userPosition.lng + '&range=20&uk=API105080', function(data) {
-        for (var i = 0; i < data.length; i++) {
-            var dataCategory = data[i].category;
-            if (dataCategory == '2' || dataCategory == '3' || dataCategory == '4' || dataCategory == '5' || dataCategory == '8') {
-                for (var j = 0; j < jsonData.length; j++) {
-                    if (data[i].UID == jsonData[j].UID) {
-                        nearByData.push(jsonData[j]);
-                    }
-                }
-            }
-        }
-        showData(nearByData);
-    });
-    */
+    showData(nearByResult, "nearBy");
     $('.filter').hide();
 }
 
-function distance(lat1, lon1, lat2, lon2) {
-    var R = 6371; // km (change this constant to get miles)
+function distVincenty(lat1, lon1, lat2, lon2) {
+    var R = 6371;
     var dLat = (lat2 - lat1) * Math.PI / 180;
     var dLon = (lon2 - lon1) * Math.PI / 180;
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
