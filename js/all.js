@@ -1,14 +1,16 @@
 var map;
+var oms;
 var markers = [];
 var infoWindows = [];
 var focusInfoWindow;
 var focusList;
-var activity;
-var isSearch = false;
 var jsonData;
 var searchResult;
 var favoriteResult = [];
 var nearByResult = [];
+var activity;
+var isSearch = false;
+
 var userPosition = { lat: 23.973875, lng: 120.982024 };
 
 function initMap() {
@@ -16,6 +18,7 @@ function initMap() {
         center: { lat: 23.973875, lng: 120.982024 },
         zoom: 8
     });
+    oms = new OverlappingMarkerSpiderfier(map);
     geoFindMe();
 }
 
@@ -186,7 +189,6 @@ function createMarkers(dataCount, dataCoordinates, dataTitle, dataStartTime, dat
         **/
 
     });
-    var oms = new OverlappingMarkerSpiderfier(map);
     oms.addMarker(marker);
     markers.push(marker);
     infoWindows.push(infoWindow);
